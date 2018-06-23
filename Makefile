@@ -1,10 +1,11 @@
-GOCMD=go
-GOBUILD=$(GOCMD) build
-GOCLEAN=$(GOCMD) clean
-GOTEST=$(GOCMD) test
-GOGET=$(GOCMD) get
-BINARY_NAME=mybinary
-BINARY_UNIX=$(BINARY_NAME)_unix
+GOCMD         =go
+GOBUILD       =$(GOCMD) build
+GOCLEAN       =$(GOCMD) clean
+GOTEST        =$(GOCMD) test
+GOGET         =$(GOCMD) get
+BINARY_NAME   =mybinary
+BINARY_UNIX   =$(BINARY_NAME)_unix
+GOPKGS        =$(shell go list ./... | grep -v /vendor/)
 
 
 # all tests and build
@@ -17,6 +18,11 @@ build:
 # test
 test: 
 		$(GOTEST) -v ./...
+
+# lint and vet (vet in verbose mode)
+check:
+	golint $(GOPKGS)
+	go vet -v $(GOPKGS)
 
 # clean
 clean: 
@@ -36,7 +42,7 @@ deps:
 
 # Display size of dependencies.
 size:
-	@gopherjs build client/*.go -m -o /tmp/out.js
+	@gopherjs build ./*.go -m -o /tmp/out.js
 	@du -h /tmp/out.js
 	@gopher-count /tmp/out.js | sort -nr
-.PHONY: size
+#.PHONY: size
