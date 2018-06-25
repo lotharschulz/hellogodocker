@@ -3,7 +3,7 @@
 
 preconditions:
 - [golang](https://golang.org/)
-- [ModernMake](https://github.com/tj/mmake) `go get github.com/tj/mmake/cmd/mmake`
+- [modern make](https://github.com/tj/mmake) `go get github.com/tj/mmake/cmd/mmake`
 - [gopherjs](https://github.com/gopherjs/gopherjs) `go get -u github.com/gopherjs/gopherjs`
 - [gopher-count](https://github.com/steveoc64/gopher-count) `go get github.com/steveoc64/gopher-count`
 
