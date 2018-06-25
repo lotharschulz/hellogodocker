@@ -28,6 +28,7 @@ go build -o hellogo -v
 .....
 ```
 
+docker-cache build
 ```
 $ make build.docker-cache
 go build -o hellogo -v
