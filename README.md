@@ -21,15 +21,15 @@ go build -o mybinary -v ./...
 
 ```
 
-build and run using docker:
+docker build
 ```
-$ docker build -t hellogo:0.0.1 .
-$ docker run -p 1234:1234 --name hellogo hellogo:0.0.1
-$ ..... Server at http://localhost:1234.
+$ make build.docker
+go build -o hellogo -v
+.....
 ```
 
-
-BASE_IMAGE=dockerhub/ghe-backup
-IMAGE=$BASE_IMAGE:v.0.0.1
-CACHE_IMAGE=$BASE_IMAGE:latest
-docker build --cache-from $CACHE_IMAGE -t $CACHE_IMAGE -t $IMAGE -f Dockerfile .
+```
+$ make build.docker-cache
+go build -o hellogo -v
+......
+```
