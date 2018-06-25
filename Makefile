@@ -1,12 +1,19 @@
-GOCMD         =go
-GOBUILD       =$(GOCMD) build
-GOCLEAN       =$(GOCMD) clean
-GOTEST        =$(GOCMD) test
-GOGET         =$(GOCMD) get
-BINARY_NAME   =mybinary
-BINARY_UNIX   =$(BINARY_NAME)_unix
-GOPKGS        =$(shell go list ./... | grep -v /vendor/)
+GOCMD         		=go
+GOBUILD       		=$(GOCMD) build
+GOCLEAN       		=$(GOCMD) clean
+GOTEST        		=$(GOCMD) test
+GOGET         		=$(GOCMD) get
+BINARY_NAME   		=hellogo
+BINARY_UNIX   		=$(BINARY_NAME)_unix
+GOPKGS        		=$(shell go list ./... | grep -v /vendor/)
+# https://blog.schlomo.schapiro.org/2017/08/meaningful-versions-with-continuous.html
+VERSION       		?=$(shell git describe --tags --always --dirty)
 
+DOCKERFILE    		?= Dockerfile
+DOCKERFILE_FOLDER	?= .
+DOCKER_BASE_IMAGE	=dockerhub/hellogo
+DOCKER_IMAGE		=$(DOCKER_BASE_IMAGE):$(VERSION)
+DOCKER_CACHE_IMAGE	=$(DOCKER_BASE_IMAGE):latest
 
 # all tests and build
 all: test build
@@ -21,8 +28,8 @@ test:
 
 # lint and vet (vet in verbose mode)
 check:
-	golint $(GOPKGS)
-	go vet -v $(GOPKGS)
+		golint $(GOPKGS)
+		go vet -v $(GOPKGS)
 
 # clean
 clean: 
@@ -45,4 +52,12 @@ size:
 	@gopherjs build ./*.go -m -o /tmp/out.js
 	@du -h /tmp/out.js
 	@gopher-count /tmp/out.js | sort -nr
-#.PHONY: size
+
+# builds the docker image, depends on build
+build.docker: build
+	docker build --rm -t hellogo:0.0.1  -f Dockerfile $(DOCKERFILE_FOLDER)
+
+# builds the docker image, depends on build
+build.docker-cache: build
+	#docker build --cache-from $(DOCKER_CACHE_IMAGE) -t $(DOCKER_CACHE_IMAGE) -t $(DOCKER_IMAGE) -f $(DOCKERFILE) $(DOCKERFILE_FOLDER)
+	docker build --cache-from golang:1.10.3 --cache-from alpine:latest -t $(DOCKER_IMAGE) -f $(DOCKERFILE) $(DOCKERFILE_FOLDER)
