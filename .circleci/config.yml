@@ -26,6 +26,6 @@ jobs:
       - run: go test -v ./...
       - run: |
         TAG=0.1.$CIRCLE_BUILD_NUM
-        time docker build --rm -t dockerhub/hellogo:$TAG -f Dockerfile . 
+        docker build -t dockerhub/hellogo:$TAG . 
       #- run: time make build.docker
       #- run: time make build.docker-cache
