@@ -21,6 +21,10 @@ jobs:
     steps:
       - checkout
 
+      - run:
+          name: Build service
+          command: make
+
       # specify any bash command here prefixed with `run: `
       - run: go get -v -t -d ./...
       - run: go test -v ./...
