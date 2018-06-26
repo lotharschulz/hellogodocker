@@ -46,7 +46,7 @@ func books(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	log.Printf("Server at http://localhost%v.\n", port)
-	http.HandleFunc("/magazine/", books)
 	http.HandleFunc("/", helloWorld)
+	http.HandleFunc("/magazine/", books)
 	log.Fatal(http.ListenAndServe(port, nil))
 }

@@ -319,4 +319,80 @@ real	0m0.441s
 user	0m0.264s
 sys	0m0.052s
 
--> change hello.go 
+-> hello.go change https://github.com/lotharschulz/hellogodocker/commit/763d45dc9534434f294128a6bc76e3a66f13b481
+
+$ time make build.docker
+go build -o hellogo -v
+docker build --rm -t hellogo:0.0.1  -f Dockerfile .
+Sending build context to Docker daemon  21.07MB
+Step 1/9 : FROM golang:1.10.3 as builder
+ ---> 52057de6c8d0
+Step 2/9 : WORKDIR /go/src/github.com/lotharschulz/hellogodocker/
+ ---> Using cache
+ ---> 1de1176dacb9
+Step 3/9 : COPY hello.go	.
+ ---> c95be67bb2c1
+Step 4/9 : RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o hellogodocker .
+ ---> Running in bb09c1e7302f
+Removing intermediate container bb09c1e7302f
+ ---> 08477f547928
+Step 5/9 : FROM alpine:latest
+ ---> 3fd9065eaf02
+Step 6/9 : RUN apk --no-cache add ca-certificates
+ ---> Using cache
+ ---> 6ca8aadfff59
+Step 7/9 : WORKDIR /root/
+ ---> Using cache
+ ---> f4ba38f79a3d
+Step 8/9 : COPY --from=builder /go/src/github.com/lotharschulz/hellogodocker/hellogodocker .
+ ---> bbf2e62b644c
+Step 9/9 : CMD ["./hellogodocker"]
+ ---> Running in b596edeadc87
+Removing intermediate container b596edeadc87
+ ---> b879b84e7545
+Successfully built b879b84e7545
+Successfully tagged hellogo:0.0.1
+
+real	0m10.229s
+user	0m0.732s
+sys	0m0.128s
+
+-> no change
+
+$ time make build.docker
+go build -o hellogo -v
+docker build --rm -t hellogo:0.0.1  -f Dockerfile .
+Sending build context to Docker daemon  21.07MB
+Step 1/9 : FROM golang:1.10.3 as builder
+ ---> 52057de6c8d0
+Step 2/9 : WORKDIR /go/src/github.com/lotharschulz/hellogodocker/
+ ---> Using cache
+ ---> 1de1176dacb9
+Step 3/9 : COPY hello.go	.
+ ---> Using cache
+ ---> c95be67bb2c1
+Step 4/9 : RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o hellogodocker .
+ ---> Using cache
+ ---> 08477f547928
+Step 5/9 : FROM alpine:latest
+ ---> 3fd9065eaf02
+Step 6/9 : RUN apk --no-cache add ca-certificates
+ ---> Using cache
+ ---> 6ca8aadfff59
+Step 7/9 : WORKDIR /root/
+ ---> Using cache
+ ---> f4ba38f79a3d
+Step 8/9 : COPY --from=builder /go/src/github.com/lotharschulz/hellogodocker/hellogodocker .
+ ---> Using cache
+ ---> bbf2e62b644c
+Step 9/9 : CMD ["./hellogodocker"]
+ ---> Using cache
+ ---> b879b84e7545
+Successfully built b879b84e7545
+Successfully tagged hellogo:0.0.1
+
+real	0m0.452s
+user	0m0.272s
+sys	0m0.056s
+
+-> hello.go change 
