@@ -313,4 +313,41 @@ real	0m0.450s
 user	0m0.264s
 sys	0m0.064s
 
--> change 
+-> change https://github.com/lotharschulz/hellogodocker/commit/bb30e497b5f85c77dc96c3a26c16b2e4f3e45e9d
+
+$ time make build.docker
+go build -o hellogo -v
+docker build --rm -t dockerhub/hellogo:bb30e49-dirty -f Dockerfile .
+Sending build context to Docker daemon   21.1MB
+Step 1/9 : FROM golang:1.10.3 as builder
+ ---> 52057de6c8d0
+Step 2/9 : WORKDIR /go/src/github.com/lotharschulz/hellogodocker/
+ ---> Using cache
+ ---> f1d4283ec3e7
+Step 3/9 : COPY hello.go	.
+ ---> 0d39ed96d34c
+Step 4/9 : RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o hellogodocker .
+ ---> Running in 98a6a302553d
+Removing intermediate container 98a6a302553d
+ ---> ce29dabcc1b6
+Step 5/9 : FROM alpine:latest
+ ---> 3fd9065eaf02
+Step 6/9 : RUN apk --no-cache add ca-certificates
+ ---> Using cache
+ ---> caef9b045e9d
+Step 7/9 : WORKDIR /root/
+ ---> Using cache
+ ---> 088ddd566611
+Step 8/9 : COPY --from=builder /go/src/github.com/lotharschulz/hellogodocker/hellogodocker .
+ ---> 5195961344b8
+Step 9/9 : CMD ["./hellogodocker"]
+ ---> Running in 4903aaef9861
+Removing intermediate container 4903aaef9861
+ ---> 2e74c7374c84
+Successfully built 2e74c7374c84
+Successfully tagged dockerhub/hellogo:bb30e49-dirty
+
+real	0m10.197s
+user	0m0.784s
+sys	0m0.104s
+
