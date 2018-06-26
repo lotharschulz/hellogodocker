@@ -58,4 +58,48 @@ real	1m10.905s
 user	0m0.380s
 sys	0m0.116s
 
--> 
+-> change https://github.com/lotharschulz/hellogodocker/commit/0d780685bf65193485dc90c6e1d5312ba556dc73
+
+$ time make build.docker-cache 
+go build -o hellogo -v
+docker build --cache-from golang:1.10.3 --cache-from alpine:latest -t dockerhub/hellogo:0d78068-dirty -f Dockerfile .
+Sending build context to Docker daemon  21.08MB
+Step 1/9 : FROM golang:1.10.3 as builder
+ ---> 52057de6c8d0
+Step 2/9 : WORKDIR /go/src/github.com/lotharschulz/hellogodocker/
+Removing intermediate container b243b64eebeb
+ ---> 3d60d50cf67a
+Step 3/9 : COPY hello.go	.
+ ---> 186455fca4ec
+Step 4/9 : RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o hellogodocker .
+ ---> Running in 602f1cabb10e
+Removing intermediate container 602f1cabb10e
+ ---> eced9325ff08
+Step 5/9 : FROM alpine:latest
+ ---> 3fd9065eaf02
+Step 6/9 : RUN apk --no-cache add ca-certificates
+ ---> Running in 565efa3e4c62
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.7/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.7/community/x86_64/APKINDEX.tar.gz
+(1/1) Installing ca-certificates (20171114-r0)
+Executing busybox-1.27.2-r7.trigger
+Executing ca-certificates-20171114-r0.trigger
+OK: 5 MiB in 12 packages
+Removing intermediate container 565efa3e4c62
+ ---> 9c4d2efe8fb3
+Step 7/9 : WORKDIR /root/
+Removing intermediate container f89b0376308a
+ ---> e49235db13b4
+Step 8/9 : COPY --from=builder /go/src/github.com/lotharschulz/hellogodocker/hellogodocker .
+ ---> cefb5048987a
+Step 9/9 : CMD ["./hellogodocker"]
+ ---> Running in 4e41d7471c74
+Removing intermediate container 4e41d7471c74
+ ---> 5cd904cb4418
+Successfully built 5cd904cb4418
+Successfully tagged dockerhub/hellogo:0d78068-dirty
+
+real	0m12.035s
+user	0m0.840s
+sys	0m0.120s
+
