@@ -55,9 +55,8 @@ size:
 
 # builds the docker image, depends on build
 build.docker: build
-	docker build --rm -t hellogo:0.0.1  -f Dockerfile $(DOCKERFILE_FOLDER)
+	docker build --rm -t $(DOCKER_IMAGE) -f Dockerfile $(DOCKERFILE_FOLDER)
 
 # builds the docker image, depends on build
 build.docker-cache: build
-	#docker build --cache-from $(DOCKER_CACHE_IMAGE) -t $(DOCKER_CACHE_IMAGE) -t $(DOCKER_IMAGE) -f $(DOCKERFILE) $(DOCKERFILE_FOLDER)
 	docker build --cache-from golang:1.10.3 --cache-from alpine:latest -t $(DOCKER_IMAGE) -f $(DOCKERFILE) $(DOCKERFILE_FOLDER)
