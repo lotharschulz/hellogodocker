@@ -24,5 +24,8 @@ jobs:
       # specify any bash command here prefixed with `run: `
       - run: go get -v -t -d ./...
       - run: go test -v ./...
-      - run: time make build.docker
-      - run: time make build.docker-cache
+      - run: |
+        TAG=0.1.$CIRCLE_BUILD_NUM
+        time docker build --rm -t dockerhub/hellogo:$TAG -f Dockerfile . 
+      #- run: time make build.docker
+      #- run: time make build.docker-cache
