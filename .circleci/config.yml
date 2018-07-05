@@ -30,9 +30,10 @@ jobs:
       - run: go get -v -t -d ./...
       - run: go test -v ./...
       - run:
-          name: docker pull golang base image
+          name: docker pull golang & alpine base image
           command: |
             docker pull golang:1.10.3
+            docker pull alpine:latest
       - run:
           name: docker command build
           command: |
@@ -43,6 +44,11 @@ jobs:
           command: |
             docker rmi -f $(docker images -q)
       - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.10.3
+            docker pull alpine:latest
+      - run:
           name: make build.docker
           command: |
             time make build.docker
@@ -50,6 +56,11 @@ jobs:
           name: docker clean
           command: |
             docker rmi -f $(docker images -q)
+      - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.10.3
+            docker pull alpine:latest
       - run:
           name: make build.docker-cache
           command: |
@@ -59,6 +70,11 @@ jobs:
           command: |
             docker rmi -f $(docker images -q)
       - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.10.3
+            docker pull alpine:latest
+      - run:
           name: make build.dockerbuilder
           command: |
             time make build.dockerbuilder
@@ -66,6 +82,11 @@ jobs:
           name: docker clean
           command: |
             docker rmi -f $(docker images -q)
+      - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.10.3
+            docker pull alpine:latest
       - run:
           name: make build.dockerbuilder-cache
           command: |
