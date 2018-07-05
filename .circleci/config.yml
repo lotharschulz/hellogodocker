@@ -30,6 +30,10 @@ jobs:
       - run: go get -v -t -d ./...
       - run: go test -v ./...
       - run:
+          name: docker pull golang base image
+          command: |
+            docker pull golang:1.10.3
+      - run:
           name: docker command build
           command: |
             TAG=0.1.$CIRCLE_BUILD_NUM
@@ -42,9 +46,27 @@ jobs:
           name: make build.docker
           command: |
             time make build.docker
-
-
-# $ make build.docker
-# $ make build.docker-cache
-# $ make build.dockerbuilder
-# $ make build.dockerbuilder-cache
+      - run:
+          name: docker clean
+          command: |
+            docker rmi -f $(docker images -q)
+      - run:
+          name: make build.docker-cache
+          command: |
+            time make build.docker-cache
+      - run:
+          name: docker clean
+          command: |
+            docker rmi -f $(docker images -q)
+      - run:
+          name: make build.dockerbuilder
+          command: |
+            time make build.dockerbuilder
+      - run:
+          name: docker clean
+          command: |
+            docker rmi -f $(docker images -q)
+      - run:
+          name: make build.dockerbuilder-cache
+          command: |
+            time make build.dockerbuilder-cache
