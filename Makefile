@@ -10,6 +10,7 @@ GOPKGS        		=$(shell go list ./... | grep -v /vendor/)
 VERSION       		?=$(shell git describe --tags --always --dirty)
 
 DOCKERFILE    		?= Dockerfile
+DOCKERFILEBUILDER	?= DockerfileBuilder
 DOCKERFILE_FOLDER	?= .
 DOCKER_BASE_IMAGE	=dockerhub/hellogo
 DOCKER_IMAGE		=$(DOCKER_BASE_IMAGE):$(VERSION)
@@ -55,8 +56,16 @@ size:
 
 # builds the docker image, depends on build
 build.docker: build
-	docker build --rm -t $(DOCKER_IMAGE) -f Dockerfile $(DOCKERFILE_FOLDER)
+	docker build --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILE) $(DOCKERFILE_FOLDER)
 
 # builds the docker image, depends on build
 build.docker-cache: build
 	docker build --cache-from golang:1.10.3 --cache-from alpine:latest -t $(DOCKER_IMAGE) -f $(DOCKERFILE) $(DOCKERFILE_FOLDER)
+
+# builds the docker builder image, depends on build
+build.dockerbuilder: build
+	docker build --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILE) $(DOCKERFILE_FOLDER)
+
+# builds the docker builder image, depends on build
+build.dockerbuilder-cache: build
+	docker build --cache-from golang:1.10.3 --cache-from alpine:latest -t $(DOCKER_IMAGE) -f $(DOCKERFILEBUILDER) $(DOCKERFILE_FOLDER)
