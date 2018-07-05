@@ -21,16 +21,19 @@ go build -o mybinary -v ./...
 
 ```
 
-docker build
+4 options of docker build
 ```
 $ make build.docker
-go build -o hellogo -v
-.....
+$ make build.docker-cache
+$ make build.dockerbuilder
+$ make build.dockerbuilder-cache
 ```
 
-docker-cache build
+
+docker run
 ```
-$ make build.docker-cache
-go build -o hellogo -v
-......
+docker run -p 1234:1234  dockerhub/hellogo:[tag]
+# e.g. docker run -p 1234:1234  dockerhub/hellogo:dd70981-dirty
 ```
+
+(build.log)[build.log] shows sample docker image build times
