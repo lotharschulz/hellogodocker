@@ -36,4 +36,4 @@ docker run -p 1234:1234  dockerhub/hellogo:[tag]
 # e.g. docker run -p 1234:1234  dockerhub/hellogo:dd70981-dirty
 ```
 
-(build.log)[build.log] shows sample docker image build times
+[build.log](build.log) shows sample docker image build times
