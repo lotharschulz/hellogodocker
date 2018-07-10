@@ -7,9 +7,12 @@ COPY hello.go	.
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o hellogodocker .
 
 FROM alpine:latest
-RUN apk --no-cache add ca-certificates
+RUN apk --no-cache add ca-certificates && \
+    groupadd -g 999 appuser && useradd -r -u 999 -g appuser appuser
 
-WORKDIR /root/
+USER appuser
+
+WORKDIR /app
 
 COPY --from=builder /go/src/github.com/lotharschulz/hellogodocker/hellogodocker .
 
