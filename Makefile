@@ -7,7 +7,7 @@ BINARY_NAME   		=hellogo
 BINARY_UNIX   		=$(BINARY_NAME)_unix
 GOPKGS        		=$(shell go list ./... | grep -v /vendor/)
 # https://blog.schlomo.schapiro.org/2017/08/meaningful-versions-with-continuous.html
-VERSION       		?=$(shell git describe --tags --always --dirty)_$(shell /bin/date "+%Y-%m-%d---%H-%M-%S")
+VERSION       		?=$(shell git describe --tags --always --dirty)$(shell /bin/date "+%Y%m%d%H%M%S")
 
 DOCKERFILE    		?= Dockerfile
 DOCKERFILEBUILDER	?= DockerfileBuilder
@@ -64,7 +64,7 @@ build.docker-cache: build
 
 # builds the docker builder image, depends on build
 build.dockerbuilder: build
-	docker build --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILE) $(DOCKERFILE_FOLDER)
+	docker build --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEBUILDER) $(DOCKERFILE_FOLDER)
 
 # builds the docker builder image, depends on build
 build.dockerbuilder-cache: build
