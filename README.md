@@ -33,7 +33,7 @@ $ make build.dockerbuilder-cache
 docker run
 ```
 docker run -p 1234:1234  dockerhub/hellogo:[tag]
-# e.g. docker run -p 1234:1234  dockerhub/hellogo:dd70981-dirty
+# e.g. docker run -p 1234:1234  dockerhub/hellogo:dd70981-dirty20180710223321
 ```
 
 [build.log](build.log) shows sample docker image build times
