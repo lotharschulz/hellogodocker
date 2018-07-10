@@ -7,7 +7,7 @@ BINARY_NAME   		=hellogo
 BINARY_UNIX   		=$(BINARY_NAME)_unix
 GOPKGS        		=$(shell go list ./... | grep -v /vendor/)
 # https://blog.schlomo.schapiro.org/2017/08/meaningful-versions-with-continuous.html
-VERSION       		?=$(shell git describe --tags --always --dirty)
+VERSION       		?=$(shell git describe --tags --always --dirty)_$(shell /bin/date "+%Y-%m-%d---%H-%M-%S")
 
 DOCKERFILE    		?= Dockerfile
 DOCKERFILEBUILDER	?= DockerfileBuilder
