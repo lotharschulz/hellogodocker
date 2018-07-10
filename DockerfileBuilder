@@ -8,7 +8,8 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o hellogodocker .
 
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates && \
-    groupadd -g 999 appuser && useradd -r -u 999 -g appuser appuser
+    addgroup -g 99 appuser && \
+    adduser -D -u 99 -G appuser appuser
 
 USER appuser
 
