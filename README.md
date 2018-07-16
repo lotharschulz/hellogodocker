@@ -2,20 +2,20 @@
 
 [![CircleCI](https://circleci.com/gh/lotharschulz/hellogodocker.svg?style=shield)](https://circleci.com/gh/lotharschulz/hellogodocker)
 
-## with docker build pattern and docker cache
+## with minimum dockerfile, docker build pattern and docker cache
 
-preconditions:
+#### preconditions
 - [golang](https://golang.org/)
 - [modern make](https://github.com/tj/mmake) `go get github.com/tj/mmake/cmd/mmake`
 - [gopherjs](https://github.com/gopherjs/gopherjs) `go get -u github.com/gopherjs/gopherjs`
 - [gopher-count](https://github.com/steveoc64/gopher-count) `go get github.com/steveoc64/gopher-count`
 
-build:
+#### build
 ```
 $ make build
 ```
 
-run:
+#### run
 ```
 $ make run
 go build -o mybinary -v ./...
@@ -24,7 +24,7 @@ go build -o mybinary -v ./...
 
 ```
 
-5 ways to build a docker image
+#### 5 ways to build a docker image
 ```
 $ make build.docker
 $ make build.docker-cache
@@ -33,7 +33,7 @@ $ make build.dockerbuilder-cache
 $ make build.dockerbuilder-min
 ```
 
-note:
+###### note about ca-certificates
 ```
 # $ make build.dockerbuilder-min
 # requires ca-certificates.crt in project directory
@@ -42,11 +42,11 @@ note:
 cp /etc/ssl/certs/ca-certificates.crt .
 ```
 
-[build.log](build.log) shows
+##### [build.log](build.log) shows
 - docker image build times
 - docker image sizes
 
-docker run
+##### docker run
 ```
 docker run -p 1234:1234  dockerhub/hellogo:[tag]
 # e.g. docker run -p 1234:1234  dockerhub/hellogo:dd70981-dirty20180710223321
