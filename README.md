@@ -1,4 +1,7 @@
 # golang hello world 
+
+[![CircleCI](https://circleci.com/gh/lotharschulz/hellogodocker.svg?style=shield)](https://circleci.com/gh/lotharschulz/hellogodocker)
+
 ## with docker build pattern and docker cache
 
 preconditions:
@@ -30,9 +33,7 @@ $ make build.dockerbuilder-cache
 $ make build.dockerbuilder-min
 ```
 
-
 note:
-
 ```
 # $ make build.dockerbuilder-min
 # requires ca-certificates.crt in project directory

@@ -283,4 +283,3 @@ $ docker images
 REPOSITORY          TAG                            IMAGE ID            CREATED             SIZE
 dockerhub/hellogo   c1d5205-dirty-20180717001304   c0925baa1b1c        6 seconds ago       6.8MB
 golang              1.10.3                         4e611157870f        2 weeks ago         794MB
-
