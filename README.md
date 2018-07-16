@@ -21,14 +21,25 @@ go build -o mybinary -v ./...
 
 ```
 
-4 options of docker build
+5 options of docker build
 ```
 $ make build.docker
 $ make build.docker-cache
 $ make build.dockerbuilder
 $ make build.dockerbuilder-cache
+$ make build.dockerbuilder-min
 ```
 
+
+note:
+
+```
+# $ make build.dockerbuilder-min
+# requires ca-certificates.crt in project directory
+# For many Linux distributions, 
+# you can copy it from /etc/ssl/certs/ca-certificates.crt :
+cp /etc/ssl/certs/ca-certificates.crt .
+```
 
 docker run
 ```

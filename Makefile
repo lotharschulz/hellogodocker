@@ -11,6 +11,7 @@ VERSION       		?=$(shell git describe --tags --always --dirty)-$(shell /bin/dat
 
 DOCKERFILE    		?= Dockerfile
 DOCKERFILEBUILDER	?= DockerfileBuilder
+DOCKERFILEMIN		?= DockerfileMin
 DOCKERFILE_FOLDER	?= .
 DOCKER_BASE_IMAGE	=dockerhub/hellogo
 DOCKER_IMAGE		=$(DOCKER_BASE_IMAGE):$(VERSION)
@@ -22,6 +23,10 @@ all: test build
 #build
 build: 
 		$(GOBUILD) -o $(BINARY_NAME) -v
+
+#build minimal docker image
+build-min: 
+		CGO_ENABLED=0 GOOS=linux $(GOBUILD) -a -installsuffix cgo -o $(BINARY_NAME) .
 
 # test
 test: 
@@ -69,3 +74,7 @@ build.dockerbuilder: build
 # builds the docker builder image, depends on build
 build.dockerbuilder-cache: build
 	docker build --cache-from golang:1.10.3 --cache-from alpine:latest -t $(DOCKER_IMAGE) -f $(DOCKERFILEBUILDER) $(DOCKERFILE_FOLDER)
+
+# builds the docker builder image, depends on build
+build.docker-min: build-min
+	docker build --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEMIN) $(DOCKERFILE_FOLDER)
