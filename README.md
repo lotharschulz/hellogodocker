@@ -36,9 +36,9 @@ $ make build.dockerbuilder-min
 ###### note about ca-certificates
 ```
 # $ make build.dockerbuilder-min
-# requires ca-certificates.crt in project directory
+# requires ca-certificates.crt file in project directory
 # For many Linux distributions, 
-# you can copy it from /etc/ssl/certs/ca-certificates.crt :
+# you can copy the file from /etc/ssl/certs/ca-certificates.crt :
 cp /etc/ssl/certs/ca-certificates.crt .
 ```
 
