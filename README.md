@@ -24,7 +24,7 @@ go build -o mybinary -v ./...
 
 ```
 
-5 options of docker build
+5 ways to build a docker image
 ```
 $ make build.docker
 $ make build.docker-cache
@@ -42,10 +42,12 @@ note:
 cp /etc/ssl/certs/ca-certificates.crt .
 ```
 
+[build.log](build.log) shows
+- docker image build times
+- docker image sizes
+
 docker run
 ```
 docker run -p 1234:1234  dockerhub/hellogo:[tag]
 # e.g. docker run -p 1234:1234  dockerhub/hellogo:dd70981-dirty20180710223321
 ```
-
-[build.log](build.log) shows sample docker image build times
