@@ -30,6 +30,11 @@ jobs:
       - run: go get -v -t -d ./...
       - run: go test -v ./...
       - run:
+          name: enable experimental docker deamon functionality
+          command: |
+            sudo sh -c 'echo '\''DOCKER_OPTS="--experimental=true"'\'' >> /etc/default/docker'
+            sudo service docker restart
+      - run:
           name: docker pull golang & alpine base image
           command: |
             docker pull golang:1.10.3
