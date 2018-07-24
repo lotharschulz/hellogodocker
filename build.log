@@ -283,3 +283,268 @@ $ docker images
 REPOSITORY          TAG                            IMAGE ID            CREATED             SIZE
 dockerhub/hellogo   c1d5205-dirty-20180717001304   c0925baa1b1c        6 seconds ago       6.8MB
 golang              1.10.3                         4e611157870f        2 weeks ago         794MB
+
+
+
+
+
+
+
+$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+golang              1.10.3              4e611157870f        3 weeks ago         794MB
+$ time make build.dockerbuilder-nocache
+go build -o hellogo -v
+docker build --no-cache --rm -t dockerhub/hellogo:07d1eb8-dirty-20180724231040 -f DockerfileBuilder .
+Sending build context to Docker daemon  21.73MB
+Step 1/10 : FROM golang:1.10.3 as builder
+ ---> 4e611157870f
+Step 2/10 : WORKDIR /go/src/github.com/lotharschulz/hellogodocker/
+Removing intermediate container 490fac100b5f
+ ---> 2ad663646a83
+Step 3/10 : COPY hello.go	.
+ ---> 601bb90ffecf
+Step 4/10 : RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o hellogodocker .
+ ---> Running in 3eba4384c3a7
+Removing intermediate container 3eba4384c3a7
+ ---> 71c3bc7bc337
+Step 5/10 : FROM alpine:latest
+latest: Pulling from library/alpine
+8e3ba11ec2a2: Already exists 
+Digest: sha256:7043076348bf5040220df6ad703798fd8593a0918d06d3ce30c6c93be117e430
+Status: Downloaded newer image for alpine:latest
+ ---> 11cd0b38bc3c
+Step 6/10 : RUN apk --no-cache add ca-certificates &&     addgroup -g 99 appuser &&     adduser -D -u 99 -G appuser appuser
+ ---> Running in b92265a192d4
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/community/x86_64/APKINDEX.tar.gz
+(1/1) Installing ca-certificates (20171114-r3)
+Executing busybox-1.28.4-r0.trigger
+Executing ca-certificates-20171114-r3.trigger
+OK: 5 MiB in 14 packages
+Removing intermediate container b92265a192d4
+ ---> 966260f6fe2e
+Step 7/10 : USER appuser
+ ---> Running in bfbfadf2e7d4
+Removing intermediate container bfbfadf2e7d4
+ ---> f0a177e6d708
+Step 8/10 : WORKDIR /app
+Removing intermediate container 6581a50d211d
+ ---> 58e912f2e058
+Step 9/10 : COPY --from=builder /go/src/github.com/lotharschulz/hellogodocker/hellogodocker .
+ ---> 7060eb9a6f0a
+Step 10/10 : CMD ["./hellogodocker"]
+ ---> Running in 1cb15d4ecc6f
+Removing intermediate container 1cb15d4ecc6f
+ ---> 7b7170b21b4c
+Successfully built 7b7170b21b4c
+Successfully tagged dockerhub/hellogo:07d1eb8-dirty-20180724231040
+
+real	0m15.643s
+user	0m0.260s
+sys	0m0.108s
+$ docker images
+REPOSITORY          TAG                            IMAGE ID            CREATED             SIZE
+dockerhub/hellogo   07d1eb8-dirty-20180724231040   7b7170b21b4c        8 seconds ago       11.5MB
+<none>              <none>                         71c3bc7bc337        14 seconds ago      816MB
+alpine              latest                         11cd0b38bc3c        2 weeks ago         4.41MB
+golang              1.10.3                         4e611157870f        3 weeks ago         794MB
+
+
+$ time make build.dockerbuilder-squash
+go build -o hellogo -v
+docker build --squash --rm -t dockerhub/hellogo:07d1eb8-dirty-20180724232928 -f DockerfileBuilder .
+Sending build context to Docker daemon  21.74MB
+Step 1/10 : FROM golang:1.10.3 as builder
+ ---> 4e611157870f
+Step 2/10 : WORKDIR /go/src/github.com/lotharschulz/hellogodocker/
+ ---> Using cache
+ ---> 2ad663646a83
+Step 3/10 : COPY hello.go	.
+ ---> Using cache
+ ---> 601bb90ffecf
+Step 4/10 : RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o hellogodocker .
+ ---> Using cache
+ ---> 71c3bc7bc337
+Step 5/10 : FROM alpine:latest
+ ---> 11cd0b38bc3c
+Step 6/10 : RUN apk --no-cache add ca-certificates &&     addgroup -g 99 appuser &&     adduser -D -u 99 -G appuser appuser
+ ---> Using cache
+ ---> 966260f6fe2e
+Step 7/10 : USER appuser
+ ---> Using cache
+ ---> f0a177e6d708
+Step 8/10 : WORKDIR /app
+ ---> Using cache
+ ---> 58e912f2e058
+Step 9/10 : COPY --from=builder /go/src/github.com/lotharschulz/hellogodocker/hellogodocker .
+ ---> Using cache
+ ---> 7060eb9a6f0a
+Step 10/10 : CMD ["./hellogodocker"]
+ ---> Using cache
+ ---> 7b7170b21b4c
+Successfully built 3042ad716817
+Successfully tagged dockerhub/hellogo:07d1eb8-dirty-20180724232928
+
+real	0m1.127s
+user	0m0.292s
+sys	0m0.056s
+$ docker imagesREPOSITORY          TAG                            IMAGE ID            CREATED             SIZE
+dockerhub/hellogo   07d1eb8-dirty-20180724232928   3042ad716817        12 seconds ago      11.5MB
+dockerhub/hellogo   07d1eb8-dirty-20180724231040   7b7170b21b4c        18 minutes ago      11.5MB
+<none>              <none>                         71c3bc7bc337        18 minutes ago      816MB
+alpine              latest                         11cd0b38bc3c        2 weeks ago         4.41MB
+golang              1.10.3                         4e611157870f        3 weeks ago         794MB
+
+
+
+$ time make build.dockerbuilder-compress
+go build -o hellogo -v
+docker build --compress --rm -t dockerhub/hellogo:07d1eb8-dirty-20180724233022 -f DockerfileBuilder .
+Sending build context to Docker daemon  7.749MB
+Step 1/10 : FROM golang:1.10.3 as builder
+ ---> 4e611157870f
+Step 2/10 : WORKDIR /go/src/github.com/lotharschulz/hellogodocker/
+ ---> Using cache
+ ---> 2ad663646a83
+Step 3/10 : COPY hello.go	.
+ ---> Using cache
+ ---> 601bb90ffecf
+Step 4/10 : RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o hellogodocker .
+ ---> Using cache
+ ---> 71c3bc7bc337
+Step 5/10 : FROM alpine:latest
+ ---> 11cd0b38bc3c
+Step 6/10 : RUN apk --no-cache add ca-certificates &&     addgroup -g 99 appuser &&     adduser -D -u 99 -G appuser appuser
+ ---> Using cache
+ ---> 966260f6fe2e
+Step 7/10 : USER appuser
+ ---> Using cache
+ ---> f0a177e6d708
+Step 8/10 : WORKDIR /app
+ ---> Using cache
+ ---> 58e912f2e058
+Step 9/10 : COPY --from=builder /go/src/github.com/lotharschulz/hellogodocker/hellogodocker .
+ ---> Using cache
+ ---> 7060eb9a6f0a
+Step 10/10 : CMD ["./hellogodocker"]
+ ---> Using cache
+ ---> 7b7170b21b4c
+Successfully built 7b7170b21b4c
+Successfully tagged dockerhub/hellogo:07d1eb8-dirty-20180724233022
+
+real	0m2.356s
+user	0m2.244s
+sys	0m0.200s
+$ docker images
+REPOSITORY          TAG                            IMAGE ID            CREATED              SIZE
+dockerhub/hellogo   07d1eb8-dirty-20180724232928   3042ad716817        About a minute ago   11.5MB
+dockerhub/hellogo   07d1eb8-dirty-20180724231040   7b7170b21b4c        19 minutes ago       11.5MB
+dockerhub/hellogo   07d1eb8-dirty-20180724233022   7b7170b21b4c        19 minutes ago       11.5MB
+<none>              <none>                         71c3bc7bc337        19 minutes ago       816MB
+alpine              latest                         11cd0b38bc3c        2 weeks ago          4.41MB
+golang              1.10.3                         4e611157870f        3 weeks ago          794MB
+
+
+
+
+$ time make build.docker-min-nocache
+CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o hellogo .
+docker build --no-cache --rm -t dockerhub/hellogo:07d1eb8-dirty-20180724233138 -f DockerfileMin .
+Sending build context to Docker daemon  21.68MB
+Step 1/4 : FROM scratch
+ ---> 
+Step 2/4 : ADD ca-certificates.crt /etc/ssl/certs/
+ ---> 1f020d72e030
+Step 3/4 : ADD hellogo /
+ ---> b50a9f3ff4d7
+Step 4/4 : CMD ["/hellogo"]
+ ---> Running in 3853d4e1209d
+Removing intermediate container 3853d4e1209d
+ ---> 9a2164b41093
+Successfully built 9a2164b41093
+Successfully tagged dockerhub/hellogo:07d1eb8-dirty-20180724233138
+
+real	0m8.616s
+user	0m23.444s
+sys	0m1.524s
+$ docker images
+REPOSITORY          TAG                            IMAGE ID            CREATED             SIZE
+dockerhub/hellogo   07d1eb8-dirty-20180724233138   9a2164b41093        3 seconds ago       6.8MB
+dockerhub/hellogo   07d1eb8-dirty-20180724232928   3042ad716817        2 minutes ago       11.5MB
+dockerhub/hellogo   07d1eb8-dirty-20180724231040   7b7170b21b4c        20 minutes ago      11.5MB
+dockerhub/hellogo   07d1eb8-dirty-20180724233022   7b7170b21b4c        20 minutes ago      11.5MB
+<none>              <none>                         71c3bc7bc337        20 minutes ago      816MB
+alpine              latest                         11cd0b38bc3c        2 weeks ago         4.41MB
+golang              1.10.3                         4e611157870f        3 weeks ago         794MB
+
+
+
+
+$ time make build.docker-min-squash
+CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o hellogo .
+docker build --squash --rm -t dockerhub/hellogo:07d1eb8-dirty-20180724233240 -f DockerfileMin .
+Sending build context to Docker daemon  21.68MB
+Step 1/4 : FROM scratch
+ ---> 
+Step 2/4 : ADD ca-certificates.crt /etc/ssl/certs/
+ ---> Using cache
+ ---> 1f020d72e030
+Step 3/4 : ADD hellogo /
+ ---> Using cache
+ ---> b50a9f3ff4d7
+Step 4/4 : CMD ["/hellogo"]
+ ---> Using cache
+ ---> 9a2164b41093
+Successfully built 54e0ce56d81c
+Successfully tagged dockerhub/hellogo:07d1eb8-dirty-20180724233240
+
+real	0m8.203s
+user	0m23.388s
+sys	0m1.560s
+$ docker images
+REPOSITORY          TAG                            IMAGE ID            CREATED              SIZE
+dockerhub/hellogo   07d1eb8-dirty-20180724233240   54e0ce56d81c        4 seconds ago        6.8MB
+dockerhub/hellogo   07d1eb8-dirty-20180724233138   9a2164b41093        About a minute ago   6.8MB
+dockerhub/hellogo   07d1eb8-dirty-20180724232928   3042ad716817        3 minutes ago        11.5MB
+dockerhub/hellogo   07d1eb8-dirty-20180724231040   7b7170b21b4c        21 minutes ago       11.5MB
+dockerhub/hellogo   07d1eb8-dirty-20180724233022   7b7170b21b4c        21 minutes ago       11.5MB
+<none>              <none>                         71c3bc7bc337        21 minutes ago       816MB
+alpine              latest                         11cd0b38bc3c        2 weeks ago          4.41MB
+golang              1.10.3                         4e611157870f        3 weeks ago          794MB
+
+
+
+
+$ time make build.docker-min-compress
+CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o hellogo .
+docker build --compress --rm -t dockerhub/hellogo:07d1eb8-dirty-20180724233332 -f DockerfileMin .
+Sending build context to Docker daemon  7.728MB
+Step 1/4 : FROM scratch
+ ---> 
+Step 2/4 : ADD ca-certificates.crt /etc/ssl/certs/
+ ---> Using cache
+ ---> 1f020d72e030
+Step 3/4 : ADD hellogo /
+ ---> Using cache
+ ---> b50a9f3ff4d7
+Step 4/4 : CMD ["/hellogo"]
+ ---> Using cache
+ ---> 9a2164b41093
+Successfully built 9a2164b41093
+Successfully tagged dockerhub/hellogo:07d1eb8-dirty-20180724233332
+
+real	0m9.965s
+user	0m25.380s
+sys	0m1.520s
+$ docker images
+REPOSITORY          TAG                            IMAGE ID            CREATED              SIZE
+dockerhub/hellogo   07d1eb8-dirty-20180724233240   54e0ce56d81c        58 seconds ago       6.8MB
+dockerhub/hellogo   07d1eb8-dirty-20180724233138   9a2164b41093        About a minute ago   6.8MB
+dockerhub/hellogo   07d1eb8-dirty-20180724233332   9a2164b41093        About a minute ago   6.8MB
+dockerhub/hellogo   07d1eb8-dirty-20180724232928   3042ad716817        4 minutes ago        11.5MB
+dockerhub/hellogo   07d1eb8-dirty-20180724231040   7b7170b21b4c        22 minutes ago       11.5MB
+dockerhub/hellogo   07d1eb8-dirty-20180724233022   7b7170b21b4c        22 minutes ago       11.5MB
+<none>              <none>                         71c3bc7bc337        22 minutes ago       816MB
+alpine              latest                         11cd0b38bc3c        2 weeks ago          4.41MB
+golang              1.10.3                         4e611157870f        3 weeks ago          794MB

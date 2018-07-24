@@ -51,3 +51,19 @@ cp /etc/ssl/certs/ca-certificates.crt .
 docker run -p 1234:1234  dockerhub/hellogo:[tag]
 # e.g. docker run -p 1234:1234  dockerhub/hellogo:dd70981-dirty20180710223321
 ```
+
+##### docker experimantal
+
+In order to run the _squash_ build commands above, you need to run the docker deamon with experimental functions:
+```
+$ cat <<EOT >> /etc/docker/daemon.json
+{ 
+    "experimental": true 
+} 
+EOT
+$ sudo service docker restart
+
+#check result
+$ docker version -f '{{.Server.Experimental}}'
+true
+```

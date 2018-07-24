@@ -63,7 +63,7 @@ size:
 build.docker: build
 	docker build --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILE) $(DOCKERFILE_FOLDER)
 
-# builds the docker image, depends on build
+# builds the docker image  with cache, depends on build
 build.docker-cache: build
 	docker build --cache-from golang:1.10.3 --cache-from alpine:latest -t $(DOCKER_IMAGE) -f $(DOCKERFILE) $(DOCKERFILE_FOLDER)
 
@@ -71,10 +71,36 @@ build.docker-cache: build
 build.dockerbuilder: build
 	docker build --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEBUILDER) $(DOCKERFILE_FOLDER)
 
-# builds the docker builder image, depends on build
+# builds the docker builder image with cache, depends on build
 build.dockerbuilder-cache: build
 	docker build --cache-from golang:1.10.3 --cache-from alpine:latest -t $(DOCKER_IMAGE) -f $(DOCKERFILEBUILDER) $(DOCKERFILE_FOLDER)
 
-# builds the docker builder image, depends on build
+# builds the docker builder image without cache, depends on build
+build.dockerbuilder-nocache: build
+	docker build --no-cache --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEBUILDER) $(DOCKERFILE_FOLDER)
+
+# builds the docker builder image and sqashes it, depends on build
+build.dockerbuilder-squash: build
+	docker build --squash --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEBUILDER) $(DOCKERFILE_FOLDER)
+
+# builds the docker builder image and sqashes it, depends on build
+build.dockerbuilder-compress: build
+	docker build --compress --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEBUILDER) $(DOCKERFILE_FOLDER)
+
+# builds the docker minimal image, depends on build
 build.docker-min: build-min
 	docker build --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEMIN) $(DOCKERFILE_FOLDER)
+
+# builds the docker minimal image without cache, depends on build
+build.docker-min-nocache: build-min
+	docker build --no-cache --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEMIN) $(DOCKERFILE_FOLDER)
+
+# builds the docker minimal image and sqashes it, depends on build
+build.docker-min-squash: build-min
+	docker build --squash --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEMIN) $(DOCKERFILE_FOLDER)
+
+# builds the docker minimal image and compresses it, depends on build
+build.docker-min-compress: build-min
+	docker build --compress --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEMIN) $(DOCKERFILE_FOLDER)
+
+	
