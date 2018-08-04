@@ -25,6 +25,7 @@ jobs:
           command: |
             sudo sh -c 'echo '\''DOCKER_OPTS="--experimental=true"'\'' >> /etc/default/docker'
             sudo service docker restart
+        # docker build
       - run:
           name: docker pull golang & alpine base image
           command: |
@@ -39,6 +40,7 @@ jobs:
           name: docker clean
           command: |
             docker rmi -f $(docker images -q)
+        # build.docker
       - run:
           name: docker pull golang & alpine base image
           command: |
@@ -52,6 +54,7 @@ jobs:
           name: docker clean
           command: |
             docker rmi -f $(docker images -q)
+        # build.docker-cache
       - run:
           name: docker pull golang & alpine base image
           command: |
@@ -65,6 +68,7 @@ jobs:
           name: docker clean
           command: |
             docker rmi -f $(docker images -q)
+        # build.dockerbuilder
       - run:
           name: docker pull golang & alpine base image
           command: |
@@ -78,6 +82,7 @@ jobs:
           name: docker clean
           command: |
             docker rmi -f $(docker images -q)
+        # build.dockerbuilder-cache
       - run:
           name: docker pull golang & alpine base image
           command: |
@@ -87,3 +92,105 @@ jobs:
           name: make build.dockerbuilder-cache
           command: |
             time make build.dockerbuilder-cache
+      - run:
+          name: docker clean
+          command: |
+            docker rmi -f $(docker images -q)
+        # build.dockerbuilder-nocache
+      - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.10.3
+            docker pull alpine:latest
+      - run:
+          name: make build.dockerbuilder-nocache
+          command: |
+            time make build.dockerbuilder-nocache
+      - run:
+          name: docker clean
+          command: |
+            docker rmi -f $(docker images -q)
+        # build.dockerbuilder-squash
+      - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.10.3
+            docker pull alpine:latest
+      - run:
+          name: build.dockerbuilder-squash
+          command: |
+            time build.dockerbuilder-squash
+      - run:
+          name: docker clean
+          command: |
+            docker rmi -f $(docker images -q)
+        # build.dockerbuilder-compress
+      - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.10.3
+            docker pull alpine:latest
+      - run:
+          name: build.dockerbuilder-compress
+          command: |
+            time build.dockerbuilder-compress
+      - run:
+          name: docker clean
+          command: |
+            docker rmi -f $(docker images -q)
+        # build.docker-min
+      - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.10.3
+            docker pull alpine:latest
+      - run:
+          name: build.docker-min
+          command: |
+            time build.docker-min
+      - run:
+          name: docker clean
+          command: |
+            docker rmi -f $(docker images -q)
+        # build.docker-min-nocache
+      - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.10.3
+            docker pull alpine:latest
+      - run:
+          name: build.docker-min-nocache
+          command: |
+            time build.docker-min-nocache
+      - run:
+          name: docker clean
+          command: |
+            docker rmi -f $(docker images -q)
+        # build.docker-min-squash
+      - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.10.3
+            docker pull alpine:latest
+      - run:
+          name: build.docker-min-squash
+          command: |
+            time build.docker-min-squash
+      - run:
+          name: docker clean
+          command: |
+            docker rmi -f $(docker images -q)
+        # build.docker-min-compress
+      - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.10.3
+            docker pull alpine:latest
+      - run:
+          name: build.docker-min-compress
+          command: |
+            time build.docker-min-compress
+      - run:
+          name: docker clean
+          command: |
+            docker rmi -f $(docker images -q)
