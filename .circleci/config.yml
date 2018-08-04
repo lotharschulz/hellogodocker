@@ -47,7 +47,7 @@ jobs:
             docker pull golang:1.10.3
             docker pull alpine:latest
       - run:
-          name: make build.docker
+          name: build.docker
           command: |
             time make build.docker
       - run:
@@ -61,7 +61,7 @@ jobs:
             docker pull golang:1.10.3
             docker pull alpine:latest
       - run:
-          name: make build.docker-cache
+          name: build.docker-cache
           command: |
             time make build.docker-cache
       - run:
@@ -75,7 +75,7 @@ jobs:
             docker pull golang:1.10.3
             docker pull alpine:latest
       - run:
-          name: make build.dockerbuilder
+          name: build.dockerbuilder
           command: |
             time make build.dockerbuilder
       - run:
@@ -89,7 +89,7 @@ jobs:
             docker pull golang:1.10.3
             docker pull alpine:latest
       - run:
-          name: make build.dockerbuilder-cache
+          name: build.dockerbuilder-cache
           command: |
             time make build.dockerbuilder-cache
       - run:
@@ -103,7 +103,7 @@ jobs:
             docker pull golang:1.10.3
             docker pull alpine:latest
       - run:
-          name: make build.dockerbuilder-nocache
+          name: build.dockerbuilder-nocache
           command: |
             time make build.dockerbuilder-nocache
       - run:
@@ -119,7 +119,7 @@ jobs:
       - run:
           name: build.dockerbuilder-squash
           command: |
-            time build.dockerbuilder-squash
+            time make build.dockerbuilder-squash
       - run:
           name: docker clean
           command: |
@@ -133,7 +133,7 @@ jobs:
       - run:
           name: build.dockerbuilder-compress
           command: |
-            time build.dockerbuilder-compress
+            time make build.dockerbuilder-compress
       - run:
           name: docker clean
           command: |
@@ -147,7 +147,7 @@ jobs:
       - run:
           name: build.docker-min
           command: |
-            time build.docker-min
+            time make build.docker-min
       - run:
           name: docker clean
           command: |
@@ -161,7 +161,7 @@ jobs:
       - run:
           name: build.docker-min-nocache
           command: |
-            time build.docker-min-nocache
+            time make build.docker-min-nocache
       - run:
           name: docker clean
           command: |
@@ -175,7 +175,7 @@ jobs:
       - run:
           name: build.docker-min-squash
           command: |
-            time build.docker-min-squash
+            time make build.docker-min-squash
       - run:
           name: docker clean
           command: |
@@ -189,7 +189,7 @@ jobs:
       - run:
           name: build.docker-min-compress
           command: |
-            time build.docker-min-compress
+            time make build.docker-min-compress
       - run:
           name: docker clean
           command: |
