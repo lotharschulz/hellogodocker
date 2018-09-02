@@ -1,4 +1,4 @@
-FROM golang:1.10.3 as builder
+FROM golang:1.10.3
 
 RUN groupadd -g 999 appuser && useradd -r -u 999 -g appuser appuser
 USER appuser
