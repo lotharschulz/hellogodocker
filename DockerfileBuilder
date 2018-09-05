@@ -4,7 +4,7 @@ WORKDIR /go/src/github.com/lotharschulz/hellogodocker/
 
 COPY hello.go	.
 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o hellogodocker .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hellogodocker .
 
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates && \
