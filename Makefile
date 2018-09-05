@@ -26,7 +26,7 @@ build:
 
 #build minimal docker image
 build-min: 
-		CGO_ENABLED=0 GOOS=linux $(GOBUILD) -a -installsuffix cgo -o $(BINARY_NAME) .
+		CGO_ENABLED=0 GOOS=linux $(GOBUILD) -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o $(BINARY_NAME) .
 
 # test
 test: 
