@@ -48,8 +48,8 @@ cp /etc/ssl/certs/ca-certificates.crt .
 
 ##### docker run
 ```
-docker run -p 1234:1234  dockerhub/hellogo:[tag]
-# e.g. docker run -p 1234:1234  dockerhub/hellogo:dd70981-dirty20180710223321
+docker run -p 1234:1234 dockerhub/hellogo:[tag] -name hellogodocker
+# e.g. docker run -p 1234:1234 dockerhub/hellogo:dd70981-dirty20180710223321 -name hellogodocker
 ```
 
 ##### docker experimantal
