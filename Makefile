@@ -12,6 +12,7 @@ VERSION       		?=$(shell git describe --tags --always --dirty)-$(shell /bin/dat
 DOCKERFILE    		?= Dockerfile
 DOCKERFILEBUILDER	?= DockerfileBuilder
 DOCKERFILEMIN		?= DockerfileMin
+DOCKERFILEALPINE	?= DockerfileAlpine
 DOCKERFILE_FOLDER	?= .
 DOCKER_BASE_IMAGE	=dockerhub/hellogo
 DOCKER_IMAGE		=$(DOCKER_BASE_IMAGE):$(VERSION)
@@ -67,6 +68,8 @@ build.docker: build
 build.docker-cache: build
 	docker build --cache-from golang:1.11 -t $(DOCKER_IMAGE) -f $(DOCKERFILE) $(DOCKERFILE_FOLDER)
 
+# builder ###########
+
 # builds the docker builder image, depends on build
 build.dockerbuilder: build
 	docker build --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEBUILDER) $(DOCKERFILE_FOLDER)
@@ -86,6 +89,31 @@ build.dockerbuilder-squash: build
 # builds the docker builder image and sqashes it, depends on build
 build.dockerbuilder-compress: build
 	docker build --compress --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEBUILDER) $(DOCKERFILE_FOLDER)
+
+# alpine ###########
+
+# builds the docker alpine image, depends on build
+build.dockeralpine: build
+	docker build --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEALPINE) $(DOCKERFILE_FOLDER)
+
+# builds the docker alpine image with cache, depends on build
+build.dockeralpine-cache: build
+	docker build --cache-from golang:1.11 --cache-from alpine:latest -t $(DOCKER_IMAGE) -f $(DOCKERFILEALPINE) $(DOCKERFILE_FOLDER)
+
+# builds the docker alpine image without cache, depends on build
+build.dockeralpine-nocache: build
+	docker build --no-cache --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEALPINE) $(DOCKERFILE_FOLDER)
+
+# builds the docker alpine image and sqashes it, depends on build
+build.dockeralpine-squash: build
+	docker build --squash --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEALPINE) $(DOCKERFILE_FOLDER)
+
+# builds the docker alpine image and sqashes it, depends on build
+build.dockeralpine-compress: build
+	docker build --compress --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEALPINE) $(DOCKERFILE_FOLDER)
+
+
+# min ###########
 
 # builds the docker minimal image, depends on build
 build.docker-min: build-min
