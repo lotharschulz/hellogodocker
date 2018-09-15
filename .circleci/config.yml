@@ -39,19 +39,21 @@ jobs:
 #            time docker pull lotharschulz/hellodocker:$TAG 
 #            docker rmi -f $(docker images -q)
 
-      - run:
-          name: docker pull golang & alpine base image
-          command: |
-            docker pull golang:1.11
+#      - run:
+#          name: docker pull golang & alpine base image
+#          command: |
+#            docker pull golang:1.11
       - run:
           name: build.docker
           command: |
-            DOCKER_IMAGE=lotharschulz/hellogo VERSION=build.docker.0.2.$CIRCLE_BUILD_NUM time make build.docker
+            IMG=lotharschulz/hellogo
+            TAG=build.docker.0.2.$CIRCLE_BUILD_NUM 
+            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker
             docker images
-            echo "docker push $DOCKER_IMAGE:$VERSION"
-            time docker push $DOCKER_IMAGE:$VERSION
+            echo "docker push $IMG:$TAG"
+            time docker push $IMG:$TAG
             docker rmi -f $(docker images -q)
-            time docker pull $DOCKER_IMAGE:$VERSION
+            time docker pull $IMG:$TAG
             docker rmi -f $(docker images -q)
 
       - run:
