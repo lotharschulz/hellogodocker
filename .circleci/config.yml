@@ -1,12 +1,12 @@
 version: 2
 
+auth:
+  username: $DOCKERHUB_USER
+  password: $DOCKERHUB_PASSWORD  # or project environment variable reference
+
 jobs:
   build:
     machine: true
-
-    auth:
-      username: $DOCKERHUB_USER
-      password: $DOCKERHUB_PASSWORD  # or project environment variable reference
 
     working_directory: ~/go/src/github.com/lotharschulz/hellogodocker
     steps:
