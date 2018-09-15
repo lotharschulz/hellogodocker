@@ -35,7 +35,8 @@ jobs:
           name: docker command build
           command: |
             TAG=0.1.$CIRCLE_BUILD_NUM
-            time docker build -t dockerhub/hellogo:$TAG . 
+            time docker build -t dockerhub/hellogo:$TAG .
+            docker images 
       - run:
           name: docker clean
           command: |
@@ -50,6 +51,7 @@ jobs:
           name: build.docker
           command: |
             time make build.docker
+            docker images
       - run:
           name: docker clean
           command: |
@@ -64,6 +66,7 @@ jobs:
           name: build.docker-cache
           command: |
             time make build.docker-cache
+            docker images
       - run:
           name: docker clean
           command: |
@@ -78,6 +81,7 @@ jobs:
           name: build.dockerbuilder
           command: |
             time make build.dockerbuilder
+            docker images
       - run:
           name: docker clean
           command: |
@@ -92,6 +96,7 @@ jobs:
           name: build.dockerbuilder-cache
           command: |
             time make build.dockerbuilder-cache
+            docker images
       - run:
           name: docker clean
           command: |
@@ -106,6 +111,7 @@ jobs:
           name: build.dockerbuilder-nocache
           command: |
             time make build.dockerbuilder-nocache
+            docker images
       - run:
           name: docker clean
           command: |
@@ -120,11 +126,11 @@ jobs:
           name: build.dockerbuilder-squash
           command: |
             time make build.dockerbuilder-squash
+            docker images
       - run:
           name: docker clean
           command: |
             docker rmi -f $(docker images -q)
-        # build.dockerbuilder-compress
       - run:
           name: docker pull golang & alpine base image
           command: |
@@ -134,11 +140,11 @@ jobs:
           name: build.dockerbuilder-compress
           command: |
             time make build.dockerbuilder-compress
+            docker images
       - run:
           name: docker clean
           command: |
             docker rmi -f $(docker images -q)
-        # build.docker-min
       - run:
           name: docker pull golang & alpine base image
           command: |
@@ -148,11 +154,11 @@ jobs:
           name: build.docker-min
           command: |
             time make build.docker-min
+            docker images
       - run:
           name: docker clean
           command: |
             docker rmi -f $(docker images -q)
-        # build.docker-min-nocache
       - run:
           name: docker pull golang & alpine base image
           command: |
@@ -162,11 +168,11 @@ jobs:
           name: build.docker-min-nocache
           command: |
             time make build.docker-min-nocache
+            docker images
       - run:
           name: docker clean
           command: |
             docker rmi -f $(docker images -q)
-        # build.docker-min-squash
       - run:
           name: docker pull golang & alpine base image
           command: |
@@ -176,11 +182,11 @@ jobs:
           name: build.docker-min-squash
           command: |
             time make build.docker-min-squash
+            docker images
       - run:
           name: docker clean
           command: |
             docker rmi -f $(docker images -q)
-        # build.docker-min-compress
       - run:
           name: docker pull golang & alpine base image
           command: |
@@ -190,6 +196,7 @@ jobs:
           name: build.docker-min-compress
           command: |
             time make build.docker-min-compress
+            docker images
       - run:
           name: docker clean
           command: |
