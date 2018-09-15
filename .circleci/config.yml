@@ -47,7 +47,7 @@ jobs:
 #          name: build.docker
 #          command: |
 #            IMG=lotharschulz/hellogo
-#            TAG=build.docker.0.2.$CIRCLE_BUILD_NUM
+#            TAG=build.docker--0.2.$CIRCLE_BUILD_NUM
 #            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker" 
 #            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker
 #            echo "docker images"
@@ -69,7 +69,7 @@ jobs:
           name: build.docker-cache
           command: |
             IMG=lotharschulz/hellogo
-            TAG=build.docker-cache.0.2.$CIRCLE_BUILD_NUM
+            TAG=build.docker-cache--0.2.$CIRCLE_BUILD_NUM
             echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-cache"
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-cache
             echo "docker images"
@@ -81,11 +81,7 @@ jobs:
             echo "docker pull $IMG:$TAG"
             time docker pull $IMG:$TAG
             docker rmi -f $(docker images -q)
-      - run:
-          name: docker clean
-          command: |
-            docker rmi -f $(docker images -q)
-
+### hier weiter
       - run:
           name: docker pull golang & alpine base image
           command: |
