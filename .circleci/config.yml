@@ -47,12 +47,16 @@ jobs:
           name: build.docker
           command: |
             IMG=lotharschulz/hellogo
-            TAG=build.docker.0.2.$CIRCLE_BUILD_NUM 
+            TAG=build.docker.0.2.$CIRCLE_BUILD_NUM
+            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker" 
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker
+            echo "docker images"
             docker images
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "docker push $IMG:$TAG"
             time docker push $IMG:$TAG
             docker rmi -f $(docker images -q)
+            echo "docker pull $IMG:$TAG"
             time docker pull $IMG:$TAG
             docker rmi -f $(docker images -q)
 
