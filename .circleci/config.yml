@@ -3,11 +3,10 @@ version: 2
 jobs:
   build:
     machine: true
-#    docker_layer_caching: false
-#    docker:
-#      # specify the version
-#      - image: circleci/golang:1.9
-    #working_directory: /go/src/github.com/lotharschulz/hellogodocker
+
+    auth:
+      username: $DOCKERHUB_USER
+      password: $DOCKERHUB_PASSWORD  # or project environment variable reference
 
     working_directory: ~/go/src/github.com/lotharschulz/hellogodocker
     steps:
@@ -16,8 +15,7 @@ jobs:
       - run:
           name: Build service
           command: make
-#      - setup_remote_docker:
-#          docker_layer_caching: false
+
       - run: go get -v -t -d ./...
       - run: go test -v ./...
       - run:
@@ -33,11 +31,12 @@ jobs:
           name: docker command build
           command: |
             TAG=0.1.$CIRCLE_BUILD_NUM
-            time docker build -t dockerhub/hellogo:$TAG .
-            docker images 
-      - run:
-          name: docker clean
-          command: |
+            time docker build -t lotharschulz/java08:$TAG .
+            docker images
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+            docker push lotharschulz/java08:$TAG
+            docker rmi -f $(docker images -q)
+            docker pull lotharschulz/java08:$TAG 
             docker rmi -f $(docker images -q)
 
       - run:
