@@ -69,7 +69,6 @@ build.docker-cache: build
 	docker build --cache-from golang:1.11 -t $(DOCKER_IMAGE) -f $(DOCKERFILE) $(DOCKERFILE_FOLDER)
 
 # builder ###########
-
 # builds the docker builder image, depends on build
 build.dockerbuilder: build
 	docker build --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEBUILDER) $(DOCKERFILE_FOLDER)
@@ -91,7 +90,6 @@ build.dockerbuilder-compress: build
 	docker build --compress --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEBUILDER) $(DOCKERFILE_FOLDER)
 
 # alpine ###########
-
 # builds the docker alpine image, depends on build
 build.dockeralpine: build
 	docker build --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEALPINE) $(DOCKERFILE_FOLDER)
@@ -114,7 +112,6 @@ build.dockeralpine-compress: build
 
 
 # min ###########
-
 # builds the docker minimal image, depends on build
 build.docker-min: build-min
 	docker build --rm -t $(DOCKER_IMAGE) -f $(DOCKERFILEMIN) $(DOCKERFILE_FOLDER)
