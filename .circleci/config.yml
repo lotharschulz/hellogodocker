@@ -48,6 +48,7 @@ jobs:
           command: |
             DOCKER_IMAGE=lotharschulz/hellogo VERSION=build.docker.0.2.$CIRCLE_BUILD_NUM time make build.docker
             docker images
+            echo "docker push $DOCKER_IMAGE:$VERSION"
             time docker push $DOCKER_IMAGE:$VERSION
             docker rmi -f $(docker images -q)
             time docker pull $DOCKER_IMAGE:$VERSION
