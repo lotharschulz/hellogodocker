@@ -30,7 +30,7 @@ jobs:
       - run:
           name: docker command build
           command: |
-            TAG=0.2.$CIRCLE_BUILD_NUM
+            TAG=docker-build-0.2.$CIRCLE_BUILD_NUM
             time docker build -t lotharschulz/hellodocker:$TAG .
             docker images
             docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
@@ -46,11 +46,11 @@ jobs:
       - run:
           name: build.docker
           command: |
-            VERSION=0.2.$CIRCLE_BUILD_NUM time make build.docker
+            DOCKER_IMAGE=lotharschulz/hellogo:build.docker-0.2.$CIRCLE_BUILD_NUM time make build.docker
             docker images
-      - run:
-          name: docker clean
-          command: |
+            time docker push $DOCKER_IMAGE
+            docker rmi -f $(docker images -q)
+            time docker pull $DOCKER_IMAGE
             docker rmi -f $(docker images -q)
 
       - run:
