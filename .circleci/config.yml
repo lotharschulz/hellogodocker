@@ -103,3 +103,24 @@ jobs:
             echo "docker pull $IMG:$TAG \n"
             time docker pull $IMG:$TAG
             docker rmi -f $(docker images -q)
+
+      - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.11
+            docker pull alpine:latest
+      - run:
+          name: build.dockerbuilder-cache
+          command: |
+            IMG=lotharschulz/hellogo
+            TAG=build.dockerbuilder-cache--0.2.$CIRCLE_BUILD_NUM
+            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-cache \n"
+            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-cache
+            docker images
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+            echo "docker push $IMG:$TAG \n"
+            time docker push $IMG:$TAG
+            docker rmi -f $(docker images -q)
+            echo "docker pull $IMG:$TAG \n"
+            time docker pull $IMG:$TAG
+            docker rmi -f $(docker images -q)
