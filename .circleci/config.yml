@@ -190,7 +190,7 @@ jobs:
 #          command: |
 #            docker pull golang:1.11
 #            docker pull alpine:latest
-       - run:
+      - run:
           name: build.dockeralpine
           command: |
             IMG=lotharschulz/hellogo
