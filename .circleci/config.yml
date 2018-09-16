@@ -182,10 +182,6 @@ jobs:
             echo "docker pull $IMG:$TAG \n"
             time docker pull $IMG:$TAG
             docker rmi -f $(docker images -q)
-      - run:
-          name: docker clean
-          command: |
-            docker rmi -f $(docker images -q)
 # alpine
 
 
