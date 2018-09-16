@@ -33,7 +33,7 @@ jobs:
 #            TAG=docker-build-0.2.$CIRCLE_BUILD_NUM
 #            time docker build -t lotharschulz/hellodocker:$TAG .
 #            docker images
-#            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+#            docker login -u $DOCKERHUB_USER --password-stdin $DOCKERHUB_PASSWORD
 #            time docker push lotharschulz/hellodocker:$TAG
 #            docker rmi -f $(docker images -q)
 #            time docker pull lotharschulz/hellodocker:$TAG 
@@ -48,15 +48,15 @@ jobs:
 #          command: |
 #            IMG=lotharschulz/hellogo
 #            TAG=build.docker--0.2.$CIRCLE_BUILD_NUM
-#            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker" 
+#            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker \n" 
 #            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker
-#            echo "docker images"
+#            echo "docker images \n"
 #            docker images
-#            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
-#            echo "docker push $IMG:$TAG"
+#            docker login -u $DOCKERHUB_USER --password-stdin $DOCKERHUB_PASSWORD
+#            echo "docker push $IMG:$TAG \n"
 #            time docker push $IMG:$TAG
 #            docker rmi -f $(docker images -q)
-#            echo "docker pull $IMG:$TAG"
+#            echo "docker pull $IMG:$TAG \n"
 #            time docker pull $IMG:$TAG
 #            docker rmi -f $(docker images -q)
 
@@ -70,18 +70,19 @@ jobs:
           command: |
             IMG=lotharschulz/hellogo
             TAG=build.docker-cache--0.2.$CIRCLE_BUILD_NUM
-            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-cache"
+            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-cache \n"
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-cache
-            echo "docker images"
+            echo "docker images \n"
             docker images
-            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
-            echo "docker push $IMG:$TAG"
+            docker login -u $DOCKERHUB_USER --password-stdin $DOCKERHUB_PASSWORD
+            echo "docker push $IMG:$TAG \n"
             time docker push $IMG:$TAG
             docker rmi -f $(docker images -q)
-            echo "docker pull $IMG:$TAG"
+            echo "docker pull $IMG:$TAG \n"
             time docker pull $IMG:$TAG
             docker rmi -f $(docker images -q)
 ### hier weiter
+# docker builder
       - run:
           name: docker pull golang & alpine base image
           command: |
@@ -151,7 +152,10 @@ jobs:
           name: docker clean
           command: |
             docker rmi -f $(docker images -q)
+# alpine
 
+
+# min
       - run:
           name: build.docker-min
           command: |
