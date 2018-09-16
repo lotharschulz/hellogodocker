@@ -202,13 +202,29 @@ jobs:
 #            time docker pull $IMG:$TAG
 #            docker rmi -f $(docker images -q)
 
+#      - run:
+#          name: build.docker-min-nocache
+#          command: |
+#            IMG=lotharschulz/hellogo
+#            TAG=build.docker-min-nocache--0.2.$CIRCLE_BUILD_NUM
+#            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-nocache \n"
+#            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-nocache
+#            docker images
+#            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+#            echo "docker push $IMG:$TAG \n"
+#            time docker push $IMG:$TAG
+#            docker rmi -f $(docker images -q)
+#            echo "docker pull $IMG:$TAG \n"
+#            time docker pull $IMG:$TAG
+#            docker rmi -f $(docker images -q)
+
       - run:
-          name: build.docker-min-nocache
+          name: build.docker-min-squash
           command: |
             IMG=lotharschulz/hellogo
-            TAG=build.docker-min-nocache--0.2.$CIRCLE_BUILD_NUM
-            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-nocache \n"
-            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-nocache
+            TAG=build.docker-min-squash--0.2.$CIRCLE_BUILD_NUM
+            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-squash \n"
+            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-squash
             docker images
             docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "docker push $IMG:$TAG \n"
@@ -217,27 +233,19 @@ jobs:
             echo "docker pull $IMG:$TAG \n"
             time docker pull $IMG:$TAG
             docker rmi -f $(docker images -q)
-      - run:
-          name: docker clean
-          command: |
-            docker rmi -f $(docker images -q)
-
-      - run:
-          name: build.docker-min-squash
-          command: |
-            time make build.docker-min-squash
-            docker images
-      - run:
-          name: docker clean
-          command: |
-            docker rmi -f $(docker images -q)
 
       - run:
           name: build.docker-min-compress
           command: |
-            time make build.docker-min-compress
+            IMG=lotharschulz/hellogo
+            TAG=build.docker-min-compress--0.2.$CIRCLE_BUILD_NUM
+            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-compress \n"
+            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-compress
             docker images
-      - run:
-          name: docker clean
-          command: |
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+            echo "docker push $IMG:$TAG \n"
+            time docker push $IMG:$TAG
+            docker rmi -f $(docker images -q)
+            echo "docker pull $IMG:$TAG \n"
+            time docker pull $IMG:$TAG
             docker rmi -f $(docker images -q)
