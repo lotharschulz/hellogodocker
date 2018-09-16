@@ -140,3 +140,213 @@ jobs:
             echo "docker pull $IMG:$TAG \n"
             time docker pull $IMG:$TAG
             docker rmi -f $(docker images -q)
+
+#################
+
+      - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.11
+            docker pull alpine:latest
+      - run:
+          name: build.dockerbuilder-squash
+          command: |
+            IMG=lotharschulz/hellogo
+            TAG=build.dockerbuilder-squash--0.2.$CIRCLE_BUILD_NUM
+            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-squash \n"
+            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-squash
+            docker images
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+            echo "docker push $IMG:$TAG \n"
+            time docker push $IMG:$TAG
+            docker rmi -f $(docker images -q)
+            echo "docker pull $IMG:$TAG \n"
+            time docker pull $IMG:$TAG
+            docker rmi -f $(docker images -q)
+
+      - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.11
+            docker pull alpine:latest
+      - run:
+          name: build.dockerbuilder-compress
+          command: |
+            IMG=lotharschulz/hellogo
+            TAG=build.dockerbuilder-compress--0.2.$CIRCLE_BUILD_NUM
+            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-compress \n"
+            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-compress
+            docker images
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+            echo "docker push $IMG:$TAG \n"
+            time docker push $IMG:$TAG
+            docker rmi -f $(docker images -q)
+            echo "docker pull $IMG:$TAG \n"
+            time docker pull $IMG:$TAG
+            docker rmi -f $(docker images -q)
+
+# alpine
+      - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.11
+            docker pull alpine:latest
+      - run:
+          name: build.dockeralpine
+          command: |
+            IMG=lotharschulz/hellogo
+            TAG=build.dockeralpine--0.2.$CIRCLE_BUILD_NUM
+            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine \n"
+            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine
+            docker images
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+            echo "docker push $IMG:$TAG \n"
+            time docker push $IMG:$TAG
+            docker rmi -f $(docker images -q)
+            echo "docker pull $IMG:$TAG \n"
+            time docker pull $IMG:$TAG
+            docker rmi -f $(docker images -q)
+
+      - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.11
+            docker pull alpine:latest
+      - run:
+          name: build.dockeralpine-cache
+          command: |
+            IMG=lotharschulz/hellogo
+            TAG=build.dockeralpine-cache--0.2.$CIRCLE_BUILD_NUM
+            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine-cache \n"
+            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine-cache
+            docker images
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+            echo "docker push $IMG:$TAG \n"
+            time docker push $IMG:$TAG
+            docker rmi -f $(docker images -q)
+            echo "docker pull $IMG:$TAG \n"
+            time docker pull $IMG:$TAG
+            docker rmi -f $(docker images -q)
+
+      - run:
+          name: build.dockeralpine-nocache
+          command: |
+            IMG=lotharschulz/hellogo
+            TAG=build.dockeralpine-nocache--0.2.$CIRCLE_BUILD_NUM
+            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine-nocache \n"
+            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine-nocache
+            docker images
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+            echo "docker push $IMG:$TAG \n"
+            time docker push $IMG:$TAG
+            docker rmi -f $(docker images -q)
+            echo "docker pull $IMG:$TAG \n"
+            time docker pull $IMG:$TAG
+            docker rmi -f $(docker images -q)
+
+      - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.11
+            docker pull alpine:latest
+      - run:
+          name: build.dockeralpine-squash
+          command: |
+            IMG=lotharschulz/hellogo
+            TAG=build.dockeralpine-squash--0.2.$CIRCLE_BUILD_NUM
+            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine-squash \n"
+            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine-squash
+            docker images
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+            echo "docker push $IMG:$TAG \n"
+            time docker push $IMG:$TAG
+            docker rmi -f $(docker images -q)
+            echo "docker pull $IMG:$TAG \n"
+            time docker pull $IMG:$TAG
+            docker rmi -f $(docker images -q)
+
+      - run:
+          name: docker pull golang & alpine base image
+          command: |
+            docker pull golang:1.11
+            docker pull alpine:latest
+      - run:
+          name: build.dockeralpine-compress
+          command: |
+            IMG=lotharschulz/hellogo
+            TAG=build.dockeralpine-compress--0.2.$CIRCLE_BUILD_NUM
+            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine-compress \n"
+            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine-compress
+            docker images
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+            echo "docker push $IMG:$TAG \n"
+            time docker push $IMG:$TAG
+            docker rmi -f $(docker images -q)
+            echo "docker pull $IMG:$TAG \n"
+            time docker pull $IMG:$TAG
+            docker rmi -f $(docker images -q)
+
+# min
+      - run:
+          name: build.docker-min
+          command: |
+            IMG=lotharschulz/hellogo
+            TAG=build.docker-min--0.2.$CIRCLE_BUILD_NUM
+            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min \n"
+            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min
+            docker images
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+            echo "docker push $IMG:$TAG \n"
+            time docker push $IMG:$TAG
+            docker rmi -f $(docker images -q)
+            echo "docker pull $IMG:$TAG \n"
+            time docker pull $IMG:$TAG
+            docker rmi -f $(docker images -q)
+
+      - run:
+          name: build.docker-min-nocache
+          command: |
+            IMG=lotharschulz/hellogo
+            TAG=build.docker-min-nocache--0.2.$CIRCLE_BUILD_NUM
+            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-nocache \n"
+            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-nocache
+            docker images
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+            echo "docker push $IMG:$TAG \n"
+            time docker push $IMG:$TAG
+            docker rmi -f $(docker images -q)
+            echo "docker pull $IMG:$TAG \n"
+            time docker pull $IMG:$TAG
+            docker rmi -f $(docker images -q)
+
+      - run:
+          name: build.docker-min-squash
+          command: |
+            IMG=lotharschulz/hellogo
+            TAG=build.docker-min-squash--0.2.$CIRCLE_BUILD_NUM
+            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-squash \n"
+            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-squash
+            docker images
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+            echo "docker push $IMG:$TAG \n"
+            time docker push $IMG:$TAG
+            docker rmi -f $(docker images -q)
+            echo "docker pull $IMG:$TAG \n"
+            time docker pull $IMG:$TAG
+            docker rmi -f $(docker images -q)
+
+      - run:
+          name: build.docker-min-compress
+          command: |
+            IMG=lotharschulz/hellogo
+            TAG=build.docker-min-compress--0.2.$CIRCLE_BUILD_NUM
+            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-compress \n"
+            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-compress
+            docker images
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+            echo "docker push $IMG:$TAG \n"
+            time docker push $IMG:$TAG
+            docker rmi -f $(docker images -q)
+            echo "docker pull $IMG:$TAG \n"
+            time docker pull $IMG:$TAG
+            docker rmi -f $(docker images -q)
