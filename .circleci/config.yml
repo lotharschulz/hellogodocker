@@ -146,13 +146,34 @@ jobs:
 #          command: |
 #            docker pull golang:1.11
 #            docker pull alpine:latest
+#      - run:
+#          name: build.dockerbuilder-squash
+#          command: |
+#            IMG=lotharschulz/hellogo
+#            TAG=build.dockerbuilder-squash--0.2.$CIRCLE_BUILD_NUM
+#            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-squash \n"
+#            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-squash
+#            docker images
+#            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+#            echo "docker push $IMG:$TAG \n"
+#            time docker push $IMG:$TAG
+#            docker rmi -f $(docker images -q)
+#            echo "docker pull $IMG:$TAG \n"
+#            time docker pull $IMG:$TAG
+#            docker rmi -f $(docker images -q)
+
+#      - run:
+#          name: docker pull golang & alpine base image
+#          command: |
+#            docker pull golang:1.11
+#            docker pull alpine:latest
       - run:
-          name: build.dockerbuilder-squash
+          name: build.dockerbuilder-compress
           command: |
             IMG=lotharschulz/hellogo
-            TAG=build.dockerbuilder-squash--0.2.$CIRCLE_BUILD_NUM
-            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-squash \n"
-            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-squash
+            TAG=build.dockerbuilder-compress--0.2.$CIRCLE_BUILD_NUM
+            echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-compress \n"
+            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-compress
             docker images
             docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "docker push $IMG:$TAG \n"
@@ -161,21 +182,6 @@ jobs:
             echo "docker pull $IMG:$TAG \n"
             time docker pull $IMG:$TAG
             docker rmi -f $(docker images -q)
-      - run:
-          name: docker clean
-          command: |
-            docker rmi -f $(docker images -q)
-
-      - run:
-          name: docker pull golang & alpine base image
-          command: |
-            docker pull golang:1.11
-            docker pull alpine:latest
-      - run:
-          name: build.dockerbuilder-compress
-          command: |
-            time make build.dockerbuilder-compress
-            docker images
       - run:
           name: docker clean
           command: |
