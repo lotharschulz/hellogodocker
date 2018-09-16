@@ -192,7 +192,7 @@ jobs:
             IMG=lotharschulz/hellogo
             TAG=build.docker-min--0.2.$CIRCLE_BUILD_NUM
             echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min \n"
-            time make build.docker-min
+            DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min
             docker images
             docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "docker push $IMG:$TAG \n"
