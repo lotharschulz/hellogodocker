@@ -82,7 +82,7 @@ jobs:
             time docker pull $IMG:$TAG
             docker rmi -f $(docker images -q)
 
- docker builder
+# docker builder
       - run:
           name: docker pull golang & alpine base image
           command: |
