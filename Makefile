@@ -96,7 +96,7 @@ build.dockeralpine: build
 
 # builds the docker alpine image with cache, depends on build
 build.dockeralpine-cache: build
-	docker build --cache-from golang:1.11 --cache-from alpine:latest -t $(DOCKER_IMAGE) -f $(DOCKERFILEALPINE) $(DOCKERFILE_FOLDER)
+	docker build --cache-from alpine:latest -t $(DOCKER_IMAGE) -f $(DOCKERFILEALPINE) $(DOCKERFILE_FOLDER)
 
 # builds the docker alpine image without cache, depends on build
 build.dockeralpine-nocache: build
