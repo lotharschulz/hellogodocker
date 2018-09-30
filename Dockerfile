@@ -1,10 +1,12 @@
 FROM golang:1.11
 
-RUN groupadd -g 999 appuser && useradd -r -u 999 -g appuser appuser
-USER appuser
-
+RUN mkdir /app
 WORKDIR /app
+COPY hello.go	.
 
-COPY hellogo .
+RUN go build -o hellogo .
+
+RUN groupadd -g 99 appuser && useradd -r -u 99 -g appuser appuser 
+USER appuser
 
 CMD ["./hellogo"]
