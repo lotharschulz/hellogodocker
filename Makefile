@@ -66,7 +66,7 @@ build.docker: build
 
 # builds the docker image  with cache, depends on build
 build.docker-cache: build
-	docker build --cache-from golang:1.11 -t $(DOCKER_IMAGE) -f $(DOCKERFILE) $(DOCKERFILE_FOLDER)
+	docker build --cache-from golang:1.12 -t $(DOCKER_IMAGE) -f $(DOCKERFILE) $(DOCKERFILE_FOLDER)
 
 # builder ###########
 # builds the docker builder image, depends on build
@@ -75,7 +75,7 @@ build.dockerbuilder: build
 
 # builds the docker builder image with cache, depends on build
 build.dockerbuilder-cache: build
-	docker build --cache-from golang:1.11 --cache-from alpine:latest -t $(DOCKER_IMAGE) -f $(DOCKERFILEBUILDER) $(DOCKERFILE_FOLDER)
+	docker build --cache-from golang:1.12 --cache-from alpine:latest -t $(DOCKER_IMAGE) -f $(DOCKERFILEBUILDER) $(DOCKERFILE_FOLDER)
 
 # builds the docker builder image without cache, depends on build
 build.dockerbuilder-nocache: build
