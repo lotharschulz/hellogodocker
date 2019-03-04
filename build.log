@@ -1,1017 +1,1050 @@
-$ ./local_build.sh 
-1.11: Pulling from library/golang
-05d1a5232b46: Pull complete 
-5cee356eda6b: Pull complete 
-89d3385f0fd3: Pull complete 
-80ae6b477848: Pull complete 
-94ebfeaaddf3: Pull complete 
-dd697213ec59: Pull complete 
-715d1281dfe7: Pull complete 
-Digest: sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Status: Downloaded newer image for golang:1.11
+$ ./local_build.sh
+1.12: Pulling from library/golang
+741437d97401: Pull complete 
+34d8874714d7: Pull complete 
+0a108aa26679: Pull complete 
+7f0334c36886: Pull complete 
+d35724ed4672: Pull complete 
+d0ea18b1198f: Pull complete 
+647e63f91386: Pull complete 
+Digest: sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Status: Downloaded newer image for golang:1.12
 go build -o hellogo -v
-docker build --rm -t lotharschulz/hellogo:4d8682f-20180916202950 -f Dockerfile .
-Sending build context to Docker daemon  22.12MB
-Step 1/6 : FROM golang:1.11
- ---> fb7a47d8605b
-Step 2/6 : RUN groupadd -g 999 appuser && useradd -r -u 999 -g appuser appuser
- ---> Running in 8bb5448c058e
-Removing intermediate container 8bb5448c058e
- ---> 665113d2a3e0
-Step 3/6 : USER appuser
- ---> Running in 3fa83f3926fb
-Removing intermediate container 3fa83f3926fb
- ---> 554affa7cc9f
-Step 4/6 : WORKDIR /app
- ---> Running in 3222acb370ef
-Removing intermediate container 3222acb370ef
- ---> 96dd05cd7c8e
-Step 5/6 : COPY hellogo .
- ---> aff6c8a62f93
-Step 6/6 : CMD ["./hellogo"]
- ---> Running in a829ad3de7f6
-Removing intermediate container a829ad3de7f6
- ---> 2188e4a229a4
-Successfully built 2188e4a229a4
-Successfully tagged lotharschulz/hellogo:4d8682f-20180916202950
+docker build --rm -t lotharschulz/hellogo:28576bf-dirty-20190304153147 -f Dockerfile .
+Sending build context to Docker daemon  7.952MB
+Step 1/8 : FROM golang:1.12
+ ---> c4f8e4c91496
+Step 2/8 : RUN mkdir /app
+ ---> Running in 30662337bbce
+Removing intermediate container 30662337bbce
+ ---> b1a631a043da
+Step 3/8 : WORKDIR /app
+ ---> Running in 2ccee89c8340
+Removing intermediate container 2ccee89c8340
+ ---> 7e2e21258990
+Step 4/8 : COPY hello.go	.
+ ---> bd4472a38cc4
+Step 5/8 : RUN go build -o hellogo .
+ ---> Running in 4f5c6bc9701c
+Removing intermediate container 4f5c6bc9701c
+ ---> e6ecd97190d9
+Step 6/8 : RUN groupadd -g 99 appuser && useradd -r -u 99 -g appuser appuser
+ ---> Running in c230f40da812
+Removing intermediate container c230f40da812
+ ---> e3e323da6110
+Step 7/8 : USER appuser
+ ---> Running in 5ab9a322a907
+Removing intermediate container 5ab9a322a907
+ ---> 532efb3ebc9e
+Step 8/8 : CMD ["./hellogo"]
+ ---> Running in c6620ce27630
+Removing intermediate container c6620ce27630
+ ---> de78aad9aa8f
+Successfully built de78aad9aa8f
+Successfully tagged lotharschulz/hellogo:28576bf-dirty-20190304153147
 
-real	0m1.997s
-user	0m0.248s
-sys	0m0.128s
-REPOSITORY             TAG                      IMAGE ID            CREATED             SIZE
-lotharschulz/hellogo   4d8682f-20180916202950   2188e4a229a4        1 second ago        783MB
-golang                 1.11                     fb7a47d8605b        11 days ago         776MB
-Untagged: lotharschulz/hellogo:4d8682f-20180916202950
-Deleted: sha256:2188e4a229a4e780449eb8e7c66d8e5328ed0b6b4922c441460635e7e60f07db
-Deleted: sha256:aff6c8a62f93ac7790d1aad2ef9e102eb482c3f56295601f7f04b8b61f039af4
-Deleted: sha256:3978548efaaec675c41adaa0931a53ed40347a1ccd7aa28b8a055a796c258064
-Deleted: sha256:96dd05cd7c8ea7c47e5f5a1ec7f04c096c0807bf124990ec7b4137f551764b03
-Deleted: sha256:52a7bc3a52f86f3f4545201825704282544814db4f2fda57c46e641721bd15e7
-Deleted: sha256:554affa7cc9f686bbc5115952ce236915c6c0631c87bc09f2eceae989993e7ee
-Deleted: sha256:665113d2a3e0608923de24d1988536285b36477bd99220e2fc57046f1d8d792c
-Deleted: sha256:246e8906373ce50469411e8c3dd2120c9e65d7a830f98a9363e19483bbb82751
-Untagged: golang:1.11
-Untagged: golang@sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Deleted: sha256:fb7a47d8605b86174e88a730064bb877a7d100ac31df3e46cc8a829160d62136
-Deleted: sha256:f8c71d541880fd9419ab0ffab11903f9f8616697814031f9b328ee71cafb30ca
-Deleted: sha256:a0ec5f11d8849b310279b62cb48eac40173a1fbd6cd309980396a5e5784ebbbe
-Deleted: sha256:195829470c4f7e4d0a32f4622d3134d5acc58bc8be4b87740d0535b9cc13919d
-Deleted: sha256:548c6a523fb3c6dab5b94c5cc04c314691ff26cab49889498f92b26829054bba
-Deleted: sha256:54a32bd7a949afcfc50488df9a48db13f5bfc63c282a09db4aa2fb499012c21f
-Deleted: sha256:7d5f2843cac2368781293d71139c6c30fbb6b7029f6fd4424da858e7f2772875
-Deleted: sha256:b28ef0b6fef80faa25436bec0a1375214d9a23a91e9b75975bba3b2889f8504f
-1.11: Pulling from library/golang
-05d1a5232b46: Pull complete 
-5cee356eda6b: Pull complete 
-89d3385f0fd3: Pull complete 
-80ae6b477848: Pull complete 
-94ebfeaaddf3: Pull complete 
-dd697213ec59: Pull complete 
-715d1281dfe7: Pull complete 
-Digest: sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Status: Downloaded newer image for golang:1.11
+real	0m7.678s
+user	0m0.815s
+sys	0m0.468s
+REPOSITORY             TAG                            IMAGE ID            CREATED                  SIZE
+lotharschulz/hellogo   28576bf-dirty-20190304153147   de78aad9aa8f        Less than a second ago   780MB
+golang                 1.12                           c4f8e4c91496        5 days ago               772MB
+Untagged: lotharschulz/hellogo:28576bf-dirty-20190304153147
+Deleted: sha256:de78aad9aa8fe6998254c5a6f66972aeeb553071ac9b2e5aa67d7c5ef146fecf
+Deleted: sha256:532efb3ebc9e3c89001c2d242979fece97b018025123ca349a8b0c03583b9068
+Deleted: sha256:e3e323da611087c2a7667ebddfdb5cf735c41949eaedba74c7ef26de01eb2cd3
+Deleted: sha256:1ce8fb8ca663d39baed9df7e0ba0c341a0618518d02a400e27d56f340350d9be
+Deleted: sha256:e6ecd97190d951888079f0dbbfe904e95f9cead7d320fd0053cc44bc7a5c9478
+Deleted: sha256:2ec70c8dc8daf243ff4fe04826ae057b6d8989b3c9cff6d20b9b290d404e79d0
+Deleted: sha256:bd4472a38cc42e720ba357f88c2c3ead26398055fd67c0d1b810ee6161bf4c92
+Deleted: sha256:5d62f0fc0242652691e2307af34a7337da27bd1db730d42dc8b45db9eedf7aa7
+Deleted: sha256:7e2e2125899082ea002944a958a7611cd36d7197f94ba721f140b80256c23d23
+Deleted: sha256:b1a631a043dac828548a0a12e6a667da25e6db0fec05443a5f6cbf0390636083
+Deleted: sha256:4039e1342c6a69d2fa242e4d47ae04128c5cd336d23ea17246d4c84ad6d31073
+Untagged: golang:1.12
+Untagged: golang@sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Deleted: sha256:c4f8e4c91496d431c2b7a96366bf334cb387e18e04e18cc710689b0cb6d76181
+Deleted: sha256:6cd0e7fc07de5cce4f10c1d9c6ccf3303c07328329e0d305b1842199d87661a5
+Deleted: sha256:b35184d5c1819f698317deb7280b5b2ff88a1cb0fc19cb5236a6de1e61245d0d
+Deleted: sha256:3f7511c3b533be31b6f279fab55803757cf07b0daccd69864e7eb14840fdaffb
+Deleted: sha256:39496f7d4f99c499b3c87643953d7b5243cc8a05ed9aad9cf1f404633cf4f8ea
+Deleted: sha256:ac00eef3f557ea71d47b65f3112c0c3b6ae7113153b7205a94bedc496103a6c8
+Deleted: sha256:8f0ebc672b43403012c586feeac72ec83ce8347faab22a2826b952968aefc3d6
+Deleted: sha256:13d5529fd232cacdd8cd561148560e0bf5d65dbc1149faf0c68240985607c303
+1.12: Pulling from library/golang
+741437d97401: Pull complete 
+34d8874714d7: Pull complete 
+0a108aa26679: Pull complete 
+7f0334c36886: Pull complete 
+d35724ed4672: Pull complete 
+d0ea18b1198f: Pull complete 
+647e63f91386: Pull complete 
+Digest: sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Status: Downloaded newer image for golang:1.12
 latest: Pulling from library/alpine
-4fe2ade4980c: Already exists 
-Digest: sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
+6c40cc604d8e: Pull complete 
+Digest: sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
 Status: Downloaded newer image for alpine:latest
 go build -o hellogo -v
-docker build --cache-from golang:1.11 -t lotharschulz/hellogo:4d8682f-20180916203053 -f Dockerfile .
-Sending build context to Docker daemon  22.12MB
-Step 1/6 : FROM golang:1.11
- ---> fb7a47d8605b
-Step 2/6 : RUN groupadd -g 999 appuser && useradd -r -u 999 -g appuser appuser
- ---> Running in ae3b9475d30c
-Removing intermediate container ae3b9475d30c
- ---> fde18ba6f6c5
-Step 3/6 : USER appuser
- ---> Running in 89646a5db1c5
-Removing intermediate container 89646a5db1c5
- ---> 90b52e843eb3
-Step 4/6 : WORKDIR /app
- ---> Running in b63af4d34b03
-Removing intermediate container b63af4d34b03
- ---> 3a76bb1e2f58
-Step 5/6 : COPY hellogo .
- ---> 20750ead3486
-Step 6/6 : CMD ["./hellogo"]
- ---> Running in 77f0aca0ca43
-Removing intermediate container 77f0aca0ca43
- ---> 5a149a362efe
-Successfully built 5a149a362efe
-Successfully tagged lotharschulz/hellogo:4d8682f-20180916203053
+docker build --cache-from golang:1.12 -t lotharschulz/hellogo:28576bf-dirty-20190304153227 -f Dockerfile .
+Sending build context to Docker daemon  7.952MB
+Step 1/8 : FROM golang:1.12
+ ---> c4f8e4c91496
+Step 2/8 : RUN mkdir /app
+ ---> Running in 1778f295b4a4
+Removing intermediate container 1778f295b4a4
+ ---> 04cdbaefcc84
+Step 3/8 : WORKDIR /app
+ ---> Running in 97e6db4bc47c
+Removing intermediate container 97e6db4bc47c
+ ---> 69164342ebdc
+Step 4/8 : COPY hello.go	.
+ ---> ae24674b499d
+Step 5/8 : RUN go build -o hellogo .
+ ---> Running in 6be864f357f7
+Removing intermediate container 6be864f357f7
+ ---> 9404f117a026
+Step 6/8 : RUN groupadd -g 99 appuser && useradd -r -u 99 -g appuser appuser
+ ---> Running in b3c876381eb9
+Removing intermediate container b3c876381eb9
+ ---> 31cae64028f6
+Step 7/8 : USER appuser
+ ---> Running in ba50502466e6
+Removing intermediate container ba50502466e6
+ ---> 2c989fa2fc37
+Step 8/8 : CMD ["./hellogo"]
+ ---> Running in 53955b668126
+Removing intermediate container 53955b668126
+ ---> 99091dcfe2c4
+Successfully built 99091dcfe2c4
+Successfully tagged lotharschulz/hellogo:28576bf-dirty-20190304153227
 
-real	0m8.264s
-user	0m0.316s
-sys	0m0.096s
-REPOSITORY             TAG                      IMAGE ID            CREATED                  SIZE
-lotharschulz/hellogo   4d8682f-20180916203053   5a149a362efe        Less than a second ago   783MB
-alpine                 latest                   196d12cf6ab1        4 days ago               4.41MB
-golang                 1.11                     fb7a47d8605b        11 days ago              776MB
-Untagged: lotharschulz/hellogo:4d8682f-20180916203053
-Deleted: sha256:5a149a362efe333cf625b51ac11a611327c244d4ee493cacc8b98dbc6cac01ab
-Deleted: sha256:20750ead3486e54aee76fa1995cdecf741ef424d85dce80284aac8a1da4ec602
-Deleted: sha256:7d58c86f33b6eacc43fabb62b76a84cb9b09d62431e66ba8aeaa8ac08d3c1fa5
-Deleted: sha256:3a76bb1e2f58a6f2e76111cb074eef310e133123df42c4abbea46258f451af1b
-Deleted: sha256:9c1f2ba590a6ebffd2bb6982b9ddc14ef74b35a58bc4355c85a017e08b615ea7
-Deleted: sha256:90b52e843eb307a20e429cd3b740aa74b6905dbba7f234832a7c46f072d1e2db
-Deleted: sha256:fde18ba6f6c55864f333830414f7d8f864244a50dac4149a200bab89aa147b4a
-Deleted: sha256:66a44d2f145f9a9a89b47ae92205314a244fcecb64469166acceffb09f5878d1
+real	0m7.244s
+user	0m0.278s
+sys	0m0.333s
+REPOSITORY             TAG                            IMAGE ID            CREATED                  SIZE
+lotharschulz/hellogo   28576bf-dirty-20190304153227   99091dcfe2c4        Less than a second ago   780MB
+golang                 1.12                           c4f8e4c91496        5 days ago               772MB
+alpine                 latest                         caf27325b298        4 weeks ago              5.53MB
+Untagged: lotharschulz/hellogo:28576bf-dirty-20190304153227
+Deleted: sha256:99091dcfe2c4d96b5afc9aa6ebc06e9d283354d5cb41d20c79a8fa9979c99b3a
+Deleted: sha256:2c989fa2fc37a8e286295a3f8f85a973815b2ee4c2293a9b7a51bfdecc374ad2
+Deleted: sha256:31cae64028f6aa0d858fcd922d0829b0da0cc19c85606deac5e49b3913fa5599
+Deleted: sha256:e0fb21c963484ee6b1d8756347b78c312be688cbd0af0c8c90e38fa336b0374c
+Deleted: sha256:9404f117a026ed4f7c2f6f04e10702be7a4daf19b83deca6b7d60dd118708b93
+Deleted: sha256:741bbf1b4de5f6ef11dd2f2bf266fa6f0e05eab83d31c00cb3e63038a6ca5340
+Deleted: sha256:ae24674b499df36097a965035d3ec6395e88d6d2851628263eaeacbac262929e
+Deleted: sha256:627289adc6e12777b2ef1a0fee908b1382664fe26a94fa48e9191f7d8b8d7689
+Deleted: sha256:69164342ebdca803c073f9695d7aef6d91a743a4bb4511273a4b229312a0fb9b
+Deleted: sha256:04cdbaefcc8404c5ce42dc65f81721eb6f872c366654398a019099d5280353d6
+Deleted: sha256:bf195e04d87cf919e77ee61e3e2aab4914eed0bb15ea0e0cb912a69d3ec3712b
+Untagged: golang:1.12
+Untagged: golang@sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Deleted: sha256:c4f8e4c91496d431c2b7a96366bf334cb387e18e04e18cc710689b0cb6d76181
+Deleted: sha256:6cd0e7fc07de5cce4f10c1d9c6ccf3303c07328329e0d305b1842199d87661a5
+Deleted: sha256:b35184d5c1819f698317deb7280b5b2ff88a1cb0fc19cb5236a6de1e61245d0d
+Deleted: sha256:3f7511c3b533be31b6f279fab55803757cf07b0daccd69864e7eb14840fdaffb
+Deleted: sha256:39496f7d4f99c499b3c87643953d7b5243cc8a05ed9aad9cf1f404633cf4f8ea
+Deleted: sha256:ac00eef3f557ea71d47b65f3112c0c3b6ae7113153b7205a94bedc496103a6c8
+Deleted: sha256:8f0ebc672b43403012c586feeac72ec83ce8347faab22a2826b952968aefc3d6
+Deleted: sha256:13d5529fd232cacdd8cd561148560e0bf5d65dbc1149faf0c68240985607c303
 Untagged: alpine:latest
-Untagged: alpine@sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
-Deleted: sha256:196d12cf6ab19273823e700516e98eb1910b03b17840f9d5509f03858484d321
-Untagged: golang:1.11
-Untagged: golang@sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Deleted: sha256:fb7a47d8605b86174e88a730064bb877a7d100ac31df3e46cc8a829160d62136
-Deleted: sha256:f8c71d541880fd9419ab0ffab11903f9f8616697814031f9b328ee71cafb30ca
-Deleted: sha256:a0ec5f11d8849b310279b62cb48eac40173a1fbd6cd309980396a5e5784ebbbe
-Deleted: sha256:195829470c4f7e4d0a32f4622d3134d5acc58bc8be4b87740d0535b9cc13919d
-Deleted: sha256:548c6a523fb3c6dab5b94c5cc04c314691ff26cab49889498f92b26829054bba
-Deleted: sha256:54a32bd7a949afcfc50488df9a48db13f5bfc63c282a09db4aa2fb499012c21f
-Deleted: sha256:7d5f2843cac2368781293d71139c6c30fbb6b7029f6fd4424da858e7f2772875
-Deleted: sha256:b28ef0b6fef80faa25436bec0a1375214d9a23a91e9b75975bba3b2889f8504f
-1.11: Pulling from library/golang
-05d1a5232b46: Pull complete 
-5cee356eda6b: Pull complete 
-89d3385f0fd3: Pull complete 
-80ae6b477848: Pull complete 
-94ebfeaaddf3: Pull complete 
-dd697213ec59: Pull complete 
-715d1281dfe7: Pull complete 
-Digest: sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Status: Downloaded newer image for golang:1.11
+Untagged: alpine@sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
+Deleted: sha256:caf27325b298a6730837023a8a342699c8b7b388b8d878966b064a1320043019
+Deleted: sha256:503e53e365f34399c4d58d8f4e23c161106cfbce4400e3d0a0357967bad69390
+1.12: Pulling from library/golang
+741437d97401: Pull complete 
+34d8874714d7: Pull complete 
+0a108aa26679: Pull complete 
+7f0334c36886: Pull complete 
+d35724ed4672: Pull complete 
+d0ea18b1198f: Pull complete 
+647e63f91386: Pull complete 
+Digest: sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Status: Downloaded newer image for golang:1.12
 latest: Pulling from library/alpine
-4fe2ade4980c: Already exists 
-Digest: sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
+6c40cc604d8e: Pull complete 
+Digest: sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
 Status: Downloaded newer image for alpine:latest
 go build -o hellogo -v
-docker build --rm -t lotharschulz/hellogo:4d8682f-20180916203205 -f DockerfileBuilder .
-Sending build context to Docker daemon  22.12MB
-Step 1/10 : FROM golang:1.11 as builder
- ---> fb7a47d8605b
+docker build --rm -t lotharschulz/hellogo:28576bf-dirty-20190304153310 -f DockerfileBuilder .
+Sending build context to Docker daemon  7.952MB
+Step 1/10 : FROM golang:1.12 as builder
+ ---> c4f8e4c91496
 Step 2/10 : WORKDIR /go/src/github.com/lotharschulz/hellogodocker/
- ---> Running in 084bb653a3d6
-Removing intermediate container 084bb653a3d6
- ---> 216d32c33986
+ ---> Running in 020eaaeceac7
+Removing intermediate container 020eaaeceac7
+ ---> 13c024dfb314
 Step 3/10 : COPY hello.go	.
- ---> 66b9f743c33d
+ ---> 3b34e6ad1ee8
 Step 4/10 : RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hellogodocker .
- ---> Running in de305f111ff6
-Removing intermediate container de305f111ff6
- ---> c8c392439fda
+ ---> Running in 364d9c145e34
+Removing intermediate container 364d9c145e34
+ ---> 4dd4be3893ff
 Step 5/10 : FROM alpine:latest
- ---> 196d12cf6ab1
+ ---> caf27325b298
 Step 6/10 : RUN apk --no-cache add ca-certificates &&     addgroup -g 99 appuser &&     adduser -D -u 99 -G appuser appuser
- ---> Running in 867bcea4442c
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/main/x86_64/APKINDEX.tar.gz
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/community/x86_64/APKINDEX.tar.gz
-(1/1) Installing ca-certificates (20171114-r3)
-Executing busybox-1.28.4-r1.trigger
-Executing ca-certificates-20171114-r3.trigger
-OK: 5 MiB in 14 packages
-Removing intermediate container 867bcea4442c
- ---> 645d9a76b30b
+ ---> Running in 314f7cb5b2e3
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/community/x86_64/APKINDEX.tar.gz
+(1/1) Installing ca-certificates (20190108-r0)
+Executing busybox-1.29.3-r10.trigger
+Executing ca-certificates-20190108-r0.trigger
+OK: 6 MiB in 15 packages
+Removing intermediate container 314f7cb5b2e3
+ ---> a2d65f934a12
 Step 7/10 : USER appuser
- ---> Running in 3621976e75e7
-Removing intermediate container 3621976e75e7
- ---> 1f6647a27155
+ ---> Running in 2ac3bf98b485
+Removing intermediate container 2ac3bf98b485
+ ---> a6006e7cf9f3
 Step 8/10 : WORKDIR /app
- ---> Running in b4b6242cd490
-Removing intermediate container b4b6242cd490
- ---> bcb3b8572997
+ ---> Running in a661483ba04c
+Removing intermediate container a661483ba04c
+ ---> 954ae9b16d7d
 Step 9/10 : COPY --from=builder /go/src/github.com/lotharschulz/hellogodocker/hellogodocker .
- ---> 4a5dde4030bd
+ ---> 75c05bf971e3
 Step 10/10 : CMD ["./hellogodocker"]
- ---> Running in 363112c7c536
-Removing intermediate container 363112c7c536
- ---> 361c0537e15e
-Successfully built 361c0537e15e
-Successfully tagged lotharschulz/hellogo:4d8682f-20180916203205
+ ---> Running in 58bc72ca4ec3
+Removing intermediate container 58bc72ca4ec3
+ ---> 78c2665b37e9
+Successfully built 78c2665b37e9
+Successfully tagged lotharschulz/hellogo:28576bf-dirty-20190304153310
 
-real	0m14.180s
-user	0m0.304s
-sys	0m0.084s
-REPOSITORY             TAG                      IMAGE ID            CREATED             SIZE
-lotharschulz/hellogo   4d8682f-20180916203205   361c0537e15e        1 second ago        10.2MB
-<none>                 <none>                   c8c392439fda        3 seconds ago       803MB
-alpine                 latest                   196d12cf6ab1        4 days ago          4.41MB
-golang                 1.11                     fb7a47d8605b        11 days ago         776MB
-Untagged: lotharschulz/hellogo:4d8682f-20180916203205
-Deleted: sha256:361c0537e15ea9ff2bd2c94ee85d0358b678bae59c0f5f800e8ad92cc9b508bc
-Deleted: sha256:4a5dde4030bddb894910f87c084617c1de78c6286f5bdb7b89ce319bc7a8a7d1
-Deleted: sha256:102d891dad7f60ccb2dc9d2b49c9bc04bbc5f01c21ee3d96eb7119b4c4b0948f
-Deleted: sha256:bcb3b8572997320943b407594db0be77ae3d12e267412d538ada38b33b4d14b0
-Deleted: sha256:23a1231a7956886acf9fb74c189b94db7cd92f9b24f02472603c9c697a176b0f
-Deleted: sha256:1f6647a27155fa375808535a1cf550b9bfc1e31d7b39bb11922767da08e1e1de
-Deleted: sha256:645d9a76b30b6afdb9112a8875eb804f1f0d8d1369836fa9a092ee9491099986
-Deleted: sha256:540e557b19d09ee3e43014699e6b165036d769f4a63a8231b76408e2c7cefb0b
-Deleted: sha256:c8c392439fdaf616923e71aa8855cd3912a66e6ebc3ab5cbf46366218ae06fc5
-Deleted: sha256:de9daf9bc45976623486ba353a7eef24b95aaa48d430f6d9afbb8aceb36e60d1
-Deleted: sha256:66b9f743c33dc135b633ec5f323d8975f86bd3afdbded1542beea0f2983dbec0
-Deleted: sha256:ea12644cd7a268a9bb8b38918d18ca685bd9c8624a375dedee7035a069f5f619
-Deleted: sha256:216d32c339865fe40a58bdda7839bfaa8e18f0ef4befbd72c6e9e4e5490b8764
-Deleted: sha256:35dd20eff07b0133155954ef92a62f970bc4aadecee4068e3b226e37578beea7
+real	0m12.281s
+user	0m0.286s
+sys	0m0.341s
+REPOSITORY             TAG                            IMAGE ID            CREATED                  SIZE
+lotharschulz/hellogo   28576bf-dirty-20190304153310   78c2665b37e9        Less than a second ago   11.9MB
+<none>                 <none>                         4dd4be3893ff        3 seconds ago            802MB
+golang                 1.12                           c4f8e4c91496        5 days ago               772MB
+alpine                 latest                         caf27325b298        4 weeks ago              5.53MB
+Untagged: lotharschulz/hellogo:28576bf-dirty-20190304153310
+Deleted: sha256:78c2665b37e94c7f74888a80574b67a95a47131dcff02768d461b5bf6b92d752
+Deleted: sha256:75c05bf971e33f35bf86476a1a6f3956a952fa2035ab02990cbe509c2539024c
+Deleted: sha256:4e54a2931bd3c8f0850fe3bc6df7190bc4fb631f86455ae03594ec5c1d637e8e
+Deleted: sha256:954ae9b16d7d0c92b8f43f75d43e5da8a5dff38581e39fee04296ebe75db6ba9
+Deleted: sha256:60d505880316f326661a5d2dbbd4aaaef92351a48925cbb461218d2495829673
+Deleted: sha256:a6006e7cf9f3f432ebd60b4821e5eea799a6d137df2578f5d78337151e5aadac
+Deleted: sha256:a2d65f934a12aa613a17a60ff3d182baab5c692111ace7cf5cb121ebf2d7680e
+Deleted: sha256:003fd1bd331b7db940e24328297c9471382ee56b459b15b1e42570e8d2cf1b7c
+Deleted: sha256:4dd4be3893ff6fb9461a42da4d6760784ae8a111141baab46cda6855d15676f1
+Deleted: sha256:7ec80d9b56edf352bbcdd3bea33cf2aa203bc614422cdfa982bcdcc61730d6f4
+Deleted: sha256:3b34e6ad1ee81f7ddffaf7fe03115137bb214b2ee0961f926aa7426f44a592c8
+Deleted: sha256:29f51a9c0cfbcaf88b33783653da66bfdb037abaf1e8d70a396a8117ed4f2cea
+Deleted: sha256:13c024dfb314a487584a4e0368d1961102473b6bae9452fd0bc8a50fe2976bea
+Deleted: sha256:babc94cb060cf3dbfcbc100b58e92532bcd8794d0801ae63e051a44577e67ff8
+Untagged: golang:1.12
+Untagged: golang@sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Deleted: sha256:c4f8e4c91496d431c2b7a96366bf334cb387e18e04e18cc710689b0cb6d76181
+Deleted: sha256:6cd0e7fc07de5cce4f10c1d9c6ccf3303c07328329e0d305b1842199d87661a5
+Deleted: sha256:b35184d5c1819f698317deb7280b5b2ff88a1cb0fc19cb5236a6de1e61245d0d
+Deleted: sha256:3f7511c3b533be31b6f279fab55803757cf07b0daccd69864e7eb14840fdaffb
+Deleted: sha256:39496f7d4f99c499b3c87643953d7b5243cc8a05ed9aad9cf1f404633cf4f8ea
+Deleted: sha256:ac00eef3f557ea71d47b65f3112c0c3b6ae7113153b7205a94bedc496103a6c8
+Deleted: sha256:8f0ebc672b43403012c586feeac72ec83ce8347faab22a2826b952968aefc3d6
+Deleted: sha256:13d5529fd232cacdd8cd561148560e0bf5d65dbc1149faf0c68240985607c303
 Untagged: alpine:latest
-Untagged: alpine@sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
-Deleted: sha256:196d12cf6ab19273823e700516e98eb1910b03b17840f9d5509f03858484d321
-Untagged: golang:1.11
-Untagged: golang@sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Deleted: sha256:fb7a47d8605b86174e88a730064bb877a7d100ac31df3e46cc8a829160d62136
-Deleted: sha256:f8c71d541880fd9419ab0ffab11903f9f8616697814031f9b328ee71cafb30ca
-Deleted: sha256:a0ec5f11d8849b310279b62cb48eac40173a1fbd6cd309980396a5e5784ebbbe
-Deleted: sha256:195829470c4f7e4d0a32f4622d3134d5acc58bc8be4b87740d0535b9cc13919d
-Deleted: sha256:548c6a523fb3c6dab5b94c5cc04c314691ff26cab49889498f92b26829054bba
-Deleted: sha256:54a32bd7a949afcfc50488df9a48db13f5bfc63c282a09db4aa2fb499012c21f
-Deleted: sha256:7d5f2843cac2368781293d71139c6c30fbb6b7029f6fd4424da858e7f2772875
-Deleted: sha256:b28ef0b6fef80faa25436bec0a1375214d9a23a91e9b75975bba3b2889f8504f
-1.11: Pulling from library/golang
-05d1a5232b46: Pull complete 
-5cee356eda6b: Pull complete 
-89d3385f0fd3: Pull complete 
-80ae6b477848: Pull complete 
-94ebfeaaddf3: Pull complete 
-dd697213ec59: Pull complete 
-715d1281dfe7: Pull complete 
-Digest: sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Status: Downloaded newer image for golang:1.11
+Untagged: alpine@sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
+Deleted: sha256:caf27325b298a6730837023a8a342699c8b7b388b8d878966b064a1320043019
+Deleted: sha256:503e53e365f34399c4d58d8f4e23c161106cfbce4400e3d0a0357967bad69390
+1.12: Pulling from library/golang
+741437d97401: Pull complete 
+34d8874714d7: Pull complete 
+0a108aa26679: Pull complete 
+7f0334c36886: Pull complete 
+d35724ed4672: Pull complete 
+d0ea18b1198f: Pull complete 
+647e63f91386: Pull complete 
+Digest: sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Status: Downloaded newer image for golang:1.12
 latest: Pulling from library/alpine
-4fe2ade4980c: Already exists 
-Digest: sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
+6c40cc604d8e: Pull complete 
+Digest: sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
 Status: Downloaded newer image for alpine:latest
 go build -o hellogo -v
-docker build --cache-from golang:1.11 --cache-from alpine:latest -t lotharschulz/hellogo:4d8682f-20180916203322 -f DockerfileBuilder .
-Sending build context to Docker daemon  22.12MB
-Step 1/10 : FROM golang:1.11 as builder
- ---> fb7a47d8605b
+docker build --cache-from golang:1.12 --cache-from alpine:latest -t lotharschulz/hellogo:28576bf-dirty-20190304153358 -f DockerfileBuilder .
+Sending build context to Docker daemon  7.952MB
+Step 1/10 : FROM golang:1.12 as builder
+ ---> c4f8e4c91496
 Step 2/10 : WORKDIR /go/src/github.com/lotharschulz/hellogodocker/
- ---> Running in d9c50017bd45
-Removing intermediate container d9c50017bd45
- ---> 0e379fccb842
+ ---> Running in 5c7ead9cb6c9
+Removing intermediate container 5c7ead9cb6c9
+ ---> d5d0b39977f1
 Step 3/10 : COPY hello.go	.
- ---> 0a25a5e5988e
+ ---> ea855c3666ff
 Step 4/10 : RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hellogodocker .
- ---> Running in 4cc1c42525e2
-Removing intermediate container 4cc1c42525e2
- ---> a8fd5adb49b7
+ ---> Running in 78416c821f93
+Removing intermediate container 78416c821f93
+ ---> 53112ea74846
 Step 5/10 : FROM alpine:latest
- ---> 196d12cf6ab1
+ ---> caf27325b298
 Step 6/10 : RUN apk --no-cache add ca-certificates &&     addgroup -g 99 appuser &&     adduser -D -u 99 -G appuser appuser
- ---> Running in 54d96ea8d49b
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/main/x86_64/APKINDEX.tar.gz
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/community/x86_64/APKINDEX.tar.gz
-(1/1) Installing ca-certificates (20171114-r3)
-Executing busybox-1.28.4-r1.trigger
-Executing ca-certificates-20171114-r3.trigger
-OK: 5 MiB in 14 packages
-Removing intermediate container 54d96ea8d49b
- ---> e0b123d367d0
+ ---> Running in 4dcdd99d11d9
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/community/x86_64/APKINDEX.tar.gz
+(1/1) Installing ca-certificates (20190108-r0)
+Executing busybox-1.29.3-r10.trigger
+Executing ca-certificates-20190108-r0.trigger
+OK: 6 MiB in 15 packages
+Removing intermediate container 4dcdd99d11d9
+ ---> 351d97c83e2c
 Step 7/10 : USER appuser
- ---> Running in babc5304e090
-Removing intermediate container babc5304e090
- ---> 58ebaec5f0ba
+ ---> Running in aa4119940932
+Removing intermediate container aa4119940932
+ ---> df09555f1b43
 Step 8/10 : WORKDIR /app
- ---> Running in 3f2c98db115e
-Removing intermediate container 3f2c98db115e
- ---> edaf85f9ea4d
+ ---> Running in b3287891f128
+Removing intermediate container b3287891f128
+ ---> 10d7c7e17f30
 Step 9/10 : COPY --from=builder /go/src/github.com/lotharschulz/hellogodocker/hellogodocker .
- ---> 0fffa37060cf
+ ---> 8e24a87d56f9
 Step 10/10 : CMD ["./hellogodocker"]
- ---> Running in e4d2bd2cb9d1
-Removing intermediate container e4d2bd2cb9d1
- ---> a1dff28c9bf7
-Successfully built a1dff28c9bf7
-Successfully tagged lotharschulz/hellogo:4d8682f-20180916203322
+ ---> Running in 5c361a0e725d
+Removing intermediate container 5c361a0e725d
+ ---> 7ed0fde866b2
+Successfully built 7ed0fde866b2
+Successfully tagged lotharschulz/hellogo:28576bf-dirty-20190304153358
 
-real	0m14.870s
-user	0m0.312s
-sys	0m0.080s
-REPOSITORY             TAG                      IMAGE ID            CREATED                  SIZE
-lotharschulz/hellogo   4d8682f-20180916203322   a1dff28c9bf7        Less than a second ago   10.2MB
-<none>                 <none>                   a8fd5adb49b7        4 seconds ago            803MB
-alpine                 latest                   196d12cf6ab1        4 days ago               4.41MB
-golang                 1.11                     fb7a47d8605b        11 days ago              776MB
-Untagged: lotharschulz/hellogo:4d8682f-20180916203322
-Deleted: sha256:a1dff28c9bf77c7a24fdcf8c1babf6db0dea266fa0504779ea75774ba050b21e
-Deleted: sha256:0fffa37060cf174c26842bd100fc3a5ace621324c45dd294b86039b7a8e9054d
-Deleted: sha256:e80b9fa419f35eb67714d56aab2629bfac2a5fee2e9863d1bd3a31855e7f0d17
-Deleted: sha256:edaf85f9ea4dcdb0d85b1031b5f1c5f472f5d55c6dfe8c8264fe61bbb5e58867
-Deleted: sha256:e6bc8fb8e826a66e7e93fb363a6e6a6acde180d2cdbad84d03394e6eb2dc0fcf
-Deleted: sha256:58ebaec5f0ba08969c8ef7388150cd0fbcc81d1858f2f161ac83728153c68fb8
-Deleted: sha256:e0b123d367d0c722aee385e5393cb90559c33bef3bd34af5ba151814c87c4ae3
-Deleted: sha256:e1eb2c31acde02cd937574d60012d72aa76fa6badb1db2678f8f80b6b7bdab08
-Deleted: sha256:a8fd5adb49b785d9899e2d8de7f272468ca7b182ac110ad1a99e4a363b2394a8
-Deleted: sha256:d41506a049a81935ff63b32d3d00ac573a6a564c1d69380723bf48f9be56e801
-Deleted: sha256:0a25a5e5988e30b8765d82c2bf31b7f400699a2e802b6a9fea5268e3065f2c54
-Deleted: sha256:d089dc60728931cfb8bc5fcb798cbd4176e3b4ba743d58c4f101929bf09a9e3e
-Deleted: sha256:0e379fccb8425f64bdbb41537b092dd46307acef6356338d2c15ce03cca8b203
-Deleted: sha256:6c1c963275bcffe351880171110efd35a97125fe07fca23877d09dff96c2a349
+real	0m11.877s
+user	0m0.301s
+sys	0m0.361s
+REPOSITORY             TAG                            IMAGE ID            CREATED                  SIZE
+lotharschulz/hellogo   28576bf-dirty-20190304153358   7ed0fde866b2        Less than a second ago   11.9MB
+<none>                 <none>                         53112ea74846        3 seconds ago            802MB
+golang                 1.12                           c4f8e4c91496        5 days ago               772MB
+alpine                 latest                         caf27325b298        4 weeks ago              5.53MB
+Untagged: lotharschulz/hellogo:28576bf-dirty-20190304153358
+Deleted: sha256:7ed0fde866b215449b314c1eb4d7ffbdf19ceae263bf2f19a55ada71a62c64e9
+Deleted: sha256:8e24a87d56f96b78df72b56980b647619d57fa3157eb49af96bbc774168397a4
+Deleted: sha256:87b16356bf468b9a4260a3a479d6379c05b65b042fa2c24554b47aac2a087902
+Deleted: sha256:10d7c7e17f30e1c965ed554390812bbfecc144d0398a97e16386fae767aa03e7
+Deleted: sha256:0b79b20ed871bd5c17ca1b52498db499e89db2b4c33e9844f0260f27f5920169
+Deleted: sha256:df09555f1b43ffc073514cbb42ce79ec7cc7075dd5c3901298fe0b2a8e38294c
+Deleted: sha256:351d97c83e2c19a0e5fb7f17cae7a45bd303236c1d9b5904412bb8f562a109b1
+Deleted: sha256:7ab710c05fa196ea4b1fbb4c26740803a98994d2f27a429b755e691ee78a0607
+Deleted: sha256:53112ea748461b78dade2f80460a550e4c5915201b11ed28cff05d926f6b93e6
+Deleted: sha256:82384aaa15a7d1323663a860e1d82cbb8965e2ec14a60525dfb24b556f78bd45
+Deleted: sha256:ea855c3666ff29ea68e01014d72345cdd9f00e85e864e17259f097800ea7424d
+Deleted: sha256:ff5fc26cc5c09367c66d0191e3726a7b16aa9a5e8c1e1e3684a8165049fbea39
+Deleted: sha256:d5d0b39977f1d4ca653c5d4a4d171757986cfe579a03ce3e24b2ce064414b45f
+Deleted: sha256:aea7d8fa0f18fc940ceae794d3c8e6ba5c666637862a894c303e21ed4affb20e
+Untagged: golang:1.12
+Untagged: golang@sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Deleted: sha256:c4f8e4c91496d431c2b7a96366bf334cb387e18e04e18cc710689b0cb6d76181
+Deleted: sha256:6cd0e7fc07de5cce4f10c1d9c6ccf3303c07328329e0d305b1842199d87661a5
+Deleted: sha256:b35184d5c1819f698317deb7280b5b2ff88a1cb0fc19cb5236a6de1e61245d0d
+Deleted: sha256:3f7511c3b533be31b6f279fab55803757cf07b0daccd69864e7eb14840fdaffb
+Deleted: sha256:39496f7d4f99c499b3c87643953d7b5243cc8a05ed9aad9cf1f404633cf4f8ea
+Deleted: sha256:ac00eef3f557ea71d47b65f3112c0c3b6ae7113153b7205a94bedc496103a6c8
+Deleted: sha256:8f0ebc672b43403012c586feeac72ec83ce8347faab22a2826b952968aefc3d6
+Deleted: sha256:13d5529fd232cacdd8cd561148560e0bf5d65dbc1149faf0c68240985607c303
 Untagged: alpine:latest
-Untagged: alpine@sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
-Deleted: sha256:196d12cf6ab19273823e700516e98eb1910b03b17840f9d5509f03858484d321
-Untagged: golang:1.11
-Untagged: golang@sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Deleted: sha256:fb7a47d8605b86174e88a730064bb877a7d100ac31df3e46cc8a829160d62136
-Deleted: sha256:f8c71d541880fd9419ab0ffab11903f9f8616697814031f9b328ee71cafb30ca
-Deleted: sha256:a0ec5f11d8849b310279b62cb48eac40173a1fbd6cd309980396a5e5784ebbbe
-Deleted: sha256:195829470c4f7e4d0a32f4622d3134d5acc58bc8be4b87740d0535b9cc13919d
-Deleted: sha256:548c6a523fb3c6dab5b94c5cc04c314691ff26cab49889498f92b26829054bba
-Deleted: sha256:54a32bd7a949afcfc50488df9a48db13f5bfc63c282a09db4aa2fb499012c21f
-Deleted: sha256:7d5f2843cac2368781293d71139c6c30fbb6b7029f6fd4424da858e7f2772875
-Deleted: sha256:b28ef0b6fef80faa25436bec0a1375214d9a23a91e9b75975bba3b2889f8504f
+Untagged: alpine@sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
+Deleted: sha256:caf27325b298a6730837023a8a342699c8b7b388b8d878966b064a1320043019
+Deleted: sha256:503e53e365f34399c4d58d8f4e23c161106cfbce4400e3d0a0357967bad69390
 go build -o hellogo -v
-docker build --no-cache --rm -t lotharschulz/hellogo:4d8682f-20180916203337 -f DockerfileBuilder .
-Sending build context to Docker daemon  22.12MB
-Step 1/10 : FROM golang:1.11 as builder
-1.11: Pulling from library/golang
-05d1a5232b46: Pull complete 
-5cee356eda6b: Pull complete 
-89d3385f0fd3: Pull complete 
-80ae6b477848: Pull complete 
-94ebfeaaddf3: Pull complete 
-dd697213ec59: Pull complete 
-715d1281dfe7: Pull complete 
-Digest: sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Status: Downloaded newer image for golang:1.11
- ---> fb7a47d8605b
+docker build --no-cache --rm -t lotharschulz/hellogo:28576bf-dirty-20190304153410 -f DockerfileBuilder .
+Sending build context to Docker daemon  7.952MB
+Step 1/10 : FROM golang:1.12 as builder
+1.12: Pulling from library/golang
+741437d97401: Pull complete 
+34d8874714d7: Pull complete 
+0a108aa26679: Pull complete 
+7f0334c36886: Pull complete 
+d35724ed4672: Pull complete 
+d0ea18b1198f: Pull complete 
+647e63f91386: Pull complete 
+Digest: sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Status: Downloaded newer image for golang:1.12
+ ---> c4f8e4c91496
 Step 2/10 : WORKDIR /go/src/github.com/lotharschulz/hellogodocker/
- ---> Running in 2e6ab18592a2
-Removing intermediate container 2e6ab18592a2
- ---> 072f5e263cfa
+ ---> Running in 62a62677cc2f
+Removing intermediate container 62a62677cc2f
+ ---> 1c6d70b59021
 Step 3/10 : COPY hello.go	.
- ---> 7046e4910385
+ ---> c6cf6be0e42b
 Step 4/10 : RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hellogodocker .
- ---> Running in a135f34717d7
-Removing intermediate container a135f34717d7
- ---> 8ddd97c8ddac
+ ---> Running in 2e0d2ecd0b53
+Removing intermediate container 2e0d2ecd0b53
+ ---> 806d6d5bca4c
 Step 5/10 : FROM alpine:latest
 latest: Pulling from library/alpine
-4fe2ade4980c: Already exists 
-Digest: sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
+6c40cc604d8e: Pull complete 
+Digest: sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
 Status: Downloaded newer image for alpine:latest
- ---> 196d12cf6ab1
+ ---> caf27325b298
 Step 6/10 : RUN apk --no-cache add ca-certificates &&     addgroup -g 99 appuser &&     adduser -D -u 99 -G appuser appuser
- ---> Running in 7a513ffa6ace
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/main/x86_64/APKINDEX.tar.gz
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/community/x86_64/APKINDEX.tar.gz
-(1/1) Installing ca-certificates (20171114-r3)
-Executing busybox-1.28.4-r1.trigger
-Executing ca-certificates-20171114-r3.trigger
-OK: 5 MiB in 14 packages
-Removing intermediate container 7a513ffa6ace
- ---> 5d8f195420e7
+ ---> Running in 88a88cd4c92c
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/community/x86_64/APKINDEX.tar.gz
+(1/1) Installing ca-certificates (20190108-r0)
+Executing busybox-1.29.3-r10.trigger
+Executing ca-certificates-20190108-r0.trigger
+OK: 6 MiB in 15 packages
+Removing intermediate container 88a88cd4c92c
+ ---> ce13543adc38
 Step 7/10 : USER appuser
- ---> Running in 08344dd7922b
-Removing intermediate container 08344dd7922b
- ---> b5fa96d9af41
+ ---> Running in 9369de137300
+Removing intermediate container 9369de137300
+ ---> e842f54e3948
 Step 8/10 : WORKDIR /app
- ---> Running in 19970c910e22
-Removing intermediate container 19970c910e22
- ---> cc280319ee0e
+ ---> Running in e639043196f7
+Removing intermediate container e639043196f7
+ ---> 6d2ccfa29b32
 Step 9/10 : COPY --from=builder /go/src/github.com/lotharschulz/hellogodocker/hellogodocker .
- ---> 26fb43d2869b
+ ---> 7cc4de3ead4c
 Step 10/10 : CMD ["./hellogodocker"]
- ---> Running in 8a2637b6bce3
-Removing intermediate container 8a2637b6bce3
- ---> b3074c07dd1a
-Successfully built b3074c07dd1a
-Successfully tagged lotharschulz/hellogo:4d8682f-20180916203337
+ ---> Running in 0a47a841e455
+Removing intermediate container 0a47a841e455
+ ---> f71e5b99cf28
+Successfully built f71e5b99cf28
+Successfully tagged lotharschulz/hellogo:28576bf-dirty-20190304153410
 
-real	1m14.461s
-user	0m0.508s
-sys	0m0.140s
-REPOSITORY             TAG                      IMAGE ID            CREATED                  SIZE
-lotharschulz/hellogo   4d8682f-20180916203337   b3074c07dd1a        Less than a second ago   10.2MB
-<none>                 <none>                   8ddd97c8ddac        6 seconds ago            803MB
-alpine                 latest                   196d12cf6ab1        4 days ago               4.41MB
-golang                 1.11                     fb7a47d8605b        11 days ago              776MB
-Untagged: lotharschulz/hellogo:4d8682f-20180916203337
-Deleted: sha256:b3074c07dd1a08f4c543b3d4d893d54d14c4210c2dc7618779fae2ac0076eeae
-Deleted: sha256:26fb43d2869b1474f728f874f069a8918189ab1a3548d23ababfa164930e5b92
-Deleted: sha256:7f0e78a1e9d56d4770b9a53dae5228ef035045d5eeb5dc549611df79ba1ff6d4
-Deleted: sha256:cc280319ee0e9242cc89997c7818ba5966a26bdf6d2f2fc5dab585ef98fc84a1
-Deleted: sha256:77a303ef870928aed81aa883de684f4d60ec64d0e0d8373219f3884357bd205e
-Deleted: sha256:b5fa96d9af418c70ec7b05dd31c20ae1863fc9be45fb680ebb87c1e5f18706a9
-Deleted: sha256:5d8f195420e75840001c723dd088e0f2cbe7ce03430ce71e7f1c911dc79817b9
-Deleted: sha256:64eb814fb998166e5f38a49d3952a94e0974b25f9a5c1c79eebae64a93a140e6
-Deleted: sha256:8ddd97c8ddacef349df5b1036dc007704b5cc81e12566021ecc8d273db0bddc7
-Deleted: sha256:de89e28f975cbd5501be5ca397d50c72f1a2d7f3039524148e17bf73955468e5
-Deleted: sha256:7046e491038502b3682c86fea1b13e52cdc1abd5bfd26eb8c23a7ad20f85a2e7
-Deleted: sha256:adf77110c84e813caa04beef4ab6204277b5298674830f43ce32d5067d70b126
-Deleted: sha256:072f5e263cfaaad69d8dbe8468547eac231dd0a2c91dd24c2cd550d73daecad4
-Deleted: sha256:0de86e1504ae8ef83cefd16e161e35e927755e82d50fe3b5ee9db0808a3a11dc
+real	0m42.722s
+user	0m0.323s
+sys	0m0.262s
+REPOSITORY             TAG                            IMAGE ID            CREATED             SIZE
+lotharschulz/hellogo   28576bf-dirty-20190304153410   f71e5b99cf28        1 second ago        11.9MB
+<none>                 <none>                         806d6d5bca4c        8 seconds ago       802MB
+golang                 1.12                           c4f8e4c91496        5 days ago          772MB
+alpine                 latest                         caf27325b298        4 weeks ago         5.53MB
+Untagged: lotharschulz/hellogo:28576bf-dirty-20190304153410
+Deleted: sha256:f71e5b99cf28acb84e872bc08900247ac81305e58e10975c8c88ac0daa27351d
+Deleted: sha256:7cc4de3ead4c49b625055aa8191574ab6a43b3d763da8ed80974299ab3a91df7
+Deleted: sha256:97e1722f69591f507523b461b2648bab6c07474196434631b72b60b3ad592d7d
+Deleted: sha256:6d2ccfa29b325134aef7d2e528eefbd8d44c0c163e38c94dfc998d5308b05896
+Deleted: sha256:2e8783a998b9b3818bb39e7c8d3d871ee587545172a7b3b6e72d92875561e883
+Deleted: sha256:e842f54e394886e0ec62110e53ae071e3b88bb35974feb52a3e993035787a366
+Deleted: sha256:ce13543adc38957693a8e9e57b5578c9e312ba41a9b2fd7f59e60c2cc53de430
+Deleted: sha256:3aef1968e925a49075ade2f32923be3c951d5dca3a076ab7dbf9c9b91cfffb25
+Deleted: sha256:806d6d5bca4c97a305e268fda8e14dbe8bf6bdb73431dc3309a1b265da224db2
+Deleted: sha256:1b173882741c8b0462e3f8191e641ded72b90d8214f9594a4c3a46c3db04ca54
+Deleted: sha256:c6cf6be0e42ba27f6e54ccdeb41d21afb3828eaf525ed36ba340351ad8afecaf
+Deleted: sha256:24a20b43e349fa3590dfa27fdf3286fa2c7396be682312a3ac730504fa9c4800
+Deleted: sha256:1c6d70b59021d484011d3c01021b81bd37284b24ca21fe0e0b1bf49c6f2be22e
+Deleted: sha256:a77bf5d7a320d5dba2617dfa90bea9a042f4b53c0e0d4e25c9d5d3050b82b8ad
+Untagged: golang:1.12
+Untagged: golang@sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Deleted: sha256:c4f8e4c91496d431c2b7a96366bf334cb387e18e04e18cc710689b0cb6d76181
+Deleted: sha256:6cd0e7fc07de5cce4f10c1d9c6ccf3303c07328329e0d305b1842199d87661a5
+Deleted: sha256:b35184d5c1819f698317deb7280b5b2ff88a1cb0fc19cb5236a6de1e61245d0d
+Deleted: sha256:3f7511c3b533be31b6f279fab55803757cf07b0daccd69864e7eb14840fdaffb
+Deleted: sha256:39496f7d4f99c499b3c87643953d7b5243cc8a05ed9aad9cf1f404633cf4f8ea
+Deleted: sha256:ac00eef3f557ea71d47b65f3112c0c3b6ae7113153b7205a94bedc496103a6c8
+Deleted: sha256:8f0ebc672b43403012c586feeac72ec83ce8347faab22a2826b952968aefc3d6
+Deleted: sha256:13d5529fd232cacdd8cd561148560e0bf5d65dbc1149faf0c68240985607c303
 Untagged: alpine:latest
-Untagged: alpine@sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
-Deleted: sha256:196d12cf6ab19273823e700516e98eb1910b03b17840f9d5509f03858484d321
-Untagged: golang:1.11
-Untagged: golang@sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Deleted: sha256:fb7a47d8605b86174e88a730064bb877a7d100ac31df3e46cc8a829160d62136
-Deleted: sha256:f8c71d541880fd9419ab0ffab11903f9f8616697814031f9b328ee71cafb30ca
-Deleted: sha256:a0ec5f11d8849b310279b62cb48eac40173a1fbd6cd309980396a5e5784ebbbe
-Deleted: sha256:195829470c4f7e4d0a32f4622d3134d5acc58bc8be4b87740d0535b9cc13919d
-Deleted: sha256:548c6a523fb3c6dab5b94c5cc04c314691ff26cab49889498f92b26829054bba
-Deleted: sha256:54a32bd7a949afcfc50488df9a48db13f5bfc63c282a09db4aa2fb499012c21f
-Deleted: sha256:7d5f2843cac2368781293d71139c6c30fbb6b7029f6fd4424da858e7f2772875
-Deleted: sha256:b28ef0b6fef80faa25436bec0a1375214d9a23a91e9b75975bba3b2889f8504f
-1.11: Pulling from library/golang
-05d1a5232b46: Pull complete 
-5cee356eda6b: Pull complete 
-89d3385f0fd3: Pull complete 
-80ae6b477848: Pull complete 
-94ebfeaaddf3: Pull complete 
-dd697213ec59: Pull complete 
-715d1281dfe7: Pull complete 
-Digest: sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Status: Downloaded newer image for golang:1.11
+Untagged: alpine@sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
+Deleted: sha256:caf27325b298a6730837023a8a342699c8b7b388b8d878966b064a1320043019
+Deleted: sha256:503e53e365f34399c4d58d8f4e23c161106cfbce4400e3d0a0357967bad69390
+1.12: Pulling from library/golang
+741437d97401: Pull complete 
+34d8874714d7: Pull complete 
+0a108aa26679: Pull complete 
+7f0334c36886: Pull complete 
+d35724ed4672: Pull complete 
+d0ea18b1198f: Pull complete 
+647e63f91386: Pull complete 
+Digest: sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Status: Downloaded newer image for golang:1.12
 latest: Pulling from library/alpine
-4fe2ade4980c: Already exists 
-Digest: sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
+6c40cc604d8e: Pull complete 
+Digest: sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
 Status: Downloaded newer image for alpine:latest
 go build -o hellogo -v
-docker build --squash --rm -t lotharschulz/hellogo:4d8682f-20180916203554 -f DockerfileBuilder .
-Sending build context to Docker daemon  22.12MB
-Step 1/10 : FROM golang:1.11 as builder
- ---> fb7a47d8605b
+docker build --squash --rm -t lotharschulz/hellogo:28576bf-dirty-20190304153530 -f DockerfileBuilder .
+Sending build context to Docker daemon  7.952MB
+Step 1/10 : FROM golang:1.12 as builder
+ ---> c4f8e4c91496
 Step 2/10 : WORKDIR /go/src/github.com/lotharschulz/hellogodocker/
- ---> Running in e22ec2f65daa
-Removing intermediate container e22ec2f65daa
- ---> 36ffbec61b37
+ ---> Running in 8e170f359cf3
+Removing intermediate container 8e170f359cf3
+ ---> fe12f39a6165
 Step 3/10 : COPY hello.go	.
- ---> 0d8ded04e6dc
+ ---> d370ea8edb8c
 Step 4/10 : RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hellogodocker .
- ---> Running in 9d6405c1bbb5
-Removing intermediate container 9d6405c1bbb5
- ---> 0be1ac2c1048
+ ---> Running in fb6d9c20cda2
+Removing intermediate container fb6d9c20cda2
+ ---> 4c743bc50cc0
 Step 5/10 : FROM alpine:latest
- ---> 196d12cf6ab1
+ ---> caf27325b298
 Step 6/10 : RUN apk --no-cache add ca-certificates &&     addgroup -g 99 appuser &&     adduser -D -u 99 -G appuser appuser
- ---> Running in 0dc56624ade5
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/main/x86_64/APKINDEX.tar.gz
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/community/x86_64/APKINDEX.tar.gz
-(1/1) Installing ca-certificates (20171114-r3)
-Executing busybox-1.28.4-r1.trigger
-Executing ca-certificates-20171114-r3.trigger
-OK: 5 MiB in 14 packages
-Removing intermediate container 0dc56624ade5
- ---> a6d5f8ab8eda
+ ---> Running in 7d3a8c31a9b1
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/community/x86_64/APKINDEX.tar.gz
+(1/1) Installing ca-certificates (20190108-r0)
+Executing busybox-1.29.3-r10.trigger
+Executing ca-certificates-20190108-r0.trigger
+OK: 6 MiB in 15 packages
+Removing intermediate container 7d3a8c31a9b1
+ ---> b949e4157adb
 Step 7/10 : USER appuser
- ---> Running in 41523da52a98
-Removing intermediate container 41523da52a98
- ---> fd1dcd314455
+ ---> Running in e211d2226c28
+Removing intermediate container e211d2226c28
+ ---> b0fb4f06c6c3
 Step 8/10 : WORKDIR /app
- ---> Running in 467f27b931bf
-Removing intermediate container 467f27b931bf
- ---> 6a77651a188c
+ ---> Running in 21323c9b1d6c
+Removing intermediate container 21323c9b1d6c
+ ---> 5f6b3af71e3e
 Step 9/10 : COPY --from=builder /go/src/github.com/lotharschulz/hellogodocker/hellogodocker .
- ---> 691b4ad62704
+ ---> e40e5e1b6bb8
 Step 10/10 : CMD ["./hellogodocker"]
- ---> Running in 155e794427f3
-Removing intermediate container 155e794427f3
- ---> 443ccc59fb3e
-Successfully built 25b79d4290c5
-Successfully tagged lotharschulz/hellogo:4d8682f-20180916203554
+ ---> Running in 1ed733e3cf99
+Removing intermediate container 1ed733e3cf99
+ ---> 448cf0bbba36
+Successfully built e9602f796b30
+Successfully tagged lotharschulz/hellogo:28576bf-dirty-20190304153530
 
-real	0m13.695s
-user	0m0.296s
-sys	0m0.088s
-REPOSITORY             TAG                      IMAGE ID            CREATED                  SIZE
-lotharschulz/hellogo   4d8682f-20180916203554   25b79d4290c5        Less than a second ago   10.2MB
-<none>                 <none>                   443ccc59fb3e        1 second ago             10.2MB
-<none>                 <none>                   0be1ac2c1048        3 seconds ago            803MB
-alpine                 latest                   196d12cf6ab1        4 days ago               4.41MB
-golang                 1.11                     fb7a47d8605b        11 days ago              776MB
-Untagged: lotharschulz/hellogo:4d8682f-20180916203554
-Deleted: sha256:25b79d4290c5eaf51abbe0df756e57f9642993abb596be476c06f2043581fa1b
-Deleted: sha256:db8eea9caa26ad66dd20d32bbc4fa7a7e56c1c672d1b31be1eb050ce4c03d6ee
-Deleted: sha256:443ccc59fb3ec6d9e997de300253e80149b1fc858377bc5e5a29b9f37cd0044e
-Deleted: sha256:691b4ad627049b24ad25f7333e5dd21730c0cdb476130ad2cc0d19797684fe95
-Deleted: sha256:3d81ed18df0b7726654285974e857b1fc51351f0d1bf7fd2bae6efda3fe25cfb
-Deleted: sha256:6a77651a188caad177510bddc3031409802b71e93f506ef3773030da59786be6
-Deleted: sha256:f35e424fb890fb59a9cbd8caf5c5966b21cafcce69c7396050eb27fecf0b5f81
-Deleted: sha256:fd1dcd314455751e356ce5fd01eb56e4adc3aa668dfbefa9426f2aed56fbe5c5
-Deleted: sha256:a6d5f8ab8edad94afc334921c4a94aedbea3c264f56b70792e9a3dc2bcb6490e
-Deleted: sha256:152d25ca781f6938a1cc37eeb118c5891aa9d2f79303a527f01be57ac700305c
-Deleted: sha256:0be1ac2c10482fb7935e8ad7619260b1db2c653d69ee75b6a6c579d2a6f197fd
-Deleted: sha256:1f96d54da8d12c7d85ec26598a7fe3c8d6bf923312111534b3a81637ad68b641
-Deleted: sha256:0d8ded04e6dc890630aacb24b1dc52e5cdac88fac6db041e9bc78652b6862fb2
-Deleted: sha256:693a8419bd1cd34fbc7d88f2011881bb346cc441e3ee74565116daa9621f2d24
-Deleted: sha256:36ffbec61b3708fed722a34037e22ee7d30fbb435cacd0c2ece7c622cc96e133
-Deleted: sha256:46be585d3b44dc338a252c3313e8d8533dd6be181c7946074db0ef0f4e0fb4fd
+real	0m11.957s
+user	0m0.283s
+sys	0m0.257s
+REPOSITORY             TAG                            IMAGE ID            CREATED             SIZE
+<none>                 <none>                         448cf0bbba36        1 second ago        11.9MB
+lotharschulz/hellogo   28576bf-dirty-20190304153530   e9602f796b30        1 second ago        11.9MB
+<none>                 <none>                         4c743bc50cc0        4 seconds ago       802MB
+golang                 1.12                           c4f8e4c91496        5 days ago          772MB
+alpine                 latest                         caf27325b298        4 weeks ago         5.53MB
+Untagged: lotharschulz/hellogo:28576bf-dirty-20190304153530
+Deleted: sha256:e9602f796b30348b89ff647543982d8c552b80276ae870ce3baea6ab36246bd5
+Deleted: sha256:b4aa129176d1a070e37caa184eac2b6392a836c97e61348fe7847f33dc4747dc
+Deleted: sha256:448cf0bbba360d9ec8c8e555275aa71c2139d4869845056b36a7c7764663e7ed
+Deleted: sha256:e40e5e1b6bb85addecc3d3e311a564efb9f15f121dfbcd75d70fb6ddbf9c5189
+Deleted: sha256:6bf355a891e829822ff2acf22372d0da53ff4346ae47224447eef48beacf5f3c
+Deleted: sha256:5f6b3af71e3e727eeaef1e33be7a8e43d8e05a788be66e74a4ab1d50be8da88c
+Deleted: sha256:7d1adef84c17d78e2b2bdc48f34746db9c9ee8d801d1d7bd3a377d1fe1d01cd0
+Deleted: sha256:b0fb4f06c6c3b8d63cc75f814d2477404989c25281016709636ec84fb9b9783e
+Deleted: sha256:b949e4157adb707ed13e94e56f190a153c25cb27e0602cea833a8fb843e25152
+Deleted: sha256:528a0feaa9068979dbd08381037e7d22436d411b4374145ea09224fa4e3ad4aa
+Deleted: sha256:4c743bc50cc0230817b4688c1599b3b5dc731cbb413d5a8648ad904d3873d2c3
+Deleted: sha256:6b77e7ba6e3022a6327f41a1c69780a2795193a171a5cdde1bd7fb241d79453b
+Deleted: sha256:d370ea8edb8c2deafd4fc745d388217bed8b818aeb5c2bb342e53c1c5f164329
+Deleted: sha256:d591f7b538feb938f91df84119feb0643acd2c72366a2f5b02cccd8a04c37f7f
+Deleted: sha256:fe12f39a61659ec65e0c3fdd2fc7d67235d3324ff690322b008e775c0f8bce75
+Deleted: sha256:f46ebf080ace97555e6ab4db51e4933a529d03a9e340ace34df1ddd15f980c7a
+Untagged: golang:1.12
+Untagged: golang@sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Deleted: sha256:c4f8e4c91496d431c2b7a96366bf334cb387e18e04e18cc710689b0cb6d76181
+Deleted: sha256:6cd0e7fc07de5cce4f10c1d9c6ccf3303c07328329e0d305b1842199d87661a5
+Deleted: sha256:b35184d5c1819f698317deb7280b5b2ff88a1cb0fc19cb5236a6de1e61245d0d
+Deleted: sha256:3f7511c3b533be31b6f279fab55803757cf07b0daccd69864e7eb14840fdaffb
+Deleted: sha256:39496f7d4f99c499b3c87643953d7b5243cc8a05ed9aad9cf1f404633cf4f8ea
+Deleted: sha256:ac00eef3f557ea71d47b65f3112c0c3b6ae7113153b7205a94bedc496103a6c8
+Deleted: sha256:8f0ebc672b43403012c586feeac72ec83ce8347faab22a2826b952968aefc3d6
+Deleted: sha256:13d5529fd232cacdd8cd561148560e0bf5d65dbc1149faf0c68240985607c303
 Untagged: alpine:latest
-Untagged: alpine@sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
-Deleted: sha256:196d12cf6ab19273823e700516e98eb1910b03b17840f9d5509f03858484d321
-Untagged: golang:1.11
-Untagged: golang@sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Deleted: sha256:fb7a47d8605b86174e88a730064bb877a7d100ac31df3e46cc8a829160d62136
-Deleted: sha256:f8c71d541880fd9419ab0ffab11903f9f8616697814031f9b328ee71cafb30ca
-Deleted: sha256:a0ec5f11d8849b310279b62cb48eac40173a1fbd6cd309980396a5e5784ebbbe
-Deleted: sha256:195829470c4f7e4d0a32f4622d3134d5acc58bc8be4b87740d0535b9cc13919d
-Deleted: sha256:548c6a523fb3c6dab5b94c5cc04c314691ff26cab49889498f92b26829054bba
-Deleted: sha256:54a32bd7a949afcfc50488df9a48db13f5bfc63c282a09db4aa2fb499012c21f
-Deleted: sha256:7d5f2843cac2368781293d71139c6c30fbb6b7029f6fd4424da858e7f2772875
-Deleted: sha256:b28ef0b6fef80faa25436bec0a1375214d9a23a91e9b75975bba3b2889f8504f
-1.11: Pulling from library/golang
-05d1a5232b46: Pull complete 
-5cee356eda6b: Pull complete 
-89d3385f0fd3: Pull complete 
-80ae6b477848: Pull complete 
-94ebfeaaddf3: Pull complete 
-dd697213ec59: Pull complete 
-715d1281dfe7: Pull complete 
-Digest: sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Status: Downloaded newer image for golang:1.11
+Untagged: alpine@sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
+Deleted: sha256:caf27325b298a6730837023a8a342699c8b7b388b8d878966b064a1320043019
+Deleted: sha256:503e53e365f34399c4d58d8f4e23c161106cfbce4400e3d0a0357967bad69390
+1.12: Pulling from library/golang
+741437d97401: Pull complete 
+34d8874714d7: Pull complete 
+0a108aa26679: Pull complete 
+7f0334c36886: Pull complete 
+d35724ed4672: Pull complete 
+d0ea18b1198f: Pull complete 
+647e63f91386: Pull complete 
+Digest: sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Status: Downloaded newer image for golang:1.12
 latest: Pulling from library/alpine
-4fe2ade4980c: Already exists 
-Digest: sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
+6c40cc604d8e: Pull complete 
+Digest: sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
 Status: Downloaded newer image for alpine:latest
 go build -o hellogo -v
-docker build --compress --rm -t lotharschulz/hellogo:4d8682f-20180916203708 -f DockerfileBuilder .
-Sending build context to Docker daemon   8.82MB
-Step 1/10 : FROM golang:1.11 as builder
- ---> fb7a47d8605b
+docker build --compress --rm -t lotharschulz/hellogo:28576bf-dirty-20190304153611 -f DockerfileBuilder .
+Sending build context to Docker daemon  4.149MB
+Step 1/10 : FROM golang:1.12 as builder
+ ---> c4f8e4c91496
 Step 2/10 : WORKDIR /go/src/github.com/lotharschulz/hellogodocker/
- ---> Running in b3b2de606d82
-Removing intermediate container b3b2de606d82
- ---> ca61b874754a
+ ---> Running in 555066d5f7a6
+Removing intermediate container 555066d5f7a6
+ ---> f72fb1d0940e
 Step 3/10 : COPY hello.go	.
- ---> bf14152de264
+ ---> 414e3d6d5512
 Step 4/10 : RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hellogodocker .
- ---> Running in 30f1fa643181
-Removing intermediate container 30f1fa643181
- ---> 2bc810dd8f6b
+ ---> Running in 693b6dd9c357
+Removing intermediate container 693b6dd9c357
+ ---> 4d76d34cc9df
 Step 5/10 : FROM alpine:latest
- ---> 196d12cf6ab1
+ ---> caf27325b298
 Step 6/10 : RUN apk --no-cache add ca-certificates &&     addgroup -g 99 appuser &&     adduser -D -u 99 -G appuser appuser
- ---> Running in 9ac569963c1b
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/main/x86_64/APKINDEX.tar.gz
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/community/x86_64/APKINDEX.tar.gz
-(1/1) Installing ca-certificates (20171114-r3)
-Executing busybox-1.28.4-r1.trigger
-Executing ca-certificates-20171114-r3.trigger
-OK: 5 MiB in 14 packages
-Removing intermediate container 9ac569963c1b
- ---> 1b6ee77f7e4d
+ ---> Running in 91e4d7136eab
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/community/x86_64/APKINDEX.tar.gz
+(1/1) Installing ca-certificates (20190108-r0)
+Executing busybox-1.29.3-r10.trigger
+Executing ca-certificates-20190108-r0.trigger
+OK: 6 MiB in 15 packages
+Removing intermediate container 91e4d7136eab
+ ---> 5ec1bc93e702
 Step 7/10 : USER appuser
- ---> Running in 3a92ffc18327
-Removing intermediate container 3a92ffc18327
- ---> ad8f39994a0a
+ ---> Running in 33be443ef954
+Removing intermediate container 33be443ef954
+ ---> ae03a08f5e19
 Step 8/10 : WORKDIR /app
- ---> Running in 69665979c7a0
-Removing intermediate container 69665979c7a0
- ---> 19e9b89b0934
+ ---> Running in a7afd281d5a9
+Removing intermediate container a7afd281d5a9
+ ---> 0487e336b8e0
 Step 9/10 : COPY --from=builder /go/src/github.com/lotharschulz/hellogodocker/hellogodocker .
- ---> e2f7949c7ad1
+ ---> 801866065d43
 Step 10/10 : CMD ["./hellogodocker"]
- ---> Running in 9ef3413932c2
-Removing intermediate container 9ef3413932c2
- ---> fa2ac84fac09
-Successfully built fa2ac84fac09
-Successfully tagged lotharschulz/hellogo:4d8682f-20180916203708
+ ---> Running in b74ff3e0e0b0
+Removing intermediate container b74ff3e0e0b0
+ ---> f664ef5496e2
+Successfully built f664ef5496e2
+Successfully tagged lotharschulz/hellogo:28576bf-dirty-20190304153611
 
-real	0m15.530s
-user	0m2.248s
-sys	0m0.300s
-REPOSITORY             TAG                      IMAGE ID            CREATED                  SIZE
-lotharschulz/hellogo   4d8682f-20180916203708   fa2ac84fac09        Less than a second ago   10.2MB
-<none>                 <none>                   2bc810dd8f6b        2 seconds ago            803MB
-alpine                 latest                   196d12cf6ab1        4 days ago               4.41MB
-golang                 1.11                     fb7a47d8605b        11 days ago              776MB
-Untagged: lotharschulz/hellogo:4d8682f-20180916203708
-Deleted: sha256:fa2ac84fac09d9510228d3578818ff330c0a4c3a5901039b801d137d293bbdaf
-Deleted: sha256:e2f7949c7ad1cfe359b0c4f942e2db87eff47e4bda8bda52434b829117be4b2f
-Deleted: sha256:044d6522e6f21c5f638522e0f8517e9ba680728333d207bf4f8553d97827de02
-Deleted: sha256:19e9b89b0934963709921ef6fb39394b71a1a20a2564a5f520ec204643cdb982
-Deleted: sha256:fdb9a8fd1f96e405fb260b68d43ed5fc8d87eb995394ccf197b48f9458338cd6
-Deleted: sha256:ad8f39994a0ab19d66e5666570b3779b80825980ba100c6e6c18f53166081e72
-Deleted: sha256:1b6ee77f7e4d459f11d1a6f0eca1909d2d5a04574935689195b6564eaa283389
-Deleted: sha256:854de3970dd61fbe34e1099b60fb6c3dedc5e21654456d3a15e4733fc0c2565f
-Deleted: sha256:2bc810dd8f6b0bc3a60ae95a0e81a4bce01062e7c3afc5bd884fc3d1d9675e65
-Deleted: sha256:68849aae8bc2a14e3348e049fc286f4fa49e8b9f343df1d2e5859ea378fa00a6
-Deleted: sha256:bf14152de264a49ab759762ecea99c10f8d63bb8b8313d013edad043898cabb9
-Deleted: sha256:7f233b72e257fdc44be97158aed633edb0a62449162a98d496b17f83002edd9c
-Deleted: sha256:ca61b874754ab683ca587a584ed4cd3e8da6751412ba599c684a34f2bb162b70
-Deleted: sha256:fce7be18ea25e1b9252d70a33ad25ddfe91b864e3859f3f9c99625aa62c7897d
+real	0m12.042s
+user	0m0.667s
+sys	0m0.345s
+REPOSITORY             TAG                            IMAGE ID            CREATED                  SIZE
+lotharschulz/hellogo   28576bf-dirty-20190304153611   f664ef5496e2        Less than a second ago   11.9MB
+<none>                 <none>                         4d76d34cc9df        3 seconds ago            802MB
+golang                 1.12                           c4f8e4c91496        5 days ago               772MB
+alpine                 latest                         caf27325b298        4 weeks ago              5.53MB
+Untagged: lotharschulz/hellogo:28576bf-dirty-20190304153611
+Deleted: sha256:f664ef5496e25c2983a1156a30c3adca1a571b44519d6e8179d2cfffc59cf4ea
+Deleted: sha256:801866065d435bb94feb780b545c2b71a35665fc6545b5dd23a992c0693cfdf4
+Deleted: sha256:571d371f7707ed669c8d081bf3f88a48e1bc3f47973803dfecda39401c8e3e0a
+Deleted: sha256:0487e336b8e02342b6c53d9ef41d5cc542c08956033cf8782b92512bf212d0e2
+Deleted: sha256:abdd23765f1806b934cd62744941efce98f9fef49db130ed02dba53104c9484e
+Deleted: sha256:ae03a08f5e19a84d0cd0eb72753d41330ac4db432c16f4d3d31346a6e5f56c95
+Deleted: sha256:5ec1bc93e7027942223294ee03856fa45855cc8bcd12c9cd8fc87bd0ee9f4ba7
+Deleted: sha256:b140d342012056c124ec4e4c56413585c9ec2cf41748c68c10c120567488e723
+Deleted: sha256:4d76d34cc9df5cda6b570b9dff8d9f14dd242da9de9bbff4bbd0694c462052ac
+Deleted: sha256:cc44e6981dff2e38cb6b65dd474541c09b554741fc62501a7f2402585ca7864f
+Deleted: sha256:414e3d6d5512cce7fd74aa76d705de94cd3766bb4e6be9b268225efa1cea53e5
+Deleted: sha256:16bc6164c97f71b7443c9e1604ce1df1ad6286d639c81221e3b4e8900e4839c6
+Deleted: sha256:f72fb1d0940eb2f3751562606baa80740e4cde06656be0d164c9df4207f95922
+Deleted: sha256:dd0215ca1770ec3c0e6a0ed50e2843980080c2704ba6ba1a66f2751773b20a3d
+Untagged: golang:1.12
+Untagged: golang@sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Deleted: sha256:c4f8e4c91496d431c2b7a96366bf334cb387e18e04e18cc710689b0cb6d76181
+Deleted: sha256:6cd0e7fc07de5cce4f10c1d9c6ccf3303c07328329e0d305b1842199d87661a5
+Deleted: sha256:b35184d5c1819f698317deb7280b5b2ff88a1cb0fc19cb5236a6de1e61245d0d
+Deleted: sha256:3f7511c3b533be31b6f279fab55803757cf07b0daccd69864e7eb14840fdaffb
+Deleted: sha256:39496f7d4f99c499b3c87643953d7b5243cc8a05ed9aad9cf1f404633cf4f8ea
+Deleted: sha256:ac00eef3f557ea71d47b65f3112c0c3b6ae7113153b7205a94bedc496103a6c8
+Deleted: sha256:8f0ebc672b43403012c586feeac72ec83ce8347faab22a2826b952968aefc3d6
+Deleted: sha256:13d5529fd232cacdd8cd561148560e0bf5d65dbc1149faf0c68240985607c303
 Untagged: alpine:latest
-Untagged: alpine@sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
-Deleted: sha256:196d12cf6ab19273823e700516e98eb1910b03b17840f9d5509f03858484d321
-Untagged: golang:1.11
-Untagged: golang@sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Deleted: sha256:fb7a47d8605b86174e88a730064bb877a7d100ac31df3e46cc8a829160d62136
-Deleted: sha256:f8c71d541880fd9419ab0ffab11903f9f8616697814031f9b328ee71cafb30ca
-Deleted: sha256:a0ec5f11d8849b310279b62cb48eac40173a1fbd6cd309980396a5e5784ebbbe
-Deleted: sha256:195829470c4f7e4d0a32f4622d3134d5acc58bc8be4b87740d0535b9cc13919d
-Deleted: sha256:548c6a523fb3c6dab5b94c5cc04c314691ff26cab49889498f92b26829054bba
-Deleted: sha256:54a32bd7a949afcfc50488df9a48db13f5bfc63c282a09db4aa2fb499012c21f
-Deleted: sha256:7d5f2843cac2368781293d71139c6c30fbb6b7029f6fd4424da858e7f2772875
-Deleted: sha256:b28ef0b6fef80faa25436bec0a1375214d9a23a91e9b75975bba3b2889f8504f
-1.11: Pulling from library/golang
-05d1a5232b46: Pull complete 
-5cee356eda6b: Pull complete 
-89d3385f0fd3: Pull complete 
-80ae6b477848: Pull complete 
-94ebfeaaddf3: Pull complete 
-dd697213ec59: Pull complete 
-715d1281dfe7: Pull complete 
-Digest: sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Status: Downloaded newer image for golang:1.11
+Untagged: alpine@sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
+Deleted: sha256:caf27325b298a6730837023a8a342699c8b7b388b8d878966b064a1320043019
+Deleted: sha256:503e53e365f34399c4d58d8f4e23c161106cfbce4400e3d0a0357967bad69390
+1.12: Pulling from library/golang
+741437d97401: Pull complete 
+34d8874714d7: Pull complete 
+0a108aa26679: Pull complete 
+7f0334c36886: Pull complete 
+d35724ed4672: Pull complete 
+d0ea18b1198f: Pull complete 
+647e63f91386: Pull complete 
+Digest: sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Status: Downloaded newer image for golang:1.12
 latest: Pulling from library/alpine
-4fe2ade4980c: Already exists 
-Digest: sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
+6c40cc604d8e: Pull complete 
+Digest: sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
 Status: Downloaded newer image for alpine:latest
 go build -o hellogo -v
-docker build --rm -t lotharschulz/hellogo:4d8682f-20180916203827 -f DockerfileAlpine .
-Sending build context to Docker daemon  22.12MB
+docker build --rm -t lotharschulz/hellogo:28576bf-dirty-20190304153653 -f DockerfileAlpine .
+Sending build context to Docker daemon  7.952MB
 Step 1/4 : FROM alpine:latest
- ---> 196d12cf6ab1
+ ---> caf27325b298
 Step 2/4 : RUN apk --no-cache add ca-certificates &&     addgroup -g 99 appuser &&     adduser -D -u 99 -G appuser appuser
- ---> Running in 0f76bc1e5d42
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/main/x86_64/APKINDEX.tar.gz
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/community/x86_64/APKINDEX.tar.gz
-(1/1) Installing ca-certificates (20171114-r3)
-Executing busybox-1.28.4-r1.trigger
-Executing ca-certificates-20171114-r3.trigger
-OK: 5 MiB in 14 packages
-Removing intermediate container 0f76bc1e5d42
- ---> 0f8ff522ad51
+ ---> Running in a3e30636df7b
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/community/x86_64/APKINDEX.tar.gz
+(1/1) Installing ca-certificates (20190108-r0)
+Executing busybox-1.29.3-r10.trigger
+Executing ca-certificates-20190108-r0.trigger
+OK: 6 MiB in 15 packages
+Removing intermediate container a3e30636df7b
+ ---> 7f3e6ab622c9
 Step 3/4 : ADD hellogo /
- ---> b88733de8364
+ ---> d2345b83265c
 Step 4/4 : CMD ["/hellogo"]
- ---> Running in 55302a825267
-Removing intermediate container 55302a825267
- ---> 0ee19a717b6e
-Successfully built 0ee19a717b6e
-Successfully tagged lotharschulz/hellogo:4d8682f-20180916203827
+ ---> Running in f2e7c65e8f78
+Removing intermediate container f2e7c65e8f78
+ ---> fd300a653058
+Successfully built fd300a653058
+Successfully tagged lotharschulz/hellogo:28576bf-dirty-20190304153653
 
-real	0m5.118s
-user	0m0.304s
-sys	0m0.076s
-REPOSITORY             TAG                      IMAGE ID            CREATED                  SIZE
-lotharschulz/hellogo   4d8682f-20180916203827   0ee19a717b6e        Less than a second ago   11.5MB
-alpine                 latest                   196d12cf6ab1        4 days ago               4.41MB
-golang                 1.11                     fb7a47d8605b        11 days ago              776MB
-Untagged: lotharschulz/hellogo:4d8682f-20180916203827
-Deleted: sha256:0ee19a717b6e1990a6b1da03bb1d22065049bb31a0ec1394d99f90dc53c7d244
-Deleted: sha256:b88733de8364a10a851032ec1d9255cdb3cc188900d99525bc5140ae170de6b5
-Deleted: sha256:3fc9810a6ae8f84e83e2bfe10f95b02ab67a081f9708d6d324bb67a18dd7ff1a
-Deleted: sha256:0f8ff522ad5184ad2a0b4ce5880e39dc1af79efa31cb2779aace144b96c79311
-Deleted: sha256:9300f05176c687069d7914ff53101d8c61bbe69ede4972052ecce1ce925f143a
+real	0m3.140s
+user	0m0.263s
+sys	0m0.238s
+REPOSITORY             TAG                            IMAGE ID            CREATED                  SIZE
+lotharschulz/hellogo   28576bf-dirty-20190304153653   fd300a653058        Less than a second ago   13.4MB
+golang                 1.12                           c4f8e4c91496        5 days ago               772MB
+alpine                 latest                         caf27325b298        4 weeks ago              5.53MB
+Untagged: lotharschulz/hellogo:28576bf-dirty-20190304153653
+Deleted: sha256:fd300a6530581c8fb276dfd39980d0245b4232881c6f93575e5059aacb20e6cc
+Deleted: sha256:d2345b83265c80cf1e20989bb59129c413d90c645ed1c6357160083fbf7c640b
+Deleted: sha256:9b7e257bcf1d28f71301007af97bd6233cc6f48a36d4598f685ded8c84e0eb9f
+Deleted: sha256:7f3e6ab622c9e399df6e74c1ee8c48f5ec421e3e0310b61dcfcb0dbde4c5c509
+Deleted: sha256:89d4a76d2025d9319da3af62a682c8403cbcc54c728a4732bc0e3d1b2c4ba514
+Untagged: golang:1.12
+Untagged: golang@sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Deleted: sha256:c4f8e4c91496d431c2b7a96366bf334cb387e18e04e18cc710689b0cb6d76181
+Deleted: sha256:6cd0e7fc07de5cce4f10c1d9c6ccf3303c07328329e0d305b1842199d87661a5
+Deleted: sha256:b35184d5c1819f698317deb7280b5b2ff88a1cb0fc19cb5236a6de1e61245d0d
+Deleted: sha256:3f7511c3b533be31b6f279fab55803757cf07b0daccd69864e7eb14840fdaffb
+Deleted: sha256:39496f7d4f99c499b3c87643953d7b5243cc8a05ed9aad9cf1f404633cf4f8ea
+Deleted: sha256:ac00eef3f557ea71d47b65f3112c0c3b6ae7113153b7205a94bedc496103a6c8
+Deleted: sha256:8f0ebc672b43403012c586feeac72ec83ce8347faab22a2826b952968aefc3d6
+Deleted: sha256:13d5529fd232cacdd8cd561148560e0bf5d65dbc1149faf0c68240985607c303
 Untagged: alpine:latest
-Untagged: alpine@sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
-Deleted: sha256:196d12cf6ab19273823e700516e98eb1910b03b17840f9d5509f03858484d321
-Untagged: golang:1.11
-Untagged: golang@sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Deleted: sha256:fb7a47d8605b86174e88a730064bb877a7d100ac31df3e46cc8a829160d62136
-Deleted: sha256:f8c71d541880fd9419ab0ffab11903f9f8616697814031f9b328ee71cafb30ca
-Deleted: sha256:a0ec5f11d8849b310279b62cb48eac40173a1fbd6cd309980396a5e5784ebbbe
-Deleted: sha256:195829470c4f7e4d0a32f4622d3134d5acc58bc8be4b87740d0535b9cc13919d
-Deleted: sha256:548c6a523fb3c6dab5b94c5cc04c314691ff26cab49889498f92b26829054bba
-Deleted: sha256:54a32bd7a949afcfc50488df9a48db13f5bfc63c282a09db4aa2fb499012c21f
-Deleted: sha256:7d5f2843cac2368781293d71139c6c30fbb6b7029f6fd4424da858e7f2772875
-Deleted: sha256:b28ef0b6fef80faa25436bec0a1375214d9a23a91e9b75975bba3b2889f8504f
-1.11: Pulling from library/golang
-05d1a5232b46: Pull complete 
-5cee356eda6b: Pull complete 
-89d3385f0fd3: Pull complete 
-80ae6b477848: Pull complete 
-94ebfeaaddf3: Pull complete 
-dd697213ec59: Pull complete 
-715d1281dfe7: Pull complete 
-Digest: sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Status: Downloaded newer image for golang:1.11
+Untagged: alpine@sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
+Deleted: sha256:caf27325b298a6730837023a8a342699c8b7b388b8d878966b064a1320043019
+Deleted: sha256:503e53e365f34399c4d58d8f4e23c161106cfbce4400e3d0a0357967bad69390
+1.12: Pulling from library/golang
+741437d97401: Pull complete 
+34d8874714d7: Pull complete 
+0a108aa26679: Pull complete 
+7f0334c36886: Pull complete 
+d35724ed4672: Pull complete 
+d0ea18b1198f: Pull complete 
+647e63f91386: Pull complete 
+Digest: sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Status: Downloaded newer image for golang:1.12
 latest: Pulling from library/alpine
-4fe2ade4980c: Already exists 
-Digest: sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
+6c40cc604d8e: Pull complete 
+Digest: sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
 Status: Downloaded newer image for alpine:latest
 go build -o hellogo -v
-docker build --cache-from golang:1.11 --cache-from alpine:latest -t lotharschulz/hellogo:4d8682f-20180916203934 -f DockerfileAlpine .
-Sending build context to Docker daemon  22.12MB
+docker build --cache-from alpine:latest -t lotharschulz/hellogo:28576bf-dirty-20190304153729 -f DockerfileAlpine .
+Sending build context to Docker daemon  7.952MB
 Step 1/4 : FROM alpine:latest
- ---> 196d12cf6ab1
+ ---> caf27325b298
 Step 2/4 : RUN apk --no-cache add ca-certificates &&     addgroup -g 99 appuser &&     adduser -D -u 99 -G appuser appuser
- ---> Running in d42048bb0035
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/main/x86_64/APKINDEX.tar.gz
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/community/x86_64/APKINDEX.tar.gz
-(1/1) Installing ca-certificates (20171114-r3)
-Executing busybox-1.28.4-r1.trigger
-Executing ca-certificates-20171114-r3.trigger
-OK: 5 MiB in 14 packages
-Removing intermediate container d42048bb0035
- ---> 6d96f0021ebf
+ ---> Running in 3d91ada60e54
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/community/x86_64/APKINDEX.tar.gz
+(1/1) Installing ca-certificates (20190108-r0)
+Executing busybox-1.29.3-r10.trigger
+Executing ca-certificates-20190108-r0.trigger
+OK: 6 MiB in 15 packages
+Removing intermediate container 3d91ada60e54
+ ---> 776fb58a31c1
 Step 3/4 : ADD hellogo /
- ---> ee095bdd31b5
+ ---> e6931e26d9d2
 Step 4/4 : CMD ["/hellogo"]
- ---> Running in b9fff51936a3
-Removing intermediate container b9fff51936a3
- ---> 6f503c6542e9
-Successfully built 6f503c6542e9
-Successfully tagged lotharschulz/hellogo:4d8682f-20180916203934
+ ---> Running in 7e4250569950
+Removing intermediate container 7e4250569950
+ ---> 37b08cf18e71
+Successfully built 37b08cf18e71
+Successfully tagged lotharschulz/hellogo:28576bf-dirty-20190304153729
 
-real	0m2.701s
-user	0m0.288s
-sys	0m0.088s
-REPOSITORY             TAG                      IMAGE ID            CREATED                  SIZE
-lotharschulz/hellogo   4d8682f-20180916203934   6f503c6542e9        Less than a second ago   11.5MB
-alpine                 latest                   196d12cf6ab1        4 days ago               4.41MB
-golang                 1.11                     fb7a47d8605b        11 days ago              776MB
-Untagged: lotharschulz/hellogo:4d8682f-20180916203934
-Deleted: sha256:6f503c6542e92a948d784b09e4c623c15182ed3bdd43623d4adf7380a2c21a8a
-Deleted: sha256:ee095bdd31b56ded46dc58299447a321fc2fc11998958d18162273cb6d08bedb
-Deleted: sha256:602839127f5d7396b204e038a5b01fc6863d286482f39a79c639b00c437fda9a
-Deleted: sha256:6d96f0021ebfc49aac1d90732d19155b8716585b7e73a3f155cfa53d411caf03
-Deleted: sha256:7f2403876c09c1090b699b413a7c15e93f89ecd5003c67d21e91b7dcbbaba3b9
+real	0m3.144s
+user	0m0.267s
+sys	0m0.239s
+REPOSITORY             TAG                            IMAGE ID            CREATED                  SIZE
+lotharschulz/hellogo   28576bf-dirty-20190304153729   37b08cf18e71        Less than a second ago   13.4MB
+golang                 1.12                           c4f8e4c91496        5 days ago               772MB
+alpine                 latest                         caf27325b298        4 weeks ago              5.53MB
+Untagged: lotharschulz/hellogo:28576bf-dirty-20190304153729
+Deleted: sha256:37b08cf18e713b5e07b8b3e94c05a4fef6b9cada9822b42b4b7d27654d01e971
+Deleted: sha256:e6931e26d9d22046452989752c14a5edbe10c8e72a967c297fe52cf6b239855f
+Deleted: sha256:8f5d53dfd8fbbf6c3b855c26961f2c4d33f130de33dd94fcd36b4dd328892c52
+Deleted: sha256:776fb58a31c10c3563adb2bd18ece6dd7ece2262fb3428bc5e2544e42557aea9
+Deleted: sha256:3b04e97be27cb0a6db41cd92755f0030128d072a1960905838b8371c43f52f9f
+Untagged: golang:1.12
+Untagged: golang@sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Deleted: sha256:c4f8e4c91496d431c2b7a96366bf334cb387e18e04e18cc710689b0cb6d76181
+Deleted: sha256:6cd0e7fc07de5cce4f10c1d9c6ccf3303c07328329e0d305b1842199d87661a5
+Deleted: sha256:b35184d5c1819f698317deb7280b5b2ff88a1cb0fc19cb5236a6de1e61245d0d
+Deleted: sha256:3f7511c3b533be31b6f279fab55803757cf07b0daccd69864e7eb14840fdaffb
+Deleted: sha256:39496f7d4f99c499b3c87643953d7b5243cc8a05ed9aad9cf1f404633cf4f8ea
+Deleted: sha256:ac00eef3f557ea71d47b65f3112c0c3b6ae7113153b7205a94bedc496103a6c8
+Deleted: sha256:8f0ebc672b43403012c586feeac72ec83ce8347faab22a2826b952968aefc3d6
+Deleted: sha256:13d5529fd232cacdd8cd561148560e0bf5d65dbc1149faf0c68240985607c303
 Untagged: alpine:latest
-Untagged: alpine@sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
-Deleted: sha256:196d12cf6ab19273823e700516e98eb1910b03b17840f9d5509f03858484d321
-Untagged: golang:1.11
-Untagged: golang@sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Deleted: sha256:fb7a47d8605b86174e88a730064bb877a7d100ac31df3e46cc8a829160d62136
-Deleted: sha256:f8c71d541880fd9419ab0ffab11903f9f8616697814031f9b328ee71cafb30ca
-Deleted: sha256:a0ec5f11d8849b310279b62cb48eac40173a1fbd6cd309980396a5e5784ebbbe
-Deleted: sha256:195829470c4f7e4d0a32f4622d3134d5acc58bc8be4b87740d0535b9cc13919d
-Deleted: sha256:548c6a523fb3c6dab5b94c5cc04c314691ff26cab49889498f92b26829054bba
-Deleted: sha256:54a32bd7a949afcfc50488df9a48db13f5bfc63c282a09db4aa2fb499012c21f
-Deleted: sha256:7d5f2843cac2368781293d71139c6c30fbb6b7029f6fd4424da858e7f2772875
-Deleted: sha256:b28ef0b6fef80faa25436bec0a1375214d9a23a91e9b75975bba3b2889f8504f
+Untagged: alpine@sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
+Deleted: sha256:caf27325b298a6730837023a8a342699c8b7b388b8d878966b064a1320043019
+Deleted: sha256:503e53e365f34399c4d58d8f4e23c161106cfbce4400e3d0a0357967bad69390
 go build -o hellogo -v
-docker build --no-cache --rm -t lotharschulz/hellogo:4d8682f-20180916203937 -f DockerfileAlpine .
-Sending build context to Docker daemon  22.12MB
+docker build --no-cache --rm -t lotharschulz/hellogo:28576bf-dirty-20190304153733 -f DockerfileAlpine .
+Sending build context to Docker daemon  7.952MB
 Step 1/4 : FROM alpine:latest
 latest: Pulling from library/alpine
-4fe2ade4980c: Already exists 
-Digest: sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
+6c40cc604d8e: Pull complete 
+Digest: sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
 Status: Downloaded newer image for alpine:latest
- ---> 196d12cf6ab1
+ ---> caf27325b298
 Step 2/4 : RUN apk --no-cache add ca-certificates &&     addgroup -g 99 appuser &&     adduser -D -u 99 -G appuser appuser
- ---> Running in 49f9f39a4d9d
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/main/x86_64/APKINDEX.tar.gz
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/community/x86_64/APKINDEX.tar.gz
-(1/1) Installing ca-certificates (20171114-r3)
-Executing busybox-1.28.4-r1.trigger
-Executing ca-certificates-20171114-r3.trigger
-OK: 5 MiB in 14 packages
-Removing intermediate container 49f9f39a4d9d
- ---> 46f9e7f69dbf
+ ---> Running in 2d0c96b365c1
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/community/x86_64/APKINDEX.tar.gz
+(1/1) Installing ca-certificates (20190108-r0)
+Executing busybox-1.29.3-r10.trigger
+Executing ca-certificates-20190108-r0.trigger
+OK: 6 MiB in 15 packages
+Removing intermediate container 2d0c96b365c1
+ ---> 1dd620ada4df
 Step 3/4 : ADD hellogo /
- ---> 2781da582630
+ ---> e99e648db7c9
 Step 4/4 : CMD ["/hellogo"]
- ---> Running in f9ab149cdfcc
-Removing intermediate container f9ab149cdfcc
- ---> e6c27e9c80ee
-Successfully built e6c27e9c80ee
-Successfully tagged lotharschulz/hellogo:4d8682f-20180916203937
+ ---> Running in 5d9b1ab1e889
+Removing intermediate container 5d9b1ab1e889
+ ---> 444ca6e2fc92
+Successfully built 444ca6e2fc92
+Successfully tagged lotharschulz/hellogo:28576bf-dirty-20190304153733
 
-real	0m5.646s
-user	0m0.288s
-sys	0m0.088s
-REPOSITORY             TAG                      IMAGE ID            CREATED                  SIZE
-lotharschulz/hellogo   4d8682f-20180916203937   e6c27e9c80ee        Less than a second ago   11.5MB
-alpine                 latest                   196d12cf6ab1        4 days ago               4.41MB
-Untagged: lotharschulz/hellogo:4d8682f-20180916203937
-Deleted: sha256:e6c27e9c80ee2b8f3f80ee38c5d4569d6f767b642227a37acfc10c9f5ee30029
-Deleted: sha256:2781da582630ad466aa37ee8b892b5fcc9624556e07fc07f29f082930181045f
-Deleted: sha256:c7acd645d1211bcefadb45f2c5e883ed5b7db739ba6bd817c46602393e92766f
-Deleted: sha256:46f9e7f69dbf84fe73f7832d4990845616e95081a044d7572fddf4399bf9a27b
-Deleted: sha256:8596a153dde60e18e301a13f375d3df1f1dc4d02bbc4b6dfe400f512416cbab6
+real	0m6.771s
+user	0m0.263s
+sys	0m0.230s
+REPOSITORY             TAG                            IMAGE ID            CREATED                  SIZE
+lotharschulz/hellogo   28576bf-dirty-20190304153733   444ca6e2fc92        Less than a second ago   13.4MB
+alpine                 latest                         caf27325b298        4 weeks ago              5.53MB
+Untagged: lotharschulz/hellogo:28576bf-dirty-20190304153733
+Deleted: sha256:444ca6e2fc92e77a694ddbee8780ba052546749c6f3799a9b238a2dd6b9330ea
+Deleted: sha256:e99e648db7c93da1617cd92af5c1c2945a8c92229ab3f93c329e5ee58ae5e07c
+Deleted: sha256:2f277ac932ae9421f220acb16ce431417ca8ef72f3529995410b616eae8004bb
+Deleted: sha256:1dd620ada4dfc9f8ab19e3ce9a17d115e3f8f49484a13e0100537c8a7b52e891
+Deleted: sha256:9ca0c557fb4d0b944f45c3b30a4165873d5ad8eecf76052c5ed1918b21c15052
 Untagged: alpine:latest
-Untagged: alpine@sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
-Deleted: sha256:196d12cf6ab19273823e700516e98eb1910b03b17840f9d5509f03858484d321
-1.11: Pulling from library/golang
-05d1a5232b46: Pull complete 
-5cee356eda6b: Pull complete 
-89d3385f0fd3: Pull complete 
-80ae6b477848: Pull complete 
-94ebfeaaddf3: Pull complete 
-dd697213ec59: Pull complete 
-715d1281dfe7: Pull complete 
-Digest: sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Status: Downloaded newer image for golang:1.11
+Untagged: alpine@sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
+Deleted: sha256:caf27325b298a6730837023a8a342699c8b7b388b8d878966b064a1320043019
+Deleted: sha256:503e53e365f34399c4d58d8f4e23c161106cfbce4400e3d0a0357967bad69390
+1.12: Pulling from library/golang
+741437d97401: Pull complete 
+34d8874714d7: Pull complete 
+0a108aa26679: Pull complete 
+7f0334c36886: Pull complete 
+d35724ed4672: Pull complete 
+d0ea18b1198f: Pull complete 
+647e63f91386: Pull complete 
+Digest: sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Status: Downloaded newer image for golang:1.12
 latest: Pulling from library/alpine
-4fe2ade4980c: Already exists 
-Digest: sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
+6c40cc604d8e: Pull complete 
+Digest: sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
 Status: Downloaded newer image for alpine:latest
 go build -o hellogo -v
-docker build --squash --rm -t lotharschulz/hellogo:4d8682f-20180916204043 -f DockerfileAlpine .
-Sending build context to Docker daemon  22.12MB
+docker build --squash --rm -t lotharschulz/hellogo:28576bf-dirty-20190304153808 -f DockerfileAlpine .
+Sending build context to Docker daemon  7.952MB
 Step 1/4 : FROM alpine:latest
- ---> 196d12cf6ab1
+ ---> caf27325b298
 Step 2/4 : RUN apk --no-cache add ca-certificates &&     addgroup -g 99 appuser &&     adduser -D -u 99 -G appuser appuser
- ---> Running in 166d008f3c86
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/main/x86_64/APKINDEX.tar.gz
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/community/x86_64/APKINDEX.tar.gz
-(1/1) Installing ca-certificates (20171114-r3)
-Executing busybox-1.28.4-r1.trigger
-Executing ca-certificates-20171114-r3.trigger
-OK: 5 MiB in 14 packages
-Removing intermediate container 166d008f3c86
- ---> bf92ccdf550c
+ ---> Running in 5d59cb9e736a
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/community/x86_64/APKINDEX.tar.gz
+(1/1) Installing ca-certificates (20190108-r0)
+Executing busybox-1.29.3-r10.trigger
+Executing ca-certificates-20190108-r0.trigger
+OK: 6 MiB in 15 packages
+Removing intermediate container 5d59cb9e736a
+ ---> 2be2530d8e15
 Step 3/4 : ADD hellogo /
- ---> c2cd32b5013d
+ ---> 9eb1b64807b3
 Step 4/4 : CMD ["/hellogo"]
- ---> Running in b1d66a74d54f
-Removing intermediate container b1d66a74d54f
- ---> 97cd2963633a
-Successfully built 2b3f0b133550
-Successfully tagged lotharschulz/hellogo:4d8682f-20180916204043
+ ---> Running in b8c1b0010e4b
+Removing intermediate container b8c1b0010e4b
+ ---> ebf5180cf8f2
+Successfully built 397e9f7d05fa
+Successfully tagged lotharschulz/hellogo:28576bf-dirty-20190304153808
 
-real	0m6.890s
-user	0m0.288s
-sys	0m0.092s
-REPOSITORY             TAG                      IMAGE ID            CREATED                  SIZE
-lotharschulz/hellogo   4d8682f-20180916204043   2b3f0b133550        Less than a second ago   11.5MB
-<none>                 <none>                   97cd2963633a        1 second ago             11.5MB
-alpine                 latest                   196d12cf6ab1        4 days ago               4.41MB
-golang                 1.11                     fb7a47d8605b        11 days ago              776MB
-Untagged: lotharschulz/hellogo:4d8682f-20180916204043
-Deleted: sha256:2b3f0b1335506d1d458055c843986f7be2a2be312dc12f58d4f5f322299655bc
-Deleted: sha256:9fc743a0c63aa330637ee1e9406aadf7f050786aef6f56ffc8daf644329fe854
-Deleted: sha256:97cd2963633a8983d1df16f30def28bdd048e0a719a4a00974554e6c84af459c
-Deleted: sha256:c2cd32b5013ddb498910e64f05c709cb43bf74b42c9f8a52d5034aab36509233
-Deleted: sha256:bd70c3d9013629ea92805353028767f9c426fa50c26b6daae583a538d27f336f
-Deleted: sha256:bf92ccdf550c3dce1d6c01f2858306b8bdd7b59af38a8549a4cf7e8d62d5d291
-Deleted: sha256:c86aa8ed573fcb20c5e7050fa440bc66b54eb45a5332c8d5cbc240234c82bb12
+real	0m3.767s
+user	0m0.268s
+sys	0m0.233s
+REPOSITORY             TAG                            IMAGE ID            CREATED             SIZE
+<none>                 <none>                         ebf5180cf8f2        1 second ago        13.4MB
+lotharschulz/hellogo   28576bf-dirty-20190304153808   397e9f7d05fa        1 second ago        13.4MB
+golang                 1.12                           c4f8e4c91496        5 days ago          772MB
+alpine                 latest                         caf27325b298        4 weeks ago         5.53MB
+Untagged: lotharschulz/hellogo:28576bf-dirty-20190304153808
+Deleted: sha256:397e9f7d05fa135732e76c8b07bc2b9451df562fb9ad1aaa9026d6986af1f2f6
+Deleted: sha256:96817c667c18d6bb1b3a1355fc92558afb1ef449e842bd577983bf06bf8549cc
+Deleted: sha256:ebf5180cf8f2be6b170268bdbda2363f3983bb2633cd670130711e6f65a32ccb
+Deleted: sha256:9eb1b64807b3ed8210d4557d2c5a39ddf120712c2edc3f708b71b0150db12151
+Deleted: sha256:97b71aaefa323f0538b238ba86d5db752ebecf4768e5aa0e891d49c27cfc589a
+Deleted: sha256:2be2530d8e1543181120429ea3caa9bb345406b5618f2e018c5db8956c74dd41
+Deleted: sha256:4fb348a4a4088c30ceac2847a6f5903095ee26aa1c500d3ea784cc575f7e915d
+Untagged: golang:1.12
+Untagged: golang@sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Deleted: sha256:c4f8e4c91496d431c2b7a96366bf334cb387e18e04e18cc710689b0cb6d76181
+Deleted: sha256:6cd0e7fc07de5cce4f10c1d9c6ccf3303c07328329e0d305b1842199d87661a5
+Deleted: sha256:b35184d5c1819f698317deb7280b5b2ff88a1cb0fc19cb5236a6de1e61245d0d
+Deleted: sha256:3f7511c3b533be31b6f279fab55803757cf07b0daccd69864e7eb14840fdaffb
+Deleted: sha256:39496f7d4f99c499b3c87643953d7b5243cc8a05ed9aad9cf1f404633cf4f8ea
+Deleted: sha256:ac00eef3f557ea71d47b65f3112c0c3b6ae7113153b7205a94bedc496103a6c8
+Deleted: sha256:8f0ebc672b43403012c586feeac72ec83ce8347faab22a2826b952968aefc3d6
+Deleted: sha256:13d5529fd232cacdd8cd561148560e0bf5d65dbc1149faf0c68240985607c303
 Untagged: alpine:latest
-Untagged: alpine@sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
-Deleted: sha256:196d12cf6ab19273823e700516e98eb1910b03b17840f9d5509f03858484d321
-Untagged: golang:1.11
-Untagged: golang@sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Deleted: sha256:fb7a47d8605b86174e88a730064bb877a7d100ac31df3e46cc8a829160d62136
-Deleted: sha256:f8c71d541880fd9419ab0ffab11903f9f8616697814031f9b328ee71cafb30ca
-Deleted: sha256:a0ec5f11d8849b310279b62cb48eac40173a1fbd6cd309980396a5e5784ebbbe
-Deleted: sha256:195829470c4f7e4d0a32f4622d3134d5acc58bc8be4b87740d0535b9cc13919d
-Deleted: sha256:548c6a523fb3c6dab5b94c5cc04c314691ff26cab49889498f92b26829054bba
-Deleted: sha256:54a32bd7a949afcfc50488df9a48db13f5bfc63c282a09db4aa2fb499012c21f
-Deleted: sha256:7d5f2843cac2368781293d71139c6c30fbb6b7029f6fd4424da858e7f2772875
-Deleted: sha256:b28ef0b6fef80faa25436bec0a1375214d9a23a91e9b75975bba3b2889f8504f
-1.11: Pulling from library/golang
-05d1a5232b46: Pull complete 
-5cee356eda6b: Pull complete 
-89d3385f0fd3: Pull complete 
-80ae6b477848: Pull complete 
-94ebfeaaddf3: Pull complete 
-dd697213ec59: Pull complete 
-715d1281dfe7: Pull complete 
-Digest: sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Status: Downloaded newer image for golang:1.11
+Untagged: alpine@sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
+Deleted: sha256:caf27325b298a6730837023a8a342699c8b7b388b8d878966b064a1320043019
+Deleted: sha256:503e53e365f34399c4d58d8f4e23c161106cfbce4400e3d0a0357967bad69390
+1.12: Pulling from library/golang
+741437d97401: Pull complete 
+34d8874714d7: Pull complete 
+0a108aa26679: Pull complete 
+7f0334c36886: Pull complete 
+d35724ed4672: Pull complete 
+d0ea18b1198f: Pull complete 
+647e63f91386: Pull complete 
+Digest: sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Status: Downloaded newer image for golang:1.12
 latest: Pulling from library/alpine
-4fe2ade4980c: Already exists 
-Digest: sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
+6c40cc604d8e: Pull complete 
+Digest: sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
 Status: Downloaded newer image for alpine:latest
 go build -o hellogo -v
-docker build --compress --rm -t lotharschulz/hellogo:4d8682f-20180916204155 -f DockerfileAlpine .
-Sending build context to Docker daemon   8.82MB
+docker build --compress --rm -t lotharschulz/hellogo:28576bf-dirty-20190304153841 -f DockerfileAlpine .
+Sending build context to Docker daemon  4.149MB
 Step 1/4 : FROM alpine:latest
- ---> 196d12cf6ab1
+ ---> caf27325b298
 Step 2/4 : RUN apk --no-cache add ca-certificates &&     addgroup -g 99 appuser &&     adduser -D -u 99 -G appuser appuser
- ---> Running in 3cfd3fa89edb
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/main/x86_64/APKINDEX.tar.gz
-fetch http://dl-cdn.alpinelinux.org/alpine/v3.8/community/x86_64/APKINDEX.tar.gz
-(1/1) Installing ca-certificates (20171114-r3)
-Executing busybox-1.28.4-r1.trigger
-Executing ca-certificates-20171114-r3.trigger
-OK: 5 MiB in 14 packages
-Removing intermediate container 3cfd3fa89edb
- ---> 92bab29ae7ff
+ ---> Running in 6002ef1bd845
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/community/x86_64/APKINDEX.tar.gz
+(1/1) Installing ca-certificates (20190108-r0)
+Executing busybox-1.29.3-r10.trigger
+Executing ca-certificates-20190108-r0.trigger
+OK: 6 MiB in 15 packages
+Removing intermediate container 6002ef1bd845
+ ---> b40d7a49257d
 Step 3/4 : ADD hellogo /
- ---> b2463e3e8dfa
+ ---> b4afeecbd349
 Step 4/4 : CMD ["/hellogo"]
- ---> Running in 865ba18c9770
-Removing intermediate container 865ba18c9770
- ---> 0d018d587dbe
-Successfully built 0d018d587dbe
-Successfully tagged lotharschulz/hellogo:4d8682f-20180916204155
+ ---> Running in b476418d38ef
+Removing intermediate container b476418d38ef
+ ---> eec79362cf93
+Successfully built eec79362cf93
+Successfully tagged lotharschulz/hellogo:28576bf-dirty-20190304153841
 
-real	0m4.853s
-user	0m2.236s
-sys	0m0.252s
-REPOSITORY             TAG                      IMAGE ID            CREATED             SIZE
-lotharschulz/hellogo   4d8682f-20180916204155   0d018d587dbe        1 second ago        11.5MB
-alpine                 latest                   196d12cf6ab1        4 days ago          4.41MB
-golang                 1.11                     fb7a47d8605b        11 days ago         776MB
-Untagged: lotharschulz/hellogo:4d8682f-20180916204155
-Deleted: sha256:0d018d587dbe7ff404505258e7e215cdd1e60dbe6342bf1bf431e8520b3dbd2c
-Deleted: sha256:b2463e3e8dfad0381bb9d5042a30a803f5234f46310c59e9a1aecec2191cd6d6
-Deleted: sha256:43edd5a0d3ad2b9aa65b3861e2212dbe93292f65af40c185c8674a667882763a
-Deleted: sha256:92bab29ae7ff3c0ccc9379bcb8605809f391163f43a23e8e3fc74f57926ee967
-Deleted: sha256:1b426531fb0583437c387c8e0853581b20e87beb01c8b3a965076a5d298b292c
+real	0m3.368s
+user	0m0.655s
+sys	0m0.334s
+REPOSITORY             TAG                            IMAGE ID            CREATED                  SIZE
+lotharschulz/hellogo   28576bf-dirty-20190304153841   eec79362cf93        Less than a second ago   13.4MB
+golang                 1.12                           c4f8e4c91496        5 days ago               772MB
+alpine                 latest                         caf27325b298        4 weeks ago              5.53MB
+Untagged: lotharschulz/hellogo:28576bf-dirty-20190304153841
+Deleted: sha256:eec79362cf931e5e680962ff33c1b843fa920cc70699c79239e85617fd99fa72
+Deleted: sha256:b4afeecbd349b722530bfd028b22c1acae50f298eaeab64c02c25f1854fa2c54
+Deleted: sha256:5dfffa98a99c583ad1f6794d3626a039031228cdf9d7a9633daeea3d4c6e896d
+Deleted: sha256:b40d7a49257dc0e0194df46c82766dcc60482bab9e499c5412fda58f1323c78c
+Deleted: sha256:bc80377781d77162ee3504303707a37b7f990df798066eb08fbf636ad270ff4f
+Untagged: golang:1.12
+Untagged: golang@sha256:05d1c73468513e13d4fca8e34c3a06fd1d8e2f6ee7867bd23b17afb7ec27767e
+Deleted: sha256:c4f8e4c91496d431c2b7a96366bf334cb387e18e04e18cc710689b0cb6d76181
+Deleted: sha256:6cd0e7fc07de5cce4f10c1d9c6ccf3303c07328329e0d305b1842199d87661a5
+Deleted: sha256:b35184d5c1819f698317deb7280b5b2ff88a1cb0fc19cb5236a6de1e61245d0d
+Deleted: sha256:3f7511c3b533be31b6f279fab55803757cf07b0daccd69864e7eb14840fdaffb
+Deleted: sha256:39496f7d4f99c499b3c87643953d7b5243cc8a05ed9aad9cf1f404633cf4f8ea
+Deleted: sha256:ac00eef3f557ea71d47b65f3112c0c3b6ae7113153b7205a94bedc496103a6c8
+Deleted: sha256:8f0ebc672b43403012c586feeac72ec83ce8347faab22a2826b952968aefc3d6
+Deleted: sha256:13d5529fd232cacdd8cd561148560e0bf5d65dbc1149faf0c68240985607c303
 Untagged: alpine:latest
-Untagged: alpine@sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
-Deleted: sha256:196d12cf6ab19273823e700516e98eb1910b03b17840f9d5509f03858484d321
-Untagged: golang:1.11
-Untagged: golang@sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
-Deleted: sha256:fb7a47d8605b86174e88a730064bb877a7d100ac31df3e46cc8a829160d62136
-Deleted: sha256:f8c71d541880fd9419ab0ffab11903f9f8616697814031f9b328ee71cafb30ca
-Deleted: sha256:a0ec5f11d8849b310279b62cb48eac40173a1fbd6cd309980396a5e5784ebbbe
-Deleted: sha256:195829470c4f7e4d0a32f4622d3134d5acc58bc8be4b87740d0535b9cc13919d
-Deleted: sha256:548c6a523fb3c6dab5b94c5cc04c314691ff26cab49889498f92b26829054bba
-Deleted: sha256:54a32bd7a949afcfc50488df9a48db13f5bfc63c282a09db4aa2fb499012c21f
-Deleted: sha256:7d5f2843cac2368781293d71139c6c30fbb6b7029f6fd4424da858e7f2772875
-Deleted: sha256:b28ef0b6fef80faa25436bec0a1375214d9a23a91e9b75975bba3b2889f8504f
+Untagged: alpine@sha256:b3dbf31b77fd99d9c08f780ce6f5282aba076d70a513a8be859d8d3a4d0c92b8
+Deleted: sha256:caf27325b298a6730837023a8a342699c8b7b388b8d878966b064a1320043019
+Deleted: sha256:503e53e365f34399c4d58d8f4e23c161106cfbce4400e3d0a0357967bad69390
 CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hellogo .
-docker build --rm -t lotharschulz/hellogo:4d8682f-20180916204209 -f DockerfileMin .
-Sending build context to Docker daemon  20.81MB
+docker build --rm -t lotharschulz/hellogo:28576bf-dirty-20190304153849 -f DockerfileMin .
+Sending build context to Docker daemon   6.49MB
 Step 1/4 : FROM scratch
  ---> 
 Step 2/4 : ADD ca-certificates.crt /etc/ssl/certs/
- ---> d14041e3e5d8
+ ---> 1bb7fa9f7066
 Step 3/4 : ADD hellogo /
- ---> de2c3ae21f12
+ ---> b30c96c888b4
 Step 4/4 : CMD ["/hellogo"]
- ---> Running in 755296c5a3d3
-Removing intermediate container 755296c5a3d3
- ---> d70233cb9a51
-Successfully built d70233cb9a51
-Successfully tagged lotharschulz/hellogo:4d8682f-20180916204209
+ ---> Running in 62e1a2423d2a
+Removing intermediate container 62e1a2423d2a
+ ---> f7ebc2de02aa
+Successfully built f7ebc2de02aa
+Successfully tagged lotharschulz/hellogo:28576bf-dirty-20190304153849
 
-real	0m9.494s
-user	0m27.576s
-sys	0m1.560s
-REPOSITORY             TAG                      IMAGE ID            CREATED                  SIZE
-lotharschulz/hellogo   4d8682f-20180916204209   d70233cb9a51        Less than a second ago   5.48MB
-Untagged: lotharschulz/hellogo:4d8682f-20180916204209
-Deleted: sha256:d70233cb9a511f6c490c710b9617139c8f2deff584fba88e2ee96c202326249b
-Deleted: sha256:de2c3ae21f120e795a314444f1aa81ba071b4e708adf515d24b8c8f2edc3ef7f
-Deleted: sha256:2e95d7a0003244e4e72292862be7eb88406e7f9e868a84bec122c846bf6181aa
-Deleted: sha256:d14041e3e5d80c4bf5098669ac00c75bdbb02d58688b227658dd6c2389d4c5c3
-Deleted: sha256:429d445193d0cb25d46d9556b20910ddeacda922ca55fd387561af4de997c4fa
+real	0m5.302s
+user	0m15.072s
+sys	0m2.693s
+REPOSITORY             TAG                            IMAGE ID            CREATED                  SIZE
+lotharschulz/hellogo   28576bf-dirty-20190304153849   f7ebc2de02aa        Less than a second ago   6.07MB
+Untagged: lotharschulz/hellogo:28576bf-dirty-20190304153849
+Deleted: sha256:f7ebc2de02aaafadae1575cbb620e3246d2c65e472d3c6aa0b607f6e5707a6da
+Deleted: sha256:b30c96c888b443b1d7f576d2b031e317bba704786346f4d2e48326693032bcc5
+Deleted: sha256:77d9fcae963cb7f8bf54062536ac53a06d55a2fdcfa9133af1b692e8442deb6f
+Deleted: sha256:1bb7fa9f7066d7f8dbd6ba6a34842831909fed89e033cfc74d85a3993184617b
+Deleted: sha256:379aa943be4d5f40dd86806989e6075bcf64bcbd6d6aff0831c155b44a2967ba
 CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hellogo .
-docker build --no-cache --rm -t lotharschulz/hellogo:4d8682f-20180916204219 -f DockerfileMin .
-Sending build context to Docker daemon  20.81MB
+docker build --no-cache --rm -t lotharschulz/hellogo:28576bf-dirty-20190304153854 -f DockerfileMin .
+Sending build context to Docker daemon   6.49MB
 Step 1/4 : FROM scratch
  ---> 
 Step 2/4 : ADD ca-certificates.crt /etc/ssl/certs/
- ---> 131ed48c9c73
+ ---> 680913d9b975
 Step 3/4 : ADD hellogo /
- ---> 2470e625f36c
+ ---> 7a8923818cfe
 Step 4/4 : CMD ["/hellogo"]
- ---> Running in 3a0d24609c64
-Removing intermediate container 3a0d24609c64
- ---> b3db2cd98cb2
-Successfully built b3db2cd98cb2
-Successfully tagged lotharschulz/hellogo:4d8682f-20180916204219
+ ---> Running in 0b7a9c8d8040
+Removing intermediate container 0b7a9c8d8040
+ ---> 00642024d06a
+Successfully built 00642024d06a
+Successfully tagged lotharschulz/hellogo:28576bf-dirty-20190304153854
 
-real	0m9.431s
-user	0m27.696s
-sys	0m1.364s
-REPOSITORY             TAG                      IMAGE ID            CREATED                  SIZE
-lotharschulz/hellogo   4d8682f-20180916204219   b3db2cd98cb2        Less than a second ago   5.48MB
-Untagged: lotharschulz/hellogo:4d8682f-20180916204219
-Deleted: sha256:b3db2cd98cb2e0f72b8f462f6f0530efe70e1d692b60a0362029b6b21a5deb97
-Deleted: sha256:2470e625f36c0fe31ebb9dc0f1e3ec20825b0902f8cd0a9b805fcc51c7f73164
-Deleted: sha256:ae81ddd7897439c55bf095c8731594d561cd719e90f8b37460301da1501b89f2
-Deleted: sha256:131ed48c9c73052eea8b316eb9c59d5d4b7f36cee849ce191eed112e0e5809d5
-Deleted: sha256:501a8472247ffa682bed0aca949687071a0ea83c52e884a8ccb17b5d42fade5d
+real	0m5.317s
+user	0m15.212s
+sys	0m2.647s
+REPOSITORY             TAG                            IMAGE ID            CREATED             SIZE
+lotharschulz/hellogo   28576bf-dirty-20190304153854   00642024d06a        1 second ago        6.07MB
+Untagged: lotharschulz/hellogo:28576bf-dirty-20190304153854
+Deleted: sha256:00642024d06a16b5d0d7abd9c159947fa9980014c2abc77a04cb0c980926a91c
+Deleted: sha256:7a8923818cfeba0d18fe65b7de19d557aa38add596b3d19d5449fee7262695d4
+Deleted: sha256:af7ba24798d59c66e7940363cf3a63682b6c1397b8b1c2dcd09151051ebb7864
+Deleted: sha256:680913d9b975a4e705decd0842964bfd8462173603e3f34ec662fa9d30b4d327
+Deleted: sha256:6e7aeddce092f866d174109a64f413c69a4caba0ae65bc01d71640dae4c7514d
 CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hellogo .
-docker build --squash --rm -t lotharschulz/hellogo:4d8682f-20180916204228 -f DockerfileMin .
-Sending build context to Docker daemon  20.81MB
+docker build --squash --rm -t lotharschulz/hellogo:28576bf-dirty-20190304153900 -f DockerfileMin .
+Sending build context to Docker daemon   6.49MB
 Step 1/4 : FROM scratch
  ---> 
 Step 2/4 : ADD ca-certificates.crt /etc/ssl/certs/
- ---> 75b258f1116e
+ ---> 826fa9dd6272
 Step 3/4 : ADD hellogo /
- ---> 52b168118d1d
+ ---> 08ef4212190a
 Step 4/4 : CMD ["/hellogo"]
- ---> Running in 4316a09fe7a6
-Removing intermediate container 4316a09fe7a6
- ---> 091c8a370330
-Successfully built e0301f9c355e
-Successfully tagged lotharschulz/hellogo:4d8682f-20180916204228
+ ---> Running in d727b088b07b
+Removing intermediate container d727b088b07b
+ ---> 2f433213145b
+Successfully built 18b6e14089fa
+Successfully tagged lotharschulz/hellogo:28576bf-dirty-20190304153900
 
-real	0m9.637s
-user	0m28.000s
-sys	0m1.360s
-REPOSITORY             TAG                      IMAGE ID            CREATED                  SIZE
-lotharschulz/hellogo   4d8682f-20180916204228   e0301f9c355e        Less than a second ago   5.48MB
-<none>                 <none>                   091c8a370330        Less than a second ago   5.48MB
-Deleted: sha256:091c8a370330fa95b35c27f60c54d32d40873e7000a530c5b1c51868fdcee82e
-Deleted: sha256:52b168118d1d367545a43bb23ab4ae9b4cc6a78a05bb016cf3e80a261b12e0e3
-Deleted: sha256:1733c39e1b33002456399ae699f5722f0698d68d79cb1e35d64178c42c66ab9c
-Deleted: sha256:75b258f1116e2c949301da7fdaea3aee304e95536100d1574369be15241e6ca6
-Deleted: sha256:8623f3f0bb07dec44c7671266a9fce7b4114d8db28bd60c56e878f10d536bad5
-Untagged: lotharschulz/hellogo:4d8682f-20180916204228
-Deleted: sha256:e0301f9c355e387c5407be64f3ec42e4b5695db49b3086169e337c64ac88da03
-Deleted: sha256:6b2fff4176d0dd6963eca24caaa55e6c7e2c6227dc2e4d9182a96bf09a669ccb
+real	0m5.453s
+user	0m15.429s
+sys	0m2.531s
+REPOSITORY             TAG                            IMAGE ID            CREATED                  SIZE
+<none>                 <none>                         2f433213145b        Less than a second ago   6.07MB
+lotharschulz/hellogo   28576bf-dirty-20190304153900   18b6e14089fa        Less than a second ago   6.07MB
+Untagged: lotharschulz/hellogo:28576bf-dirty-20190304153900
+Deleted: sha256:18b6e14089fa3dd6d98c9a764ff8df1a32894c6ddc2715dcb755eef29b2333c1
+Deleted: sha256:f6ea2f338f7fd0a692351050c91dd7abd391183ff321943c580bb0edbc1037dc
+Deleted: sha256:2f433213145b0de504bd1ed2368d18ec614b3e77eb5052616808bfb82b1743aa
+Deleted: sha256:08ef4212190a7f4c5d50bbbc5604fef2a354e86271d0fcfb4928023fa92542ce
+Deleted: sha256:60fb578133bcfc4e65c76ae8308b9e1b615693733d1a6627271254a65ad81a0b
+Deleted: sha256:826fa9dd6272d7137ed3a85b3bb22cc332194262c080c88347f7f5ad02b92f3f
+Deleted: sha256:2d6a729175b922299434802db790f5fd755d93eeb1d99e7399b32c1ec15b1714
 CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hellogo .
-docker build --compress --rm -t lotharschulz/hellogo:4d8682f-20180916204238 -f DockerfileMin .
-Sending build context to Docker daemon  7.537MB
+docker build --compress --rm -t lotharschulz/hellogo:28576bf-dirty-20190304153905 -f DockerfileMin .
+Sending build context to Docker daemon  2.686MB
 Step 1/4 : FROM scratch
  ---> 
 Step 2/4 : ADD ca-certificates.crt /etc/ssl/certs/
- ---> bc548dbe61cf
+ ---> 211cd484f1f5
 Step 3/4 : ADD hellogo /
- ---> 9af89a4319d8
+ ---> afbed7ba358f
 Step 4/4 : CMD ["/hellogo"]
- ---> Running in b6d8e5d4ac31
-Removing intermediate container b6d8e5d4ac31
- ---> 738d5339a9af
-Successfully built 738d5339a9af
-Successfully tagged lotharschulz/hellogo:4d8682f-20180916204238
+ ---> Running in f1c2886da278
+Removing intermediate container f1c2886da278
+ ---> 9514f94bc859
+Successfully built 9514f94bc859
+Successfully tagged lotharschulz/hellogo:28576bf-dirty-20190304153905
 
-real	0m11.272s
-user	0m29.392s
-sys	0m1.668s
-REPOSITORY             TAG                      IMAGE ID            CREATED                  SIZE
-lotharschulz/hellogo   4d8682f-20180916204238   738d5339a9af        Less than a second ago   5.48MB
-Untagged: lotharschulz/hellogo:4d8682f-20180916204238
-Deleted: sha256:738d5339a9aff4305317c650917886885f2b2e35db2649f75b58d4aa57e9bd95
-Deleted: sha256:9af89a4319d89a0ce8a72d9a201cedafd2cd8cea0baa7d7462689d141166b095
-Deleted: sha256:4b41bece41efd997daa0bac45298c9809131c44bd132b25d21f627501b50a7a4
-Deleted: sha256:bc548dbe61cfdc847eb1ee1fe5d621ac4620fb6c663b7337a28404f086348abf
-Deleted: sha256:b159733a081565c60f365f3df839473689a9cda764282ab7ef9c5ee483855554
+real	0m5.419s
+user	0m15.851s
+sys	0m2.610s
+REPOSITORY             TAG                            IMAGE ID            CREATED                  SIZE
+lotharschulz/hellogo   28576bf-dirty-20190304153905   9514f94bc859        Less than a second ago   6.07MB
+Untagged: lotharschulz/hellogo:28576bf-dirty-20190304153905
+Deleted: sha256:9514f94bc859d8cad6353691a24564c922f685a7fc31cf2b23b44c2d074482e3
+Deleted: sha256:afbed7ba358fba3ed04592aa2609e5f6afc315d768ce130c2e2b1fb61f4c23ec
+Deleted: sha256:eb2ec0e496b87cbd4b96175f9d2ae2bae7a1329989ea5c6e6633524e220a739c
+Deleted: sha256:211cd484f1f526cf51cffae305bd2b493dfaa907b5d04a44669c6aeec3b67155
+Deleted: sha256:6648603b3f83b4b7f6d463e12adc138b57c90de14fcfe838b98347b2ab2e72d5
