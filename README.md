@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/lotharschulz/hellogodocker.svg?style=shield)](https://circleci.com/gh/lotharschulz/hellogodocker)
 
-## with minimum dockerfile, docker build pattern and docker cache
+## docker images with docker build pattern, docker cache and from scratch based dockerfile
 
 #### preconditions
 - [golang](https://golang.org/)
@@ -53,7 +53,7 @@ docker run -p 1234:1234 dockerhub/hellogo:[tag] -name hellogodocker
 # e.g. docker run -p 1234:1234 --name hellogodocker dockerhub/hellogo:dd70981-dirty20180710223321
 ```
 
-##### docker experimantal
+##### docker experimental
 
 In order to run the _squash_ build commands above, you need to run the docker deamon with experimental functions:
 ```
@@ -68,4 +68,7 @@ $ sudo service docker restart
 $ docker version -f '{{.Server.Experimental}}'
 true
 ```
-Docker on Mac OS offers to set this via UI as well. That would be Preferences->Daemon->Advanced.
+_Docker on Mac OS offers to set this via UI as well. That would be Preferences->Daemon->Advanced._
+
+#### blog post
+[let’s go build a minimal docker image](https://www.lotharschulz.info/2018/10/01/lets-go-build-a-minimal-docker-image/)
