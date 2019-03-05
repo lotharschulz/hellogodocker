@@ -24,18 +24,19 @@ go build -o mybinary -v ./...
 
 ```
 
-#### 5 ways to build a docker image
+#### 6 main ways to build a docker image
 ```
 $ make build.docker
 $ make build.docker-cache
 $ make build.dockerbuilder
 $ make build.dockerbuilder-cache
-$ make build.dockerbuilder-min
+$ make build.dockeralpine
+$ make build.docker-min
 ```
 
 ###### note about ca-certificates
 ```
-# $ make build.dockerbuilder-min
+# $ make build.docker-min
 # requires ca-certificates.crt file in project directory
 # For many Linux distributions, 
 # you can copy the file from /etc/ssl/certs/ca-certificates.crt :
@@ -67,6 +68,7 @@ $ sudo service docker restart
 $ docker version -f '{{.Server.Experimental}}'
 true
 ```
+_Docker on Mac OS offers to set this via UI as well. That would be Preferences->Daemon->Advanced._
 
 #### blog post
 [let’s go build a minimal docker image](https://www.lotharschulz.info/2018/10/01/lets-go-build-a-minimal-docker-image/)

@@ -26,7 +26,7 @@ jobs:
       - run:
           name: docker pull golang & alpine base image
           command: |
-            docker pull golang:1.11
+            docker pull golang:1.12
       - run:
           name: docker command build
           command: |
@@ -42,7 +42,7 @@ jobs:
       - run:
           name: docker pull golang
           command: |
-            docker pull golang:1.11
+            docker pull golang:1.12
       - run:
           name: build.docker
           command: |
@@ -63,7 +63,7 @@ jobs:
       - run:
           name: docker pull golang & alpine base image
           command: |
-            docker pull golang:1.11
+            docker pull golang:1.12
             docker pull alpine:latest
       - run:
           name: build.docker-cache
@@ -86,7 +86,7 @@ jobs:
       - run:
           name: docker pull golang & alpine base image
           command: |
-            docker pull golang:1.11
+            docker pull golang:1.12
             docker pull alpine:latest
       - run:
           name: build.dockerbuilder
@@ -107,7 +107,7 @@ jobs:
       - run:
           name: docker pull golang & alpine base image
           command: |
-            docker pull golang:1.11
+            docker pull golang:1.12
             docker pull alpine:latest
       - run:
           name: build.dockerbuilder-cache
@@ -146,7 +146,7 @@ jobs:
       - run:
           name: docker pull golang & alpine base image
           command: |
-            docker pull golang:1.11
+            docker pull golang:1.12
             docker pull alpine:latest
       - run:
           name: build.dockerbuilder-squash
@@ -167,7 +167,7 @@ jobs:
       - run:
           name: docker pull golang & alpine base image
           command: |
-            docker pull golang:1.11
+            docker pull golang:1.12
             docker pull alpine:latest
       - run:
           name: build.dockerbuilder-compress
@@ -189,7 +189,7 @@ jobs:
       - run:
           name: docker pull golang & alpine base image
           command: |
-            docker pull golang:1.11
+            docker pull golang:1.12
             docker pull alpine:latest
       - run:
           name: build.dockeralpine
@@ -210,7 +210,7 @@ jobs:
       - run:
           name: docker pull golang & alpine base image
           command: |
-            docker pull golang:1.11
+            docker pull golang:1.12
             docker pull alpine:latest
       - run:
           name: build.dockeralpine-cache
@@ -247,7 +247,7 @@ jobs:
       - run:
           name: docker pull golang & alpine base image
           command: |
-            docker pull golang:1.11
+            docker pull golang:1.12
             docker pull alpine:latest
       - run:
           name: build.dockeralpine-squash
@@ -268,7 +268,7 @@ jobs:
       - run:
           name: docker pull golang & alpine base image
           command: |
-            docker pull golang:1.11
+            docker pull golang:1.12
             docker pull alpine:latest
       - run:
           name: build.dockeralpine-compress
