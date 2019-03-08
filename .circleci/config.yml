@@ -16,6 +16,8 @@ jobs:
           name: Build service
           command: make
 
+      - run: docker version -f '{{.Server.Version}}'
+      - run: docker version -f '{{.Client.Version}}'
       - run: go get -v -t -d ./...
       - run: go test -v ./...
       - run:
