@@ -68,7 +68,7 @@ $ sudo service docker restart
 $ docker version -f '{{.Server.Experimental}}'
 true
 ```
-_Docker on Mac OS offers to set this via UI as well. That would be Preferences->Daemon->Advanced._
+_Docker on Mac OS offers to set the experimental functions via UI as well. That would be Preferences->Daemon->Advanced._
 
 #### blog post
 [let’s go build a minimal docker image](https://www.lotharschulz.info/2018/10/01/lets-go-build-a-minimal-docker-image/)
