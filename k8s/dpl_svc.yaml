@@ -35,6 +35,4 @@ spec:
   ports:
   - port: 1234
     targetPort: 1234
-    nodePort: 30037
-    # targetPort: hellogo-svc
-    
+    nodePort: 30037    
