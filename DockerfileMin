@@ -1,4 +1,6 @@
 FROM scratch
+LABEL maintainer="Lothar Schulz <http://bit.ly/2zVLbWh>"
+
 ADD ca-certificates.crt /etc/ssl/certs/
 ADD hellogo /
 CMD ["/hellogo"]

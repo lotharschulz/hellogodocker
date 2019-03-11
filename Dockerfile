@@ -1,4 +1,5 @@
 FROM golang:1.12
+LABEL maintainer="Lothar Schulz <http://bit.ly/2zVLbWh>"
 
 RUN mkdir /app
 WORKDIR /app

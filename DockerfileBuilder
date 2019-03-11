@@ -1,4 +1,5 @@
 FROM golang:1.12 as builder
+LABEL maintainer="Lothar Schulz <http://bit.ly/2zVLbWh>"
 
 WORKDIR /go/src/github.com/lotharschulz/hellogodocker/
 

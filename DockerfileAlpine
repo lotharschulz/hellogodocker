@@ -1,4 +1,6 @@
 FROM alpine:latest
+LABEL maintainer="Lothar Schulz <http://bit.ly/2zVLbWh>"
+
 RUN apk --no-cache add ca-certificates && \
     addgroup -g 99 appuser && \
     adduser -D -u 99 -G appuser appuser
