@@ -35,7 +35,6 @@ jobs:
             TAG=docker-build-0.2.$CIRCLE_BUILD_NUM
             time docker build -t lotharschulz/hellogo:$TAG .
             docker images
-            # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USER --password-stdin
             time docker push lotharschulz/hellogo:$TAG
             docker rmi -f $(docker images -q)
@@ -55,7 +54,6 @@ jobs:
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker
             echo "docker images \n"
             docker images
-            # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USER --password-stdin
             echo "docker push $IMG:$TAG \n"
             time docker push $IMG:$TAG
@@ -78,7 +76,6 @@ jobs:
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-cache
             echo "docker images \n"
             docker images
-            # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USER --password-stdin
             echo "docker push $IMG:$TAG \n"
             time docker push $IMG:$TAG
@@ -101,7 +98,6 @@ jobs:
             echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder \n"
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder
             docker images
-            # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USER --password-stdin
             echo "docker push $IMG:$TAG \n"
             time docker push $IMG:$TAG
@@ -123,7 +119,6 @@ jobs:
             echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-cache \n"
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-cache
             docker images
-            # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USER --password-stdin
             echo "docker push $IMG:$TAG \n"
             time docker push $IMG:$TAG
@@ -140,7 +135,6 @@ jobs:
             echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-nocache \n"
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-nocache
             docker images
-            # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USER --password-stdin
             echo "docker push $IMG:$TAG \n"
             time docker push $IMG:$TAG
@@ -164,7 +158,6 @@ jobs:
             echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-squash \n"
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-squash
             docker images
-            # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USER --password-stdin
             echo "docker push $IMG:$TAG \n"
             time docker push $IMG:$TAG
@@ -186,7 +179,6 @@ jobs:
             echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-compress \n"
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockerbuilder-compress
             docker images
-            # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USER --password-stdin
             echo "docker push $IMG:$TAG \n"
             time docker push $IMG:$TAG
@@ -209,7 +201,6 @@ jobs:
             echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine \n"
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine
             docker images
-            # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USER --password-stdin
             echo "docker push $IMG:$TAG \n"
             time docker push $IMG:$TAG
@@ -231,7 +222,6 @@ jobs:
             echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine-cache \n"
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine-cache
             docker images
-            # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USER --password-stdin
             echo "docker push $IMG:$TAG \n"
             time docker push $IMG:$TAG
@@ -248,7 +238,6 @@ jobs:
             echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine-nocache \n"
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine-nocache
             docker images
-            # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USER --password-stdin
             echo "docker push $IMG:$TAG \n"
             time docker push $IMG:$TAG
@@ -270,7 +259,6 @@ jobs:
             echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine-squash \n"
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine-squash
             docker images
-            # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USER --password-stdin
             echo "docker push $IMG:$TAG \n"
             time docker push $IMG:$TAG
@@ -292,7 +280,6 @@ jobs:
             echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine-compress \n"
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.dockeralpine-compress
             docker images
-            # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USER --password-stdin
             echo "docker push $IMG:$TAG \n"
             time docker push $IMG:$TAG
@@ -310,7 +297,6 @@ jobs:
             echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min \n"
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min
             docker images
-            # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USER --password-stdin
             echo "docker push $IMG:$TAG \n"
             time docker push $IMG:$TAG
@@ -327,7 +313,6 @@ jobs:
             echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-nocache \n"
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-nocache
             docker images
-            # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USER --password-stdin
             echo "docker push $IMG:$TAG \n"
             time docker push $IMG:$TAG
@@ -344,7 +329,6 @@ jobs:
             echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-squash \n"
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-squash
             docker images
-            # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USER --password-stdin
             echo "docker push $IMG:$TAG \n"
             time docker push $IMG:$TAG
@@ -361,7 +345,6 @@ jobs:
             echo "DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-compress \n"
             DOCKER_IMAGE=$IMG VERSION=$TAG time make build.docker-min-compress
             docker images
-            # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USER --password-stdin
             echo "docker push $IMG:$TAG \n"
             time docker push $IMG:$TAG
