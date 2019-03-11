@@ -1,0 +1,40 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: hellogo-depl
+  labels:
+    app: hellogo
+spec:
+  selector:
+    matchLabels:
+      app: hellogo
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hellogo
+    spec:
+      containers:
+      - name: hellogo
+        image: lotharschulz/hellogo:build.docker-min--0.2.101 # or any other image from https://cloud.docker.com/repository/registry-1.docker.io/lotharschulz/hellogo
+        imagePullPolicy: Always
+        ports:
+        - name: hellogo-svc
+          containerPort: 1234
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: hellogo-svc
+  labels:
+    app: hellogo
+spec:
+  type: NodePort
+  selector:
+    app: hellogo
+  ports:
+  - port: 1234
+    targetPort: 1234
+    nodePort: 30037
+    # targetPort: hellogo-svc
+    

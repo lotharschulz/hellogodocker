@@ -47,13 +47,7 @@ cp /etc/ssl/certs/ca-certificates.crt .
 - docker image build times
 - docker image sizes
 
-##### docker run
-```
-docker run -p 1234:1234 dockerhub/hellogo:[tag] -name hellogodocker
-# e.g. docker run -p 1234:1234 --name hellogodocker dockerhub/hellogo:dd70981-dirty20180710223321
-```
-
-##### docker experimental
+##### docker experimental functions
 
 In order to run the _squash_ build commands above, you need to run the docker deamon with experimental functions:
 ```
@@ -69,6 +63,41 @@ $ docker version -f '{{.Server.Experimental}}'
 true
 ```
 _Docker on Mac OS offers to set the experimental functions via UI as well. That would be Preferences->Daemon->Advanced._
+
+##### docker run
+```
+docker run -p 1234:1234 -name hellogodocker lotharschulz/hellogo:[tag]
+# e.g. docker run -p 1234:1234 --name hellogodocker lotharschulz/hellogo:build.docker--0.2.102
+```
+
+##### kubernetes deployment
+
+create k8s resources
+```
+kubectl create -f k8s/dpl_svc.yaml --record=true
+```
+
+check k8s resources
+```
+kubectl get po -w                   # watch progress
+kubectl get po,rs,deploy,svc        # check k8s resources
+```
+
+access the service
+```
+minikube service hellogo-svc
+# opens the service in default browser
+```
+```
+minikube service hellogo-svc --url
+# sample output: http://192.168.99.100:30037 
+curl http://192.168.99.100:1234
+```
+
+clean up
+```
+kubectl delete deploy,svc,po,rs -l app=hellogo
+```
 
 #### blog post
 [let’s go build a minimal docker image](https://www.lotharschulz.info/2018/10/01/lets-go-build-a-minimal-docker-image/)
