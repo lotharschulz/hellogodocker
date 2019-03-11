@@ -91,7 +91,7 @@ minikube service hellogo-svc
 ```
 minikube service hellogo-svc --url
 # sample output: http://192.168.99.100:30037 
-curl http://192.168.99.100:1234
+curl http://192.168.99.100:30037
 ```
 
 clean up
