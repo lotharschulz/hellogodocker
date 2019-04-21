@@ -25,7 +25,7 @@ all: test build
 build: 
 		$(GOBUILD) -o $(BINARY_NAME) -v
 
-#build minimal docker image
+#build static linked binary
 build-min: 
 		CGO_ENABLED=0 GOOS=linux $(GOBUILD) -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o $(BINARY_NAME) .
 
