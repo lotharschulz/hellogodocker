@@ -99,5 +99,8 @@ clean up
 kubectl delete deploy,svc,po,rs -l app=hellogo
 ```
 
+
+fix
+
 #### blog post
 [let’s go build a minimal docker image](https://www.lotharschulz.info/2018/10/01/lets-go-build-a-minimal-docker-image/)
