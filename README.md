@@ -1,8 +1,10 @@
-# golang hello world 
+# hello go docker
 
 [![CircleCI](https://circleci.com/gh/lotharschulz/hellogodocker.svg?style=shield)](https://circleci.com/gh/lotharschulz/hellogodocker)
 
-## docker images with docker build pattern, docker cache and from scratch based dockerfile
+Docker images build with various `docker build` command flags.
+
+## docker images
 
 #### preconditions
 - [golang](https://golang.org/)
